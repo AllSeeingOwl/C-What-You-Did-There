@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tape timeline on a phone · Side C mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button{font-family:inherit}
+</style>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background: #0B0C0F"><div id="app" style="border-radius: 28px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.5)"></div></div>
+<template id="tpl">
+<div style="position: relative; width: 390px; height: 844px; overflow: hidden; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.4; display: flex; flex-direction: column">
+
+<!-- Header -->
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 12px; border-bottom: 1px solid #262A31; background: #101216">
+<div style="display: flex; align-items: center; gap: 10px">
+<button type="button" aria-label="Back to shelf" style="width: 44px; height: 44px; margin-left: -10px; border: none; background: transparent; color: #E8E9EC; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 3L5 9l6 6"></path></svg></button>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; line-height: 1.1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Rain on a Tuesday</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A7ABB3">C15 · 8:00 · 12 slots</span>
+</div>
+<button type="button" aria-label="Tape options" style="width: 44px; height: 44px; margin-right: -10px; border: none; background: transparent; color: #E8E9EC; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor" aria-hidden="true"><circle cx="4" cy="9" r="1.6"></circle><circle cx="9" cy="9" r="1.6"></circle><circle cx="14" cy="9" r="1.6"></circle></svg></button>
+</div>
+<!-- Mini tape strip -->
+<div style="display: flex; gap: 2px; height: 12px">
+<sc-for list="{{items}}" as="s" hint-placeholder-count="12">
+<div style="flex: {{s.dur}} 1 0; border-radius: 2px; box-sizing: border-box; {{s.stripLook}}"></div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; font-size: 12px; color: #B4B8C0"><span>{{gotCount}} of {{total}} collected</span><span>{{leftText}}</span></div>
+</div>
+
+<!-- Vertical timeline -->
+<div style="flex: 1; overflow-y: auto; padding: 12px 16px 20px">
+<sc-for list="{{items}}" as="s" hint-placeholder-count="12">
+<div style="display: flex; gap: 10px; align-items: stretch">
+<span style="width: 34px; flex: none; padding-top: 6px; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8F949D; text-align: right">{{s.at}}</span>
+<button type="button" onClick="{{s.pick}}" aria-label="{{s.aria}}" style="flex: 1; min-width: 0; display: flex; align-items: stretch; gap: 10px; margin-bottom: 6px; padding: 0; border: none; background: transparent; color: #E8E9EC; text-align: left; cursor: pointer">
+<span style="width: 18px; flex: none; min-height: {{s.h}}px; border-radius: 5px; box-sizing: border-box; {{s.look}}"></span>
+<span style="flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 8px 12px; border-radius: 10px; background: #171A1F; {{s.cardBorder}}">
+<span style="font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; {{s.titleStyle}}">{{s.label}}</span>
+<span style="font-size: 12px; color: #A7ABB3">{{s.meta}}</span>
+</span>
+</button>
+</div>
+</sc-for>
+<div style="display: flex; gap: 10px; padding-top: 6px">
+<span style="width: 34px; flex: none; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #8F949D; text-align: right">8:00</span>
+<span style="font-size: 12px; color: #8F949D">End of tape</span>
+</div>
+</div>
+
+<!-- Bottom nav -->
+<nav style="display: flex; justify-content: space-around; padding: 6px 8px 14px; border-top: 1px solid #262A31; background: #101216" aria-label="Main">
+<a href="#" style="min-width: 72px; min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #A7ABB3; text-decoration: none; font-size: 11px"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L17 17"></path></svg>Browse</a>
+<a href="#" style="min-width: 72px; min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #E8E9EC; text-decoration: none; font-size: 11px; font-weight: 600"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="4" width="16" height="12" rx="2"></rect><circle cx="7" cy="10" r="2"></circle><circle cx="13" cy="10" r="2"></circle></svg>My shelf</a>
+<a href="#" style="min-width: 72px; min-height: 48px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; color: #A7ABB3; text-decoration: none; font-size: 11px"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16l1-4 8-8 3 3-8 8z"></path></svg>Write</a>
+</nav>
+
+<!-- Bottom sheet -->
+<sc-if value="{{sheetOpen}}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end">
+<button type="button" onClick="{{close}}" aria-label="Close details" style="flex: 1; border: none; background: rgba(5,6,8,0.6); cursor: pointer"></button>
+<div style="max-height: 560px; overflow-y: auto; background: #171A1F; border-top-left-radius: 18px; border-top-right-radius: 18px; border-top: 1px solid #2C3038; padding: 8px 18px 22px; display: flex; flex-direction: column; gap: 14px">
+<div style="align-self: center; width: 40px; height: 4px; border-radius: 2px; background: #3A3F48"></div>
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: {{sel.color}}"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{sel.swatch}}"></span>{{sel.laneLabel}} · Slot {{sel.num}} · {{sel.len}}</span>
+<span style="font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; border: 1px solid {{sel.rarityColor}}; color: {{sel.rarityColor}}">{{sel.rarityLabel}}</span>
+</div>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 21px; line-height: 1.2">{{sel.title}}</h2>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">{{sel.findHeading}}</span>
+<span>{{sel.find}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">Where to look</span>
+<span>{{sel.where}}</span>
+</div>
+<sc-if value="{{sel.hasAlts}}" hint-placeholder-val="{{ false }}">
+<div style="border: 1px dashed #3A3F48; border-radius: 10px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">Can't find it? Fallbacks</span>
+<sc-for list="{{sel.alts}}" as="a" hint-placeholder-count="2">
+<span style="display: flex; gap: 8px; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; color: #A7ABB3; flex: none">{{a.letter}}</span><span>{{a.text}}</span></span>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{sel.isLocked}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px dashed #3A3F48; color: #A7ABB3; font-size: 13px">Unlocks when you collect slot 10</div>
+</sc-if>
+<sc-if value="{{sel.canToggle}}" hint-placeholder-val="{{ true }}">
+<button type="button" onClick="{{toggle}}" style="min-height: 52px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; {{sel.btnLook}}">{{sel.btnLabel}}</button>
+</sc-if>
+</div>
+</div>
+</sc-if>
+
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: "s8",
+      open: true,
+      got: { s1: true, s2: true, s3: true, s5: true, s6: true, s9: true, s11: true }
+    };
+  }
+
+  renderVals() {
+    var self = this;
+    var SPLIT = "linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)";
+    var lanes = {
+      radio: { label: "Radio", color: "#E9A23B" },
+      tv: { label: "TV", color: "#4C8DF6" },
+      film: { label: "Film", color: "#F06A6E" },
+      youtube: { label: "YouTube", color: "#3DBE7A" },
+      podcast: { label: "Podcast", color: "#A68BF5" },
+      interference: { label: "Interference", color: "#D9DBE0", swatch: SPLIT },
+      between: { label: "In-between", color: "#A7ABB3" }
+    };
+    var rarity = { common: ["Common", "#A7ABB3"], uncommon: ["Uncommon", "#8DB8FF"], rare: ["Rare", "#F2B65A"], yours: ["You", "#A7ABB3"] };
+    var data = [
+      { id: "s1", lane: "between", start: 0, dur: 8, short: "Count down from 5", title: "Count down from five, out loud", kind: "instruction", rarity: "yours", find: "Say it slowly, as if the tape is about to start broadcasting.", where: "You, in the room" },
+      { id: "s2", lane: "radio", start: 8, dur: 42, short: "Late-night weather bulletin", title: "A late-night weather bulletin, read slowly", rarity: "common", find: "Any station's overnight weather read. Start where the presenter takes a breath.", where: "Radio catch-up apps or archives", alts: ["Any slow, calm shipping or travel bulletin", "A sleep track with a spoken weather report"] },
+      { id: "s3", lane: "youtube", start: 50, dur: 45, short: "Rain on a tin roof", title: "Rain on a tin roof", rarity: "common", find: "Any long rain-on-a-roof video. Pick a stretch with no thunder.", where: "Video sites · free" },
+      { id: "s4", lane: "film", start: 95, dur: 55, short: "? Waiting at a bus stop", title: "Someone waiting at a bus stop in the rain (mystery)", rarity: "uncommon", mystery: true, find: "Clue: any film. A character waits, the bus doesn't come, and nobody speaks for ten seconds.", where: "Any film service, rental or DVD" },
+      { id: "s5", lane: "between", start: 150, dur: 10, short: "Lights off", title: "Turn the lights off. Ten seconds of silence.", kind: "instruction", rarity: "yours", find: "Turn off the lights and count ten seconds in silence.", where: "You, in the room" },
+      { id: "s6", lane: "podcast", start: 160, dur: 55, short: "The smell of rain", title: "Someone describing the smell of rain", rarity: "uncommon", find: "A podcast segment explaining why rain smells the way it does.", where: "Podcast apps · science shows" },
+      { id: "s7", lane: "tv", start: 215, dur: 45, short: "? Forecaster loses it", title: "A weather presenter loses their composure (mystery)", rarity: "rare", mystery: true, find: "Clue: any year, any channel. A live forecast where the presenter can't stop laughing.", where: "Broadcaster channels, clip collections", alts: ["A presenter corpsing on live TV", "A newsreader keeping a straight face over a silly story"] },
+      { id: "s8", lane: "radio", start: 260, dur: 60, short: "Phone-in: strange lights", title: "1980s phone-in: a caller reports strange lights", rarity: "rare", find: "A late-night phone-in where a caller describes lights in the sky during a storm.", where: "Radio archives and off-air recording collections", alts: ["A radio drama or podcast scene about lights in the sky", "A documentary interview about a sighting", "Read an eyewitness-style account aloud yourself"] },
+      { id: "s9", lane: "interference", start: 320, dur: 40, short: "Clash: sunny video, gale warning", title: "Interference: a sunny pop video over a gale warning", rarity: "uncommon", find: "Picture, muted: any bright pop music video. Sound: any severe weather warning. Start the sound when the singer first smiles at the camera.", where: "Official video channels and radio catch-up" },
+      { id: "s10", lane: "tv", start: 360, dur: 50, short: "Puddle jumping", title: "A children's TV segment about jumping in puddles", rarity: "uncommon", find: "Any children's programme segment about puddles, wellies or splashing.", where: "TV catch-up or archives" },
+      { id: "s11", lane: "between", start: 410, dur: 10, short: "Open a window", title: "Open a window, if it's raining", kind: "instruction", rarity: "yours", find: "If it's raining, open a window for ten seconds. If not, imagine it.", where: "You, in the room" },
+      { id: "s12", lane: "film", start: 420, dur: 60, short: "Final scene", title: "Final scene", rarity: "uncommon", lockedUntil: "s10", find: "Revealed once slot 10 is collected.", where: "Revealed once slot 10 is collected." }
+    ];
+    var got = this.state.got;
+    function tc(s) { var m = Math.floor(s / 60); var r = s % 60; return m + ":" + (r < 10 ? "0" : "") + r; }
+
+    var items = data.map(function (d, i) {
+      var L = lanes[d.lane];
+      var c = L.color;
+      var fill = L.swatch || c;
+      var locked = !!d.lockedUntil && !got[d.lockedUntil];
+      var isGot = !locked && !!got[d.id];
+      var isSel = self.state.open && d.id === self.state.selected;
+      var look, stripLook;
+      if (locked) {
+        look = "background: #1B1E24; border: 1.5px dashed #3A3F48;";
+        stripLook = "background: #1B1E24; border: 1px dashed #3A3F48;";
+      } else if (isGot) {
+        look = "background: " + fill + ";";
+        stripLook = "background: " + fill + ";";
+      } else {
+        look = "background: repeating-linear-gradient(135deg, " + c + "40 0 4px, transparent 4px 8px); border: 1.5px dashed " + c + ";";
+        stripLook = "background: transparent; border: 1px solid " + c + ";";
+      }
+      var r = rarity[d.rarity];
+      var state = locked ? "Locked" : (isGot ? "Collected" : "To find");
+      return {
+        id: d.id, num: String(i + 1), dur: d.dur, at: tc(d.start),
+        h: Math.max(52, Math.round(d.dur * 1.25)),
+        look: look, stripLook: stripLook,
+        cardBorder: isSel ? "box-shadow: inset 0 0 0 1.5px #E8E9EC;" : "",
+        titleStyle: isGot ? "" : "color: #E8E9EC;",
+        label: locked ? "Locked" : d.short,
+        meta: L.label + " · " + tc(d.dur) + " · " + state,
+        aria: "Slot " + (i + 1) + ", " + L.label + ", " + (locked ? "locked" : d.title) + ", " + state.toLowerCase(),
+        pick: function () { self.setState({ selected: d.id, open: true }); },
+        d: d, L: L, locked: locked, isGot: isGot, r: r
+      };
+    });
+
+    var gotCount = items.filter(function (x) { return x.isGot; }).length;
+    var total = items.length;
+    var s = items.filter(function (x) { return x.id === self.state.selected; })[0] || items[0];
+    var d = s.d;
+    var isInstr = d.kind === "instruction";
+    var sel = {
+      num: s.num,
+      color: s.L.color,
+      swatch: s.L.swatch || s.L.color,
+      laneLabel: s.L.label,
+      len: tc(d.dur),
+      rarityLabel: s.locked ? "Locked" : s.r[0],
+      rarityColor: s.locked ? "#A7ABB3" : s.r[1],
+      title: s.locked ? "Locked slot" : d.title,
+      findHeading: isInstr ? "What to do" : (d.mystery ? "The clue" : "What to find"),
+      find: d.find,
+      where: d.where,
+      hasAlts: !s.locked && !!d.alts,
+      alts: (d.alts || []).map(function (t, k) { return { letter: "ABC".charAt(k), text: t }; }),
+      isLocked: s.locked,
+      canToggle: !s.locked,
+      btnLabel: s.isGot ? (isInstr ? "Done ✓ · undo" : "Collected ✓ · undo") : (isInstr ? "Mark as done" : "I've found it"),
+      btnLook: s.isGot ? "border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;" : "border: none; background: " + s.L.color + "; color: #121418;"
+    };
+
+    return {
+      items: items,
+      gotCount: gotCount,
+      total: total,
+      leftText: (total - gotCount) + " to find",
+      sel: sel,
+      sheetOpen: this.state.open,
+      close: function () { self.setState({ open: false }); },
+      toggle: function () {
+        var g = Object.assign({}, self.state.got);
+        if (g[s.id]) { delete g[s.id]; } else { g[s.id] = true; }
+        self.setState({ got: g });
+      }
+    };
+  }
+}
+mountComponent(Component);
+</script>
+</body>
+</html>

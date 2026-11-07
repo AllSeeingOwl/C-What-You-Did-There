@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home and browse</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button,input,select{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="max-width: 1400px; margin: 0 auto; padding: 20px 24px 64px; box-sizing: border-box; display: flex; flex-direction: column; gap: 36px">
+
+<!-- Top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #262A31">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="#E8E9EC" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle><path d="M6 21l3-5h12l3 5"></path></svg>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Side C</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 12px; color: #A7ABB3">(What You Did There)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px">
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #E8E9EC; background: #1D2026; text-decoration: none">Browse tapes</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">My shelf</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">Write a tape</a>
+<a href="#" style="margin-left: 8px; padding: 10px 16px; border-radius: 8px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">Sign in</a>
+</div>
+</div>
+
+<!-- Hero -->
+<div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 60px; letter-spacing: -0.03em; line-height: 0.98">Mixtapes made of everything.</h1>
+<p style="margin: 0; font-size: 18px; color: #C9CCD2; max-width: 600px">Every tape is a set of instructions. Hunt down the pieces from radio, TV, film, video and podcasts, put them in order, then play it back and see what they did there.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#browse" style="display: flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 10px; background: #E8E9EC; color: #101216; font-weight: 600; font-size: 15px; text-decoration: none">Find a tape</a>
+<a href="#" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid #3A3F48; background: #1A1D22; color: #E8E9EC; font-weight: 500; font-size: 15px; text-decoration: none">Write your own</a>
+</div>
+</div>
+<div style="flex: 1 1 420px; min-width: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">01</span>
+<div style="display: flex; gap: 3px; height: 20px"><div style="flex: 2; border-radius: 3px; border: 1.5px dashed #E9A23B"></div><div style="flex: 3; border-radius: 3px; border: 1.5px dashed #4C8DF6"></div><div style="flex: 2; border-radius: 3px; border: 1.5px dashed #3DBE7A"></div></div>
+<span style="font-weight: 600">Pick a tape</span>
+<span style="font-size: 13px; color: #B4B8C0">Instructions, not clips. Nothing to download.</span>
+</div>
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">02</span>
+<div style="display: flex; gap: 3px; height: 20px"><div style="flex: 2; border-radius: 3px; background: #E9A23B"></div><div style="flex: 3; border-radius: 3px; border: 1.5px dashed #4C8DF6"></div><div style="flex: 2; border-radius: 3px; background: #3DBE7A"></div></div>
+<span style="font-weight: 600">Hunt the pieces</span>
+<span style="font-size: 13px; color: #B4B8C0">Collect slots over days or weeks, at your pace.</span>
+</div>
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">03</span>
+<div style="display: flex; gap: 3px; height: 20px"><div style="flex: 2; border-radius: 3px; background: #E9A23B"></div><div style="flex: 3; border-radius: 3px; background: #4C8DF6"></div><div style="flex: 2; border-radius: 3px; background: #3DBE7A"></div></div>
+<span style="font-weight: 600">Play it back</span>
+<span style="font-size: 13px; color: #B4B8C0">Then see what they did there.</span>
+</div>
+</div>
+</div>
+
+<!-- Weekly prompt -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; border-radius: 14px; border: 1.5px dashed #A68BF5; background: repeating-linear-gradient(135deg, #A68BF512 0 10px, transparent 10px 20px)">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #C4B2FA">This week's prompt · closes Sunday</span>
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 24px">A tape where every slot is someone waiting for something.</span>
+<span style="font-size: 13px; color: #B4B8C0">[N] tapes submitted so far · C5 or C15 · Worldwide entries welcome</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#" style="display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">See entries</a>
+<a href="#" style="display: flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 10px; background: #A68BF5; color: #121418; font-weight: 600; text-decoration: none">Write one</a>
+</div>
+</div>
+
+<!-- Explore by region -->
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em">Explore by region</h2>
+<span style="font-size: 13px; color: #B4B8C0">Some broadcasts and services only exist in one country. Worldwide tapes work for anyone, anywhere.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px">
+<sc-for list="{{regionCards}}" as="r" hint-placeholder-count="6">
+<button type="button" onClick="{{r.pick}}" aria-pressed="{{r.pressed}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 6px; min-height: 104px; padding: 16px; border-radius: 14px; text-align: left; cursor: pointer; color: #E8E9EC; {{r.look}}">
+<span style="display: flex; align-items: center; gap: 8px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px">
+<sc-if value="{{r.isWorld}}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg></sc-if>
+<sc-if value="{{r.isLocal}}" hint-placeholder-val="{{ true }}"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M8 16.5s6-5.2 6-9.5a6 6 0 0 0-12 0c0 4.3 6 9.5 6 9.5z"></path><circle cx="8" cy="7" r="2"></circle></svg></sc-if>
+{{r.label}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{r.sub}}</span>
+<span style="margin-top: auto; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{r.count}}</span>
+</button>
+</sc-for>
+</div>
+</div>
+
+<!-- Browse -->
+<div id="browse" style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 32px; letter-spacing: -0.02em">Browse tapes</h2>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #B4B8C0">Sort by
+<select style="min-height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #171A1F; color: #E8E9EC; font-size: 13px"><option selected="selected">Popular this week</option><option>Newest</option><option>Most completed</option><option>Shortest first</option></select>
+</label>
+</div>
+
+<!-- Search + filters -->
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 18px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<label style="flex: 999 1 360px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #101216">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#A7ABB3" stroke-width="1.6" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l3.5 3.5"></path></svg>
+<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search tapes</span>
+<input type="search" placeholder="Search by title, mood or creator" style="flex: 1; min-width: 0; border: none; background: transparent; color: #E8E9EC; font-size: 15px; outline: none">
+</label>
+<label style="flex: 1 1 260px; display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #101216; font-size: 13px; color: #B4B8C0">
+<svg width="14" height="16" viewBox="0 0 16 18" fill="none" stroke="#A7ABB3" stroke-width="1.6" aria-hidden="true"><path d="M8 16.5s6-5.2 6-9.5a6 6 0 0 0-12 0c0 4.3 6 9.5 6 9.5z"></path><circle cx="8" cy="7" r="2"></circle></svg>
+<span style="white-space: nowrap">I'm collecting from</span>
+<select onChange="{{pickWhere}}" value="{{where}}" style="flex: 1; min-width: 0; min-height: 36px; border: none; background: transparent; color: #E8E9EC; font-size: 14px; font-weight: 600">
+<sc-for list="{{whereOptions}}" as="o" hint-placeholder-count="7"><option value="{{o.v}}">{{o.v}}</option></sc-for>
+</select>
+</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px 18px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px" role="group" aria-label="Tape length">
+<span style="font-size: 12px; color: #A7ABB3; margin-right: 4px">Length</span>
+<sc-for list="{{tiers}}" as="t" hint-placeholder-count="4">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{t.look}}">{{t.label}}</button>
+</sc-for>
+</div>
+<div style="width: 1px; height: 24px; background: #2C3038"></div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px" role="group" aria-label="Availability">
+<span style="font-size: 12px; color: #A7ABB3; margin-right: 4px">Availability</span>
+<sc-for list="{{avails}}" as="a" hint-placeholder-count="3">
+<button type="button" onClick="{{a.pick}}" aria-pressed="{{a.pressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{a.look}}">{{a.label}}</button>
+</sc-for>
+</div>
+<div style="width: 1px; height: 24px; background: #2C3038"></div>
+<button type="button" onClick="{{toggleFree}}" aria-pressed="{{freePressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{freeLook}}">Free sources only</button>
+<button type="button" onClick="{{toggleInterf}}" aria-pressed="{{interfPressed}}" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{interfLook}}"><span style="width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)"></span>Has Interference</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px" role="group" aria-label="Vibe">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: #A7ABB3; margin-right: 4px"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>Vibe</span>
+<sc-for list="{{vibeChips}}" as="v" hint-placeholder-count="15">
+<button type="button" onClick="{{v.pick}}" aria-pressed="{{v.pressed}}" style="min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{v.look}}">{{v.label}}</button>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; font-size: 13px; color: #B4B8C0">
+<span>{{resultText}}</span>
+<sc-if value="{{anyFilter}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{clear}}" style="min-height: 36px; padding: 0 12px; border-radius: 8px; border: none; background: transparent; color: #9CC2FF; font-size: 13px; cursor: pointer">Clear filters</button>
+</sc-if>
+</div>
+</div>
+
+<!-- Grid -->
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px">
+<sc-for list="{{tapes}}" as="p" hint-placeholder-count="8">
+<a href="#" style="display: flex; flex-direction: column; gap: 12px; padding: 14px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31; color: #E8E9EC; text-decoration: none">
+<div style="position: relative; height: 180px; display: flex; border-radius: 6px; overflow: hidden; background: #EDE9E0; color: #1A1B1E; {{p.dim}}">
+<div style="width: 16px; display: flex; flex-direction: column">
+<sc-for list="{{p.mix}}" as="m" hint-placeholder-count="4">
+<div style="flex: {{m.w}}; background: {{m.c}}"></div>
+</sc-for>
+</div>
+<div style="flex: 1; padding: 14px; display: flex; flex-direction: column; gap: 8px; min-width: 0">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em"><span>SIDE C</span><span>{{p.tier}}</span></div>
+<span style="font-family: 'Permanent Marker', cursive; font-size: 21px; line-height: 1.12; color: #1F2A44">{{p.title}}</span>
+<span style="margin-top: auto; font-family: 'Patrick Hand', 'Comic Neue', cursive; font-size: 15px; color: #3A3F48">by [CREATOR]</span>
+</div>
+</div>
+<span style="display: flex; align-items: center; gap: 6px; align-self: flex-start; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; {{p.regionLook}}">
+<sc-if value="{{p.isWorld}}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg></sc-if>
+<sc-if value="{{p.isLocal}}" hint-placeholder-val="{{ true }}"><svg width="11" height="13" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 16.5s6-5.2 6-9.5a6 6 0 0 0-12 0c0 4.3 6 9.5 6 9.5z"></path><circle cx="8" cy="7" r="2"></circle></svg></sc-if>
+{{p.regionLabel}}</span>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600; font-size: 15px">{{p.title}}</span>
+<span style="font-size: 12px; color: #A7ABB3; font-family: 'JetBrains Mono', monospace">{{p.meta}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{p.blurb}}</span>
+</div>
+<sc-if value="{{p.blocked}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 12px; color: #F2B65A">{{p.blockedText}}</span>
+</sc-if>
+<span style="display: flex; align-items: center; gap: 6px; font-size: 13px; color: #E8E9EC"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>{{p.vibeText}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{p.tags}}" as="g" hint-placeholder-count="2">
+<span style="font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 999px; border: 1px solid #3A3F48; color: #C9CCD2">{{g.t}}</span>
+</sc-for>
+</div>
+</a>
+</sc-for>
+</div>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 48px 20px; border-radius: 14px; border: 1.5px dashed #3A3F48; text-align: center">
+<span style="font-family: 'Space Grotesk', sans-serif; font-size: 20px">No tapes match those filters</span>
+<span style="color: #B4B8C0">Try a different length or region, or write the tape you were looking for.</span>
+<button type="button" onClick="{{clear}}" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A3F48; background: #1A1D22; color: #E8E9EC; cursor: pointer">Clear filters</button>
+</div>
+</sc-if>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2720}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tier: "All", avail: "any", where: "United Kingdom", free: false, interf: false, vibe: "Any" };
+  }
+
+  renderVals() {
+    var self = this;
+    var C = { radio: "#E9A23B", tv: "#4C8DF6", film: "#F06A6E", yt: "#3DBE7A", pod: "#A68BF5", btw: "#A7ABB3", inf: "linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)" };
+    var WORLD = "Worldwide";
+    var all = [
+      { title: "Rain on a Tuesday", vibes: ["Tranquil", "Strange", "Hopeful"], tier: "C15", len: "8:00", slots: 12, diff: "Medium", free: false, interf: true, ok: ["United Kingdom", "Ireland"], label: "Best in the UK", note: "9 of 12 slots worldwide", blurb: "Calm, then strange, then hopeful.", mix: [["btw",28],["radio",102],["tv",95],["film",115],["yt",45],["inf",40],["pod",55]], tags: ["Interference", "2 mystery slots"] },
+      { title: "Only clips under 20 seconds", vibes: ["Frantic", "Chaotic", "Funny"], tier: "C5", len: "4:40", slots: 15, diff: "Quick", free: true, interf: false, ok: WORLD, label: "Worldwide", blurb: "Fast cuts, no breathing room.", mix: [["yt",70],["radio",30],["tv",20]], tags: ["All free"] },
+      { title: "Departure melodies", vibes: ["Nostalgic", "Dreamy", "Tranquil"], tier: "C5", len: "4:15", slots: 8, diff: "Medium", free: true, interf: false, ok: ["Japan"], label: "Japan only", note: "Regional rail and broadcast archives", blurb: "Station jingles, platform announcements and the gap between trains.", mix: [["yt",40],["radio",35],["btw",10]], tags: ["Regional pick"] },
+      { title: "Public access at midnight", vibes: ["Strange", "Funny", "Nostalgic"], tier: "C15", len: "13:20", slots: 11, diff: "Ambitious", free: true, interf: true, ok: ["USA"], label: "USA only", note: "Local cable archives", blurb: "Community TV made by people who meant every second of it.", mix: [["tv",80],["inf",15],["btw",15]], tags: ["Interference", "Archive digging"] },
+      { title: "Applause for no reason", vibes: ["Funny", "Joyful", "Strange"], tier: "C5", len: "3:10", slots: 6, diff: "Quick", free: true, interf: false, ok: WORLD, label: "Worldwide", blurb: "Audiences cheering at things you never see.", mix: [["tv",50],["yt",40],["btw",10]], tags: ["All free"] },
+      { title: "Waiting rooms", vibes: ["Tense", "Melancholy", "Funny"], tier: "C15", len: "11:30", slots: 9, diff: "Ambitious", free: false, interf: false, ok: ["United Kingdom", "USA"], label: "UK and USA", blurb: "Every slot is someone waiting for something.", mix: [["tv",60],["btw",40],["film",80]], tags: ["Prompt entry"] },
+      { title: "1987", vibes: ["Nostalgic", "Experimental", "Joyful"], tier: "C30", len: "26:00", slots: 18, diff: "Ambitious", free: false, interf: true, ok: ["USA", "Canada"], label: "USA and Canada", blurb: "One year, heard and seen from every angle.", mix: [["radio",40],["tv",50],["inf",10],["film",30],["btw",10]], tags: ["Interference"] },
+      { title: "Kitchen at 3am", vibes: ["Eerie", "Cosy", "Strange"], tier: "C15", len: "9:20", slots: 10, diff: "Medium", free: false, interf: true, ok: WORLD, label: "Worldwide", blurb: "Hums, fridges, late radio and one bad idea.", mix: [["radio",50],["pod",30],["inf",15],["btw",20]], tags: ["Interference", "Uncanny merge"] },
+      { title: "Seaside out of season", vibes: ["Melancholy", "Nostalgic", "Tranquil"], tier: "C15", len: "12:45", slots: 11, diff: "Medium", free: true, interf: false, ok: ["United Kingdom"], label: "UK only", blurb: "Empty piers, gulls and closed arcades.", mix: [["yt",50],["pod",30],["radio",30],["btw",15]], tags: ["All free", "1 locked slot"] },
+      { title: "Snow days", vibes: ["Cosy", "Joyful", "Nostalgic"], tier: "C5", len: "4:50", slots: 7, diff: "Quick", free: true, interf: false, ok: WORLD, label: "Worldwide", blurb: "School-closure announcements from everywhere it snows.", mix: [["radio",40],["yt",30],["tv",20],["btw",10]], tags: ["All free", "Many languages"] },
+      { title: "Late-night shopping channels", vibes: ["Frantic", "Strange", "Experimental"], tier: "C15", len: "10:05", slots: 10, diff: "Medium", free: false, interf: true, ok: ["Japan", "USA"], label: "Japan and USA", blurb: "Two countries selling things at 4am, cut together.", mix: [["tv",70],["inf",20],["btw",10]], tags: ["Interference"] },
+      { title: "Things heard through walls", vibes: ["Eerie", "Tense", "Experimental"], tier: "C30", len: "21:00", slots: 16, diff: "Ambitious", free: false, interf: true, ok: ["Australia"], label: "Australia only", blurb: "Muffled, half-understood, and slightly too close.", mix: [["film",40],["inf",25],["radio",30],["tv",25],["btw",15]], tags: ["Interference", "Content warning"] }
+    ];
+    var st = this.state;
+    function okIn(t, place) { return t.ok === WORLD || place === "Elsewhere" ? (t.ok === WORLD) : t.ok.indexOf(place) >= 0; }
+
+    var list = all.filter(function (t) {
+      if (st.tier !== "All" && t.tier !== st.tier) { return false; }
+      if (st.avail === "world" && t.ok !== WORLD) { return false; }
+      if (st.avail === "mine" && !okIn(t, st.where)) { return false; }
+      if (st.free && !t.free) { return false; }
+      if (st.interf && !t.interf) { return false; }
+      if (st.vibe !== "Any" && t.vibes.indexOf(st.vibe) < 0) { return false; }
+      return true;
+    });
+
+    var tapes = list.map(function (t) {
+      var world = t.ok === WORLD;
+      var blocked = !okIn(t, st.where);
+      var mine = !blocked && !world;
+      return {
+        title: t.title,
+        tier: t.tier,
+        meta: t.tier + " · " + t.len + " · " + t.slots + " slots · " + t.diff,
+        blurb: t.blurb,
+        isWorld: world,
+        isLocal: !world,
+        regionLabel: t.label + (t.note ? " · " + t.note : ""),
+        regionLook: world ? "background: #1E3A2B; color: #8FE0B3; border: 1px solid #2F6B4A;" : (mine ? "background: #1D2A40; color: #A9C8FF; border: 1px solid #34507E;" : "background: transparent; color: #C9CCD2; border: 1px solid #3A3F48;"),
+        blocked: blocked,
+        blockedText: "Not fully available in " + (st.where === "Elsewhere" ? "your region" : (st.where === "USA" ? "the USA" : (st.where === "United Kingdom" ? "the UK" : st.where))) + ". Fallbacks may help.",
+        dim: blocked ? "opacity: 0.55;" : "",
+        mix: t.mix.map(function (m) { return { c: C[m[0]], w: m[1] }; }),
+        tags: t.tags.map(function (g) { return { t: g }; }),
+        vibeText: t.vibes.join(" · ")
+      };
+    });
+
+    var on = "border: 1.5px solid #E8E9EC; background: #E8E9EC; color: #101216; font-weight: 600;";
+    var off = "border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;";
+    var tiers = ["All", "C5", "C15", "C30"].map(function (k) {
+      var sel = st.tier === k;
+      return { label: k, pressed: sel ? "true" : "false", look: sel ? on : off, pick: function () { self.setState({ tier: k }); } };
+    });
+    var short = st.where === "United Kingdom" ? "the UK" : (st.where === "USA" ? "the USA" : (st.where === "Elsewhere" ? "my region" : st.where));
+    var avails = [["any", "Any"], ["mine", "Works in " + short], ["world", "Worldwide only"]].map(function (a) {
+      var sel = st.avail === a[0];
+      return { label: a[1], pressed: sel ? "true" : "false", look: sel ? on : off, pick: function () { self.setState({ avail: a[0] }); } };
+    });
+
+    var places = ["United Kingdom", "Ireland", "USA", "Canada", "Japan", "Australia", "Elsewhere"];
+    var whereOptions = places.map(function (p) { return { v: p }; });
+
+    var regionDefs = [
+      { key: WORLD, label: "Worldwide", sub: "Every slot or its fallback works anywhere" },
+      { key: "USA", label: "USA", sub: "Local TV, cable archives, US radio" },
+      { key: "Japan", label: "Japan", sub: "Broadcast archives, station sounds" },
+      { key: "United Kingdom", label: "UK and Ireland", sub: "Catch-up services, radio archives" },
+      { key: "Canada", label: "Canada", sub: "Bilingual broadcasts" },
+      { key: "Australia", label: "Australia and NZ", sub: "Regional radio and TV" }
+    ];
+    var regionCards = regionDefs.map(function (r) {
+      var isW = r.key === WORLD;
+      var n = all.filter(function (t) { return isW ? t.ok === WORLD : (t.ok !== WORLD && t.ok.indexOf(r.key) >= 0); }).length;
+      var sel = isW ? st.avail === "world" : (st.avail === "mine" && st.where === r.key);
+      return {
+        label: r.label, sub: r.sub, isWorld: isW, isLocal: !isW,
+        count: n + (n === 1 ? " tape" : " tapes"),
+        pressed: sel ? "true" : "false",
+        look: sel ? (isW ? "background: #1E3A2B; border: 1.5px solid #8FE0B3;" : "background: #1D2A40; border: 1.5px solid #A9C8FF;") : "background: #171A1F; border: 1px solid #262A31;",
+        pick: function () { if (isW) { self.setState({ avail: "world" }); } else { self.setState({ avail: "mine", where: r.key }); } }
+      };
+    });
+
+    var vibeChips = ["Any"].concat(["Tranquil", "Dreamy", "Cosy", "Nostalgic", "Melancholy", "Hopeful", "Joyful", "Funny", "Strange", "Eerie", "Tense", "Frantic", "Chaotic", "Experimental"]).map(function (k) {
+      var sel = st.vibe === k;
+      return { label: k, pressed: sel ? "true" : "false", look: sel ? on : off, pick: function () { self.setState({ vibe: k }); } };
+    });
+    var anyFilter = st.tier !== "All" || st.avail !== "any" || st.free || st.interf || st.vibe !== "Any";
+    return {
+      tiers: tiers,
+      avails: avails,
+      where: st.where,
+      whereOptions: whereOptions,
+      pickWhere: function (e) { self.setState({ where: e.target.value }); },
+      regionCards: regionCards,
+      tapes: tapes,
+      empty: tapes.length === 0,
+      anyFilter: anyFilter,
+      resultText: tapes.length + (tapes.length === 1 ? " tape" : " tapes") + (anyFilter ? " match your filters" : " to explore"),
+      freeLook: st.free ? on : off, freePressed: st.free ? "true" : "false",
+      interfLook: st.interf ? on : off, interfPressed: st.interf ? "true" : "false",
+      toggleFree: function () { self.setState({ free: !self.state.free }); },
+      toggleInterf: function () { self.setState({ interf: !self.state.interf }); },
+      vibeChips: vibeChips,
+      clear: function () { self.setState({ tier: "All", avail: "any", free: false, interf: false, vibe: "Any" }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

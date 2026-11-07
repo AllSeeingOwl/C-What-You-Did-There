@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Welcome and sign-up</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button,input{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45; display: flex; flex-direction: column">
+
+<!-- Top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 24px; border-bottom: 1px solid #262A31">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="#E8E9EC" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle><path d="M6 21l3-5h12l3 5"></path></svg>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Side C</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 12px; color: #A7ABB3">(What You Did There)</span></span>
+</div>
+<span style="font-size: 13px; color: #B4B8C0">Already have an account? <a href="#">Sign in</a></span>
+</div>
+
+<div style="flex: 1; display: flex; justify-content: center; padding: 40px 20px 56px">
+<div style="width: 100%; max-width: 640px; display: flex; flex-direction: column; gap: 28px">
+
+<!-- Progress -->
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 6px" role="img" aria-label="{{progressAria}}">
+<sc-for list="{{dots}}" as="d" hint-placeholder-count="6">
+<div style="flex: 1; height: 6px; border-radius: 3px; background: {{d.c}}"></div>
+</sc-for>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{stepLabel}}</span>
+</div>
+
+<!-- Step 0: Welcome -->
+<sc-if value="{{s0}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 52px; letter-spacing: -0.03em; line-height: 1">Mixtapes made of everything.</h1>
+<p style="margin: 0; font-size: 18px; color: #C9CCD2">A Side C tape is a set of instructions, not a playlist. Someone picks moments from radio, TV, film, video and podcasts. You hunt them down, put them in order, and play it back.</p>
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; gap: 3px; width: 92px; height: 22px; flex: none"><div style="flex: 2; border-radius: 3px; border: 1.5px dashed #E9A23B"></div><div style="flex: 3; border-radius: 3px; border: 1.5px dashed #4C8DF6"></div><div style="flex: 2; border-radius: 3px; border: 1.5px dashed #3DBE7A"></div></div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 600">1 · Pick a tape</span><span style="font-size: 13px; color: #B4B8C0">Nothing to download. Every piece comes from official sources.</span></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; gap: 3px; width: 92px; height: 22px; flex: none"><div style="flex: 2; border-radius: 3px; background: #E9A23B"></div><div style="flex: 3; border-radius: 3px; border: 1.5px dashed #4C8DF6"></div><div style="flex: 2; border-radius: 3px; background: #3DBE7A"></div></div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 600">2 · Hunt the pieces</span><span style="font-size: 13px; color: #B4B8C0">Over an evening or a few weeks. Fallbacks help when something's hard to find.</span></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: center; padding: 16px 18px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; gap: 3px; width: 92px; height: 22px; flex: none"><div style="flex: 2; border-radius: 3px; background: #E9A23B"></div><div style="flex: 3; border-radius: 3px; background: #4C8DF6"></div><div style="flex: 2; border-radius: 3px; background: #3DBE7A"></div></div>
+<div style="display: flex; flex-direction: column"><span style="font-weight: 600">3 · Play it back</span><span style="font-size: 13px; color: #B4B8C0">Then read the creator's notes and see what they did there.</span></div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- Step 1: Account -->
+<sc-if value="{{s1}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em">Make an account</h1>
+<span style="color: #B4B8C0">So your shelf, finds and tapes are saved.</span>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Display name <span style="font-weight: 400; color: #A7ABB3">Shown on tapes you write. Doesn't need to be your real name.</span>
+<input type="text" placeholder="e.g. weatherwatcher" style="min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #171A1F; color: #E8E9EC; font-size: 15px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Email
+<input type="email" placeholder="you@example.com" style="min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #171A1F; color: #E8E9EC; font-size: 15px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Password <span style="font-weight: 400; color: #A7ABB3">At least 10 characters.</span>
+<input type="password" style="min-height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #171A1F; color: #E8E9EC; font-size: 15px">
+</label>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border-radius: 12px; background: #171A1F; border: 1px solid #262A31">
+<label style="display: flex; align-items: flex-start; gap: 12px; min-height: 40px; padding-top: 8px; cursor: pointer"><input type="checkbox" checked="{{age}}" onChange="{{toggleAge}}" style="width: 20px; height: 20px; margin: 0; flex: none; accent-color: #E8E9EC"><span>I'm [AGE] or older</span></label>
+<label style="display: flex; align-items: flex-start; gap: 12px; min-height: 40px; padding-top: 8px; cursor: pointer"><input type="checkbox" checked="{{agree}}" onChange="{{toggleAgree}}" style="width: 20px; height: 20px; margin: 0; flex: none; accent-color: #E8E9EC"><span>I've read the <a href="#">community guidelines</a> and agree to the <a href="#">terms</a> and <a href="#">privacy policy</a></span></label>
+</div>
+<sc-if value="{{showAccountHint}}" hint-placeholder-val="{{ false }}">
+<span style="font-size: 13px; color: #F2B65A">Tick both boxes to continue.</span>
+</sc-if>
+</div>
+</sc-if>
+
+<!-- Step 2: Region -->
+<sc-if value="{{s2}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em">Where will you be collecting from?</h1>
+<span style="color: #B4B8C0">Some broadcasts and services only exist in certain countries. We'll flag slots you might not be able to get, and show you tapes that work where you are.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 10px" role="group" aria-label="Country">
+<sc-for list="{{places}}" as="p" hint-placeholder-count="7">
+<button type="button" onClick="{{p.pick}}" aria-pressed="{{p.pressed}}" style="display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px; border-radius: 12px; text-align: left; font-size: 15px; cursor: pointer; color: #E8E9EC; {{p.look}}"><svg width="14" height="16" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M8 16.5s6-5.2 6-9.5a6 6 0 0 0-12 0c0 4.3 6 9.5 6 9.5z"></path><circle cx="8" cy="7" r="2"></circle></svg>{{p.v}}</button>
+</sc-for>
+</div>
+<button type="button" onClick="{{toggleWorld}}" aria-pressed="{{worldPressed}}" style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 12px; text-align: left; cursor: pointer; color: #E8E9EC; {{worldLook}}">
+<svg width="20" height="20" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg>
+<span style="flex: 1; display: flex; flex-direction: column"><span style="font-weight: 600">Start with Worldwide tapes</span><span style="font-size: 13px; color: #B4B8C0">Every slot, or a fallback, works anywhere. Good for a first tape.</span></span>
+<span style="font-size: 13px; font-weight: 600">{{worldState}}</span>
+</button>
+<span style="font-size: 12px; color: #A7ABB3">You can change this any time in settings.</span>
+</div>
+</sc-if>
+
+<!-- Step 3: Vibes -->
+<sc-if value="{{s3}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em">What kind of tapes do you like?</h1>
+<span style="color: #B4B8C0">Pick as many vibes as you like. We'll put tapes that match at the top of your home page.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px" role="group" aria-label="Vibes">
+<sc-for list="{{vibes}}" as="v" hint-placeholder-count="14">
+<button type="button" onClick="{{v.pick}}" aria-pressed="{{v.pressed}}" style="display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 999px; font-size: 15px; cursor: pointer; {{v.look}}"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>{{v.name}}</button>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #A7ABB3">{{vibeCount}}</span>
+</div>
+</sc-if>
+
+<!-- Step 4: Reading -->
+<sc-if value="{{s4}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em">How would you like to read tapes?</h1>
+<span style="color: #B4B8C0">Creators' titles and notes appear in handwriting, like a real cassette. If that's harder to read, switch to plain text.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px" role="group" aria-label="Text style">
+<button type="button" onClick="{{pickHand}}" aria-pressed="{{handPressed}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 72px; padding: 14px 16px; border-radius: 12px; text-align: left; cursor: pointer; color: #E8E9EC; {{handLook}}"><span style="font-weight: 600">Handwritten</span><span style="font-size: 13px; color: #B4B8C0">The cassette feel</span></button>
+<button type="button" onClick="{{pickPlain}}" aria-pressed="{{plainPressed}}" style="display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-height: 72px; padding: 14px 16px; border-radius: 12px; text-align: left; cursor: pointer; color: #E8E9EC; {{plainLook}}"><span style="font-weight: 600">Plain text</span><span style="font-size: 13px; color: #B4B8C0">Easier to read for some people</span></button>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; color: #A7ABB3">Preview</span>
+<div style="display: flex; gap: 16px; flex-wrap: wrap">
+<div style="width: 190px; height: 130px; display: flex; border-radius: 6px; overflow: hidden; background: #EDE9E0; color: #1F2A44; flex: none">
+<div style="width: 12px; background: linear-gradient(#A7ABB3 0 10%, #E9A23B 10% 35%, #4C8DF6 35% 55%, #F06A6E 55% 80%, #A68BF5 80% 100%)"></div>
+<div style="flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: #1A1B1E">SIDE C · C15</span>
+<span style="{{titleStyle}}">Rain on a Tuesday</span>
+</div>
+</div>
+<div style="flex: 1 1 260px; min-width: 0; background: #171A1F; border: 1px solid #262A31; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">Note from the creator</span>
+<span style="{{noteStyle}}">The calmer the voice, the better. Let it fade in under the rain if you can.</span>
+</div>
+</div>
+</div>
+<span style="font-size: 12px; color: #A7ABB3">Buttons, timings and instructions are always in plain text either way.</span>
+</div>
+</sc-if>
+
+<!-- Step 5: Done -->
+<sc-if value="{{s5}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em">Your shelf is ready.</h1>
+<span style="color: #B4B8C0">{{summary}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">A good first tape</span>
+<div style="display: flex; gap: 18px; flex-wrap: wrap; align-items: center; padding: 16px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="width: 150px; height: 104px; display: flex; border-radius: 6px; overflow: hidden; background: #EDE9E0; color: #1F2A44; flex: none">
+<div style="width: 12px; background: {{pick.stripe}}"></div>
+<div style="flex: 1; padding: 10px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.08em; color: #1A1B1E">SIDE C · {{pick.tier}}</span>
+<span style="{{pickTitleStyle}}">{{pick.title}}</span>
+</div>
+</div>
+<div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600; font-size: 16px">{{pick.title}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{pick.meta}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{pick.why}}</span>
+</div>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#" style="display: flex; align-items: center; min-height: 52px; padding: 0 24px; border-radius: 12px; background: #E8E9EC; color: #101216; font-weight: 600; font-size: 15px; text-decoration: none">Start this tape</a>
+<a href="#" style="display: flex; align-items: center; min-height: 52px; padding: 0 20px; border-radius: 12px; border: 1px solid #3A3F48; color: #E8E9EC; font-size: 15px; text-decoration: none">Browse all tapes</a>
+<button type="button" onClick="{{restart}}" style="min-height: 52px; padding: 0 16px; border-radius: 12px; border: none; background: transparent; color: #9CC2FF; font-size: 14px; cursor: pointer">Start the welcome again</button>
+</div>
+</div>
+</sc-if>
+
+<!-- Nav -->
+<sc-if value="{{showNav}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding-top: 8px; border-top: 1px solid #262A31">
+<sc-if value="{{canBack}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{back}}" style="min-height: 52px; padding: 0 18px; border-radius: 12px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 15px; cursor: pointer">Back</button>
+</sc-if>
+<sc-if value="{{canSkip}}" hint-placeholder-val="{{ false }}">
+<button type="button" onClick="{{skip}}" style="min-height: 52px; padding: 0 16px; border-radius: 12px; border: none; background: transparent; color: #B4B8C0; font-size: 14px; cursor: pointer">Skip for now</button>
+</sc-if>
+<button type="button" onClick="{{next}}" style="margin-left: auto; min-height: 52px; padding: 0 26px; border-radius: 12px; font-weight: 600; font-size: 15px; cursor: pointer; {{nextLook}}">{{nextLabel}}</button>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { step: 0, age: false, agree: false, tried: false, place: "United Kingdom", world: false, vibes: ["Strange", "Cosy"], hand: true };
+  }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var step = st.step;
+    var TOTAL = 6;
+    var names = ["Welcome", "Account", "Region", "Vibes", "Reading", "Ready"];
+    var on = "border: 1.5px solid #E8E9EC; background: #E8E9EC; color: #101216; font-weight: 600;";
+    var off = "border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;";
+    var cardOn = "border: 1.5px solid #A9C8FF; background: #1D2A40;";
+    var cardOff = "border: 1px solid #3A3F48; background: #171A1F;";
+    function go(n) { self.setState({ step: n, tried: false }); }
+
+    var dots = [];
+    for (var i = 0; i < TOTAL; i++) { dots.push({ c: i < step ? "#8F949D" : (i === step ? "#E8E9EC" : "#262A31") }); }
+
+    var places = ["United Kingdom", "Ireland", "USA", "Canada", "Japan", "Australia", "Somewhere else"].map(function (p) {
+      var sel = st.place === p;
+      return { v: p, pressed: sel ? "true" : "false", look: sel ? cardOn : cardOff, pick: function () { self.setState({ place: p }); } };
+    });
+
+    var vibeNames = ["Tranquil", "Dreamy", "Cosy", "Nostalgic", "Melancholy", "Hopeful", "Joyful", "Funny", "Strange", "Eerie", "Tense", "Frantic", "Chaotic", "Experimental"];
+    var vibes = vibeNames.map(function (n) {
+      var sel = st.vibes.indexOf(n) >= 0;
+      return { name: n, pressed: sel ? "true" : "false", look: sel ? on : off, pick: function () {
+        var cur = self.state.vibes.slice(); var k = cur.indexOf(n);
+        if (k >= 0) { cur.splice(k, 1); } else { cur.push(n); }
+        self.setState({ vibes: cur });
+      } };
+    });
+
+    var HAND = "font-family: 'Patrick Hand', cursive; font-size: 20px; line-height: 1.3;";
+    var PLAIN = "font-family: Inter, system-ui, sans-serif; font-size: 15px; line-height: 1.45;";
+    var TITLE_HAND = "font-family: 'Permanent Marker', cursive; font-size: 19px; line-height: 1.1;";
+    var TITLE_PLAIN = "font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 19px; line-height: 1.05;";
+
+    var lively = ["Strange", "Eerie", "Funny", "Chaotic", "Frantic", "Experimental", "Tense"];
+    var likesLively = st.vibes.some(function (v) { return lively.indexOf(v) >= 0; });
+    var ukish = !st.world && (st.place === "United Kingdom" || st.place === "Ireland");
+    var pick;
+    if (ukish && likesLively) {
+      pick = { title: "Rain on a Tuesday", tier: "C15", meta: "C15 · 8:00 · 12 slots · Medium · Best in the UK", why: "Tranquil, then strange, then hopeful. Matches your vibes, and it works best where you are.", stripe: "linear-gradient(#A7ABB3 0 6%, #E9A23B 6% 27%, #4C8DF6 27% 47%, #F06A6E 47% 71%, #3DBE7A 71% 80%, #D9DBE0 80% 88%, #A68BF5 88% 100%)" };
+    } else if (likesLively) {
+      pick = { title: "Applause for no reason", tier: "C5", meta: "C5 · 3:10 · 6 slots · Quick · Worldwide", why: "Funny, joyful and a bit strange. Short, all free, and it works anywhere.", stripe: "linear-gradient(#4C8DF6 0 50%, #3DBE7A 50% 90%, #A7ABB3 90% 100%)" };
+    } else {
+      pick = { title: "Snow days", tier: "C5", meta: "C5 · 4:50 · 7 slots · Quick · Worldwide", why: "Cosy, joyful and nostalgic. Short, all free, and it works anywhere.", stripe: "linear-gradient(#E9A23B 0 40%, #3DBE7A 40% 70%, #4C8DF6 70% 90%, #A7ABB3 90% 100%)" };
+    }
+
+    var accountOk = st.age && st.agree;
+    var nextLabels = ["Get started", "Create account", "Continue", "Continue", "Finish", ""];
+    var blocked = step === 1 && !accountOk;
+    var vibeTxt = st.vibes.length === 0 ? "None picked yet, and that's fine." : st.vibes.length + " picked: " + st.vibes.join(", ");
+    var where = st.world ? "Worldwide tapes first" : "collecting from " + (st.place === "Somewhere else" ? "your region" : st.place);
+
+    return {
+      dots: dots,
+      progressAria: "Step " + (step + 1) + " of " + TOTAL + ": " + names[step],
+      stepLabel: "Step " + (step + 1) + " of " + TOTAL + " · " + names[step],
+      s0: step === 0, s1: step === 1, s2: step === 2, s3: step === 3, s4: step === 4, s5: step === 5,
+      age: st.age, agree: st.agree,
+      toggleAge: function () { self.setState({ age: !self.state.age }); },
+      toggleAgree: function () { self.setState({ agree: !self.state.agree }); },
+      showAccountHint: st.tried && !accountOk,
+      places: places,
+      toggleWorld: function () { self.setState({ world: !self.state.world }); },
+      worldPressed: st.world ? "true" : "false",
+      worldLook: st.world ? "border: 1.5px solid #8FE0B3; background: #1E3A2B;" : cardOff,
+      worldState: st.world ? "On" : "Off",
+      vibes: vibes,
+      vibeCount: vibeTxt,
+      pickHand: function () { self.setState({ hand: true }); },
+      pickPlain: function () { self.setState({ hand: false }); },
+      handPressed: st.hand ? "true" : "false",
+      plainPressed: st.hand ? "false" : "true",
+      handLook: st.hand ? cardOn : cardOff,
+      plainLook: st.hand ? cardOff : cardOn,
+      titleStyle: st.hand ? TITLE_HAND : TITLE_PLAIN,
+      noteStyle: st.hand ? HAND : PLAIN,
+      pick: pick,
+      pickTitleStyle: (st.hand ? "font-family: 'Permanent Marker', cursive;" : "font-family: 'Space Grotesk', sans-serif; font-weight: 700;") + " font-size: 15px; line-height: 1.1;",
+      summary: "We'll show you tapes " + where + (st.vibes.length ? ", with " + st.vibes.slice(0, 3).join(", ").toLowerCase() + (st.vibes.length > 3 ? " and more" : "") + " vibes near the top" : "") + ". Creators' notes will appear " + (st.hand ? "in handwriting" : "in plain text") + ".",
+      showNav: step < 5,
+      canBack: step > 0,
+      canSkip: step >= 2 && step <= 4,
+      nextLabel: nextLabels[step],
+      nextLook: blocked ? "border: 1px solid #3A3F48; background: #1A1D22; color: #8F949D;" : "border: none; background: #E8E9EC; color: #101216;",
+      next: function () {
+        if (step === 1 && !accountOk) { self.setState({ tried: true }); return; }
+        go(Math.min(step + 1, TOTAL - 1));
+      },
+      back: function () { go(Math.max(step - 1, 0)); },
+      skip: function () { go(Math.min(step + 1, TOTAL - 1)); },
+      restart: function () { go(0); }
+    };
+  }
+}
+</script>
+</body>
+</html>

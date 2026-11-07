@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write a tape · Side C mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button,input,select,textarea{font-family:inherit}
+</style>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="max-width: 1400px; margin: 0 auto; padding: 20px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+
+<!-- Top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #262A31">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="#E8E9EC" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle><path d="M6 21l3-5h12l3 5"></path></svg>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Side C</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 12px; color: #A7ABB3">(What You Did There)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px">
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">Browse tapes</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">My shelf</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #E8E9EC; background: #1D2026; text-decoration: none">Write a tape</a>
+</div>
+</div>
+
+<!-- Page header -->
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px; max-width: 720px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3; letter-spacing: 0.08em; text-transform: uppercase">Draft · autosaved</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; line-height: 1.05">Write a tape</h1>
+<span style="color: #B4B8C0">You're not uploading anything. You're writing the instructions, so someone else can hunt down each piece and see what you did there.</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A3F48; background: #1A1D22; color: #E8E9EC; font-weight: 500; font-size: 14px; cursor: pointer">Preview as a collector</button>
+<button type="button" style="min-height: 44px; padding: 0 18px; border-radius: 10px; border: none; background: #E8E9EC; color: #101216; font-weight: 600; font-size: 14px; cursor: pointer">Submit for review</button>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+
+<!-- Form column -->
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<!-- Section 1 -->
+<section style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A7ABB3; margin-right: 8px">01</span>About the tape</h2>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Title
+<input type="text" value="Rain on a Tuesday" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Theme <span style="font-weight: 400; color: #A7ABB3">What it's about, in a few words</span>
+<input type="text" value="weather, rain, staying in" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">One-line description
+<input type="text" value="A mixtape about the sound and feeling of bad weather" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<fieldset style="margin: 0; padding: 16px; border-radius: 12px; border: 1px solid #2C3038; background: #101216; display: flex; flex-direction: column; gap: 12px">
+<legend style="padding: 0 6px; font-size: 13px; font-weight: 500">Vibe <span style="font-weight: 400; color: #A7ABB3">How should it feel to play? Pick up to 3.</span></legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{vibes}}" as="v" hint-placeholder-count="14">
+<button type="button" onClick="{{v.pick}}" aria-pressed="{{v.pressed}}" disabled="{{v.disabled}}" style="display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 999px; font-size: 13px; cursor: pointer; {{v.look}}"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>{{v.name}}</button>
+</sc-for>
+<button type="button" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px dashed #3A3F48; background: transparent; color: #B4B8C0; font-size: 13px; cursor: pointer">+ Suggest a vibe</button>
+</div>
+<span style="font-size: 12px; color: #A7ABB3">{{vibeCount}}</span>
+<div style="height: 1px; background: #262A31"></div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 500">Vibe arc <span style="font-weight: 400; color: #A7ABB3">Optional. How does the mood move from start to finish?</span></span>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<label style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Starts
+<select onChange="{{arcAPick}}" value="{{arcA}}" style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+<option value="">Not set</option>
+<option value="Tranquil">Tranquil</option><option value="Dreamy">Dreamy</option><option value="Cosy">Cosy</option><option value="Nostalgic">Nostalgic</option><option value="Melancholy">Melancholy</option><option value="Hopeful">Hopeful</option><option value="Joyful">Joyful</option><option value="Funny">Funny</option><option value="Strange">Strange</option><option value="Eerie">Eerie</option><option value="Tense">Tense</option><option value="Frantic">Frantic</option><option value="Chaotic">Chaotic</option><option value="Experimental">Experimental</option>
+</select>
+</label>
+<label style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Middle
+<select onChange="{{arcBPick}}" value="{{arcB}}" style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+<option value="">Not set</option>
+<option value="Tranquil">Tranquil</option><option value="Dreamy">Dreamy</option><option value="Cosy">Cosy</option><option value="Nostalgic">Nostalgic</option><option value="Melancholy">Melancholy</option><option value="Hopeful">Hopeful</option><option value="Joyful">Joyful</option><option value="Funny">Funny</option><option value="Strange">Strange</option><option value="Eerie">Eerie</option><option value="Tense">Tense</option><option value="Frantic">Frantic</option><option value="Chaotic">Chaotic</option><option value="Experimental">Experimental</option>
+</select>
+</label>
+<label style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Ends
+<select onChange="{{arcCPick}}" value="{{arcC}}" style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+<option value="">Not set</option>
+<option value="Tranquil">Tranquil</option><option value="Dreamy">Dreamy</option><option value="Cosy">Cosy</option><option value="Nostalgic">Nostalgic</option><option value="Melancholy">Melancholy</option><option value="Hopeful">Hopeful</option><option value="Joyful">Joyful</option><option value="Funny">Funny</option><option value="Strange">Strange</option><option value="Eerie">Eerie</option><option value="Tense">Tense</option><option value="Frantic">Frantic</option><option value="Chaotic">Chaotic</option><option value="Experimental">Experimental</option>
+</select>
+</label>
+</div>
+<sc-if value="{{hasArc}}" hint-placeholder-val="{{ true }}">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #E8E9EC"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg><span style="color: #A7ABB3; font-size: 12px">Collectors will see:</span>{{arcText}}</span>
+</sc-if>
+</div>
+</fieldset>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Liner notes <span style="font-weight: 400; color: #A7ABB3">What were you going for? Collectors read this before they start. It appears in handwriting.</span>
+<textarea rows="3" style="padding: 10px 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-family: 'Patrick Hand', 'Comic Neue', cursive; font-size: 19px; line-height: 1.3; resize: vertical">I made this on a wet afternoon when everything sounded like rain. It starts calm, gets strange in the middle, and ends somewhere hopeful.</textarea>
+</label>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Difficulty
+<select style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px"><option>Quick: all free and online</option><option selected="selected">Medium: some digging</option><option>Ambitious: archive hunting</option></select>
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Content warnings
+<input type="text" placeholder="e.g. flashing images, loud noises" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Spoilers?
+<select style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px"><option selected="selected">No spoilers</option><option>Contains spoilers (named on each slot)</option></select>
+</label>
+</div>
+<fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 8px">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 500">Tape length <span style="font-weight: 400; color: #A7ABB3">You can change this later.</span></legend>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #101216; cursor: pointer">
+<span style="display: flex; align-items: center; gap: 8px"><input type="radio" name="tier" style="width: 18px; height: 18px; accent-color: #E8E9EC"><span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500">C5</span></span>
+<span style="font-size: 13px; font-weight: 500">2 to 5 minutes · 3 to 6 slots</span>
+<span style="font-size: 12px; color: #A7ABB3">A quick tape for one evening</span>
+</label>
+<label style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 10px; border: 1.5px solid #E8E9EC; background: #1D2026; cursor: pointer">
+<span style="display: flex; align-items: center; gap: 8px"><input type="radio" name="tier" checked="checked" style="width: 18px; height: 18px; accent-color: #E8E9EC"><span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500">C15</span></span>
+<span style="font-size: 13px; font-weight: 500">5 to 15 minutes · up to 12 slots</span>
+<span style="font-size: 12px; color: #A7ABB3">The standard tape, room for an arc</span>
+</label>
+<label style="display: flex; flex-direction: column; gap: 4px; padding: 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #101216; cursor: pointer">
+<span style="display: flex; align-items: center; gap: 8px"><input type="radio" name="tier" style="width: 18px; height: 18px; accent-color: #E8E9EC"><span style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 500">C30</span></span>
+<span style="font-size: 13px; font-weight: 500">15 to 30 minutes · up to 20 slots</span>
+<span style="font-size: 12px; color: #A7ABB3">An ambitious, weeks-long hunt</span>
+</label>
+</div>
+</fieldset>
+</section>
+
+<!-- Section 2: slots -->
+<section style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A7ABB3; margin-right: 8px">02</span>The running order</h2>
+<span style="font-size: 12px; color: #A7ABB3">4 slots · 2:15 so far</span>
+</div>
+
+<!-- Running-time meter -->
+<div style="display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; border-radius: 10px; background: #101216; border: 1px solid #262A31">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<span style="font-size: 13px; font-weight: 600">Running time <span style="font-family: 'JetBrains Mono', monospace; font-weight: 500; margin-left: 6px">2:15</span> <span style="font-weight: 400; color: #A7ABB3">of a C15</span></span>
+<span style="font-size: 12px; color: #A7ABB3">About 2:45 more to reach the target</span>
+</div>
+<div style="position: relative; height: 28px; border-radius: 6px; background: #171A1F; overflow: hidden" role="img" aria-label="Running time 2 minutes 15 seconds. Target 5 to 15 minutes, close enough from 4:30 to 16:30.">
+<div style="position: absolute; top: 0; bottom: 0; left: 27.3%; width: 3%; background: repeating-linear-gradient(135deg, #E8E9EC22 0 4px, transparent 4px 8px)"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 30.3%; width: 60.6%; background: #E8E9EC14; border-left: 1.5px solid #E8E9EC; border-right: 1.5px solid #E8E9EC"></div>
+<div style="position: absolute; top: 0; bottom: 0; left: 90.9%; width: 9.1%; background: repeating-linear-gradient(135deg, #E8E9EC22 0 4px, transparent 4px 8px)"></div>
+<div style="position: absolute; top: 4px; bottom: 4px; left: 0; right: 0; display: flex; gap: 2px">
+<div style="width: 0.8%; min-width: 4px; border-radius: 2px; background: #A7ABB3"></div>
+<div style="width: 4.2%; border-radius: 2px; background: #E9A23B"></div>
+<div style="width: 4.5%; border-radius: 2px; background: repeating-linear-gradient(135deg, #3DBE7A66 0 4px, transparent 4px 8px); border: 1px dashed #3DBE7A; box-sizing: border-box"></div>
+<div style="width: 4%; border-radius: 2px; background: linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)"></div>
+</div>
+</div>
+<div style="position: relative; height: 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A7ABB3">
+<span style="position: absolute; left: 0">0:00</span>
+<span style="position: absolute; left: 30.3%; transform: translateX(-50%); color: #E8E9EC">5:00</span>
+<span style="position: absolute; left: 90.9%; transform: translateX(-50%); color: #E8E9EC">15:00</span>
+<span style="position: absolute; right: 0">16:30</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #B4B8C0">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 10px; border-radius: 2px; background: #E8E9EC14; border-left: 1.5px solid #E8E9EC; border-right: 1.5px solid #E8E9EC"></span>Target length</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 18px; height: 10px; border-radius: 2px; background: repeating-linear-gradient(135deg, #E8E9EC33 0 3px, transparent 3px 6px)"></span>Close enough: up to 10% either side</span>
+</div>
+<span style="font-size: 12px; color: #A7ABB3">Aim for the feel, not the stopwatch. Fallbacks can run a little longer or shorter, and that's fine as long as the tape still flows.</span>
+</div>
+
+<!-- Availability summary -->
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 14px; padding: 14px 16px; border-radius: 10px; background: #101216; border: 1px solid #2F6B4A">
+<span style="display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #1E3A2B; color: #8FE0B3; border: 1px solid #2F6B4A; flex: none"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg>Worldwide</span>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 13px; font-weight: 600">Your tape will show as Worldwide, so anyone can collect it</span>
+<span style="font-size: 13px; color: #B4B8C0">Slots 1, 3 and 4 work anywhere. Slot 2 is UK and Ireland only, but its fallbacks work worldwide, so it still counts. Remove those fallbacks and the tape would show as "Best in the UK".</span>
+</div>
+</div>
+
+<!-- Slot 1 (collapsed) -->
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; background: #1D2026; border: 1px solid #262A31">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">1</span>
+<span style="width: 10px; height: 10px; border-radius: 3px; background: #A7ABB3; flex: none"></span>
+<span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">In-between · Count down from five, out loud</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">0:08</span>
+<button type="button" style="min-height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">Edit</button>
+</div>
+
+<!-- Slot 2 (expanded editor) -->
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 16px; border-radius: 12px; background: #1D2026; border: 1.5px solid #E9A23B">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">2</span>
+<span style="font-weight: 600">Editing slot 2</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 13px; font-weight: 500">Type of slot</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" aria-pressed="true" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #E9A23B; background: #E9A23B; color: #121418; font-weight: 600; font-size: 13px; cursor: pointer">Radio</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #4C8DF6; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">TV</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #F06A6E; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">Film</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #3DBE7A; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">YouTube</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #A68BF5; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">Podcast</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #A7ABB3; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">In-between</button>
+<button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1.5px solid #D9DBE0; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer"><span style="width: 10px; height: 10px; border-radius: 3px; background: linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)"></span>Interference</button>
+</div>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">What to find <span style="font-weight: 400; color: #A7ABB3">Describe it in your own words. No transcripts or lyrics.</span>
+<textarea rows="2" style="padding: 10px 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px; resize: vertical">Any station's overnight weather read. Start where the presenter takes a breath before the first region.</textarea>
+</label>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Start in source
+<input type="text" value="00:12" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-family: 'JetBrains Mono', monospace; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">End in source
+<input type="text" value="00:54" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-family: 'JetBrains Mono', monospace; font-size: 14px">
+</label>
+<div style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Length in tape
+<span style="min-height: 44px; display: flex; align-items: center; padding: 0 12px; border-radius: 8px; background: #262A31; font-family: 'JetBrains Mono', monospace">0:42</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Where to look
+<input type="text" value="Radio archives or catch-up apps" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">How easy to get
+<select style="min-height: 44px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px"><option selected="selected">Free online</option><option>Needs a subscription</option><option>Rent or buy</option><option>Archive or library</option><option>Region-locked</option></select>
+</label>
+</div>
+<fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 8px">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 500">Where it's available <span style="font-weight: 400; color: #A7ABB3">Where can collectors get this source?</span></legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" aria-pressed="false" style="display: flex; align-items: center; gap: 6px; min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px solid #2F6B4A; background: transparent; color: #8FE0B3"><svg width="14" height="14" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg>Worldwide</button>
+<button type="button" aria-pressed="true" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1.5px solid #A9C8FF; background: #1D2A40; color: #E8E9EC; font-weight: 600;">United Kingdom</button>
+<button type="button" aria-pressed="true" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1.5px solid #A9C8FF; background: #1D2A40; color: #E8E9EC; font-weight: 600;">Ireland</button>
+<button type="button" aria-pressed="false" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;">USA</button>
+<button type="button" aria-pressed="false" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;">Canada</button>
+<button type="button" aria-pressed="false" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;">Japan</button>
+<button type="button" aria-pressed="false" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;">Australia</button>
+<button type="button" style="min-height: 38px; padding: 0 12px; border-radius: 999px; font-size: 13px; cursor: pointer; border: 1px dashed #3A3F48; background: transparent; color: #B4B8C0">+ Another country</button>
+</div>
+<span style="font-size: 12px; color: #A7ABB3">Only in some countries? That's fine. Add a fallback that works elsewhere, and anyone can still finish your tape.</span>
+</fieldset>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Link to an official source <span style="font-weight: 400; color: #A7ABB3">Optional. Official channels and services only.</span>
+<input type="url" placeholder="https://" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Note to the collector <span style="font-weight: 400; color: #A7ABB3">Why is it here? This is the "what you did there" part. It appears in handwriting.</span>
+<textarea rows="2" style="padding: 10px 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-family: 'Patrick Hand', 'Comic Neue', cursive; font-size: 19px; line-height: 1.3; resize: vertical">The calmer the voice, the better.</textarea>
+</label>
+<fieldset style="margin: 0; padding: 14px; border-radius: 10px; border: 1px dashed #3A3F48; display: flex; flex-direction: column; gap: 10px">
+<legend style="padding: 0 6px; font-size: 13px; font-weight: 500">Fallbacks <span style="font-weight: 400; color: #A7ABB3">If it's hard to find, region-locked or gone. Up to 3.</span></legend>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; color: #A7ABB3; width: 16px">A</span>
+<input type="text" value="Any slow, calm shipping or travel bulletin" aria-label="Fallback A" style="flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; align-items: center; gap: 10px; font-size: 13px"><span style="font-family: 'JetBrains Mono', monospace; color: #A7ABB3; width: 16px">B</span>
+<input type="text" value="A sleep or relaxation track with a spoken weather report" aria-label="Fallback B" style="flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<button type="button" style="align-self: flex-start; min-height: 40px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">+ Add a fallback</button>
+</fieldset>
+<div style="display: flex; flex-wrap: wrap; gap: 18px; padding-top: 4px; border-top: 1px solid #2C3038">
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #E9A23B">Mystery slot (give a clue, not a timestamp)</label>
+<label style="display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #E9A23B">Lock until an earlier slot is found</label>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 13px">Rarity
+<select style="min-height: 40px; padding: 0 10px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 13px"><option selected="selected">Common</option><option>Uncommon</option><option>Rare</option></select>
+</label>
+</div>
+</div>
+
+<!-- Slot 3 (empty placeholder) -->
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 10px; border: 1.5px dashed #3DBE7A; background: repeating-linear-gradient(135deg, #3DBE7A1A 0 6px, transparent 6px 12px)">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">3</span>
+<span style="width: 10px; height: 10px; border-radius: 3px; background: #3DBE7A; flex: none"></span>
+<span style="flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">YouTube · Rain on a tin roof <span style="color: #A7ABB3">(note missing)</span></span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">0:45</span>
+<button type="button" style="min-height: 36px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">Edit</button>
+</div>
+
+<!-- Slot 4: Interference editor -->
+<div style="display: flex; flex-direction: column; gap: 14px; padding: 16px; border-radius: 12px; background: #1D2026; border: 1.5px solid #D9DBE0">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+<span style="display: flex; align-items: center; gap: 12px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">4</span><span style="width: 12px; height: 12px; border-radius: 3px; background: linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)"></span><span style="font-weight: 600">Interference slot</span></span>
+<span style="font-size: 12px; color: #A7ABB3">Muted picture from one source, sound from another · 10 to 45 seconds · up to 2 per tape</span>
+</div>
+<fieldset style="margin: 0; padding: 0; border: none; display: flex; flex-direction: column; gap: 8px">
+<legend style="padding: 0; margin-bottom: 8px; font-size: 13px; font-weight: 500">Mode</legend>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<label style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #E8E9EC; background: #171A1F; cursor: pointer">
+<span style="display: flex; align-items: center; gap: 8px; font-weight: 600"><input type="radio" name="imode" checked="checked" style="width: 18px; height: 18px; accent-color: #E8E9EC">Clash</span>
+<span style="font-size: 12px; color: #B4B8C0">Picture and sound fight each other</span>
+</label>
+<label style="display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: 10px; border: 1px solid #3A3F48; background: #101216; cursor: pointer">
+<span style="display: flex; align-items: center; gap: 8px; font-weight: 600"><input type="radio" name="imode" style="width: 18px; height: 18px; accent-color: #E8E9EC">Uncanny merge</span>
+<span style="font-size: 12px; color: #B4B8C0">They almost fit, and that's what's unsettling</span>
+</label>
+</div>
+</fieldset>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 10px; background: #171A1F; border-top: 4px solid #3DBE7A">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3DBE7A">Picture · played muted</span>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">What to find
+<input type="text" value="Any bright, cheerful pop music video" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Where to look
+<input type="text" value="Artists' official video channels" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Start
+<input type="text" value="1:02" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px; font-family: 'JetBrains Mono', monospace">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">End
+<input type="text" value="1:42" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px; font-family: 'JetBrains Mono', monospace">
+</label>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 10px; background: #171A1F; border-top: 4px solid #E9A23B">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #E9A23B">Sound</span>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">What to find
+<input type="text" value="A radio gale or severe weather warning" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Where to look
+<input type="text" value="Radio archives or catch-up" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Start
+<input type="text" value="0:00" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px; font-family: 'JetBrains Mono', monospace">
+</label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">End
+<input type="text" value="0:40" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px; font-family: 'JetBrains Mono', monospace">
+</label>
+</div>
+</div>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 500">Sync cue <span style="font-weight: 400; color: #A7ABB3">When should the collector start the sound?</span>
+<input type="text" value="The moment the singer first smiles at the camera" style="min-height: 44px; padding: 0 12px; border-radius: 8px; border: 1px solid #3A3F48; background: #101216; color: #E8E9EC; font-size: 14px">
+</label>
+<div style="display: flex; gap: 10px; padding: 10px 12px; border-radius: 8px; background: #171A1F; font-size: 13px; color: #B4B8C0">
+<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#E9A23B" stroke-width="1.6" style="flex: none; margin-top: 2px" aria-hidden="true"><circle cx="8" cy="8" r="6.5"></circle><path d="M8 4.5v4M8 11v.5"></path></svg>
+<span>Your tape will be labelled "contains an unsettling interlude" so collectors can opt in. Fallbacks can be added for each layer.</span>
+</div>
+</div>
+
+<button type="button" style="min-height: 48px; border-radius: 10px; border: 1.5px dashed #3A3F48; background: transparent; color: #E8E9EC; font-weight: 500; font-size: 14px; cursor: pointer">+ Add a slot</button>
+</section>
+
+<!-- Section 3: checklist -->
+<section style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0 0 4px; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px"><span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #A7ABB3; margin-right: 8px">03</span>Before you submit</h2>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="checkbox" checked="checked" style="width: 18px; height: 18px; accent-color: #E8E9EC">Every slot can be found legally, without pirated copies</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="checkbox" checked="checked" style="width: 18px; height: 18px; accent-color: #E8E9EC">I've described clips in my own words, with no transcripts or lyrics</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #E8E9EC">I've added content warnings and spoiler flags where needed</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 40px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: #E8E9EC">In-between instructions are safe to do at home</label>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end; padding-top: 8px">
+<button type="button" style="min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A3F48; background: #1A1D22; color: #E8E9EC; font-weight: 500; font-size: 14px; cursor: pointer">Save draft</button>
+<button type="button" style="min-height: 44px; padding: 0 18px; border-radius: 10px; border: none; background: #E8E9EC; color: #101216; font-weight: 600; font-size: 14px; cursor: pointer">Submit for review</button>
+</div>
+</section>
+</div>
+
+<!-- Guide column -->
+<aside style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px">Making a good tape</h2>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3DBE7A"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2.5 7.5l3 3 6-7"></path></svg>Do</span>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-left: 4px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Give exact start and end times</span><span style="font-size: 13px; color: #B4B8C0">Say which version you mean, since broadcast and DVD timings can differ.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Say where to look and what it costs</span><span style="font-size: 13px; color: #B4B8C0">Free, subscription, archive or region-locked. Nobody likes a dead end.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Keep each slot to a moment</span><span style="font-size: 13px; color: #B4B8C0">Clips run 5 seconds to 2 minutes, and most work best under one. In-between slots up to a minute.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Aim close, not exact</span><span style="font-size: 13px; color: #B4B8C0">Within 10% of your tier is fine. Flow matters more than the clock.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Explain why each piece is there</span><span style="font-size: 13px; color: #B4B8C0">The notes are what make the reveal land.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Give fallbacks for tricky slots</span><span style="font-size: 13px; color: #B4B8C0">Clips vanish and some are region-locked. One to three alternatives keep your tape finishable.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Save Interference for one big moment</span><span style="font-size: 13px; color: #B4B8C0">Short and sparing: 10 to 45 seconds, no more than two per tape. Give a clear sync cue.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Think about collectors abroad</span><span style="font-size: 13px; color: #B4B8C0">Mark where each slot is available. Region-only gems are welcome; a worldwide fallback means anyone can finish.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Pick vibes that match how it plays</span><span style="font-size: 13px; color: #B4B8C0">Up to three, plus an arc if the mood shifts. Collectors use them to choose what to play tonight.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Use in-between slots for pacing</span><span style="font-size: 13px; color: #B4B8C0">A pause or an instruction can be the best moment on the tape.</span></div>
+</div>
+</div>
+<div style="height: 1px; background: #262A31"></div>
+<div style="display: flex; flex-direction: column; gap: 10px">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #F06A6E"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8"></path></svg>Don't</span>
+<div style="display: flex; flex-direction: column; gap: 10px; padding-left: 4px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Link to pirated copies or unofficial re-uploads</span><span style="font-size: 13px; color: #B4B8C0">Official sources only, or leave the link out.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Paste dialogue, transcripts or lyrics</span><span style="font-size: 13px; color: #B4B8C0">Describe the moment instead. That's half the fun.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Make slots impossible to find</span><span style="font-size: 13px; color: #B4B8C0">Rare is good. Unfindable just means nobody finishes.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Feature private people</span><span style="font-size: 13px; color: #B4B8C0">No clips of people who didn't choose to be public, and no asking collectors to film others.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Make Interference graphic</span><span style="font-size: 13px; color: #B4B8C0">Unsettling should come from the pairing, not from violent, distressing or flashing material.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Spring spoilers or shocks</span><span style="font-size: 13px; color: #B4B8C0">Flag spoilers, flashing images and upsetting content.</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Write risky in-between instructions</span><span style="font-size: 13px; color: #B4B8C0">Lights off and a window open, yes. Anything unsafe, no.</span></div>
+</div>
+</div>
+</div>
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-weight: 600">Stuck for an idea?</span>
+<span style="font-size: 13px; color: #B4B8C0">Try this week's prompt: a tape where every slot is someone waiting for something.</span>
+<a href="#" style="font-size: 13px">See past prompts</a>
+</div>
+</aside>
+</div>
+
+</div>
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { picked: ["Tranquil", "Strange", "Hopeful"], arcA: "Tranquil", arcB: "Strange", arcC: "Hopeful" };
+  }
+
+  renderVals() {
+    var self = this;
+    var names = ["Tranquil", "Dreamy", "Cosy", "Nostalgic", "Melancholy", "Hopeful", "Joyful", "Funny", "Strange", "Eerie", "Tense", "Frantic", "Chaotic", "Experimental"];
+    var picked = this.state.picked;
+    var full = picked.length >= 3;
+    var vibes = names.map(function (n) {
+      var on = picked.indexOf(n) >= 0;
+      return {
+        name: n,
+        pressed: on ? "true" : "false",
+        disabled: !on && full,
+        look: on ? "border: 1.5px solid #E8E9EC; background: #E8E9EC; color: #101216; font-weight: 600;" : (full ? "border: 1px solid #262A31; background: transparent; color: #6E737C; cursor: not-allowed;" : "border: 1px solid #3A3F48; background: transparent; color: #E8E9EC;"),
+        pick: function () {
+          var cur = self.state.picked.slice();
+          var i = cur.indexOf(n);
+          if (i >= 0) { cur.splice(i, 1); } else if (cur.length < 3) { cur.push(n); }
+          self.setState({ picked: cur });
+        }
+      };
+    });
+    var arc = [this.state.arcA, this.state.arcB, this.state.arcC].filter(function (x) { return !!x; });
+    return {
+      vibes: vibes,
+      vibeNames: names.map(function (n) { return { v: n }; }),
+      vibeCount: picked.length + " of 3 picked" + (full ? ". Untick one to choose another." : ""),
+      arcA: this.state.arcA, arcB: this.state.arcB, arcC: this.state.arcC,
+      arcAPick: function (e) { self.setState({ arcA: e.target.value }); },
+      arcBPick: function (e) { self.setState({ arcB: e.target.value }); },
+      arcCPick: function (e) { self.setState({ arcC: e.target.value }); },
+      hasArc: arc.length > 1,
+      arcText: arc.join(" → ")
+    };
+  }
+}
+mountComponent(Component);
+</script>
+</body>
+</html>

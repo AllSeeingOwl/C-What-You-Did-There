@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Play-along</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#0B0C0F}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button{font-family:inherit}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #0B0C0F; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45; display: flex; flex-direction: column">
+
+<!-- Slim top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 24px; border-bottom: 1px solid #1E2127">
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 18px">Side C</span>
+<span style="color: #5B606A" aria-hidden="true">/</span>
+<span style="color: #B4B8C0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Rain on a Tuesday · play-along</span>
+</div>
+<button type="button" style="min-height: 40px; padding: 0 14px; border-radius: 8px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 13px; cursor: pointer">Exit play-along</button>
+</div>
+
+<!-- Progress strip -->
+<div style="padding: 16px 24px 0; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; gap: 3px; height: 30px">
+<sc-for list="{{segs}}" as="g" hint-placeholder-count="12">
+<button type="button" onClick="{{g.go}}" aria-label="{{g.aria}}" style="flex: {{g.flex}} 1 0; min-width: 6px; padding: 0; border-radius: 5px; cursor: pointer; {{g.look}}"></button>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A7ABB3"><span>0:00</span><span>{{progressText}}</span><span>8:00</span></div>
+</div>
+
+<!-- Stage -->
+<div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px 48px; box-sizing: border-box">
+<div style="width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 24px">
+
+<!-- Clip slot -->
+<sc-if value="{{isClip}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: {{cur.color}}"><span style="width: 12px; height: 12px; border-radius: 3px; background: {{cur.color}}"></span>Slot {{cur.num}} of 12 · {{cur.laneLabel}} · {{cur.lenText}}</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.08">{{cur.mine}}</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 14px">
+<div style="flex: 1 1 240px; background: #15171C; border: 1px solid #262A31; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; color: #A7ABB3">Play from</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 26px">{{cur.from}} → {{cur.to}}</span>
+</div>
+<div style="flex: 1 1 240px; background: #15171C; border: 1px solid #262A31; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; color: #A7ABB3">Your source</span>
+<span style="font-size: 15px">{{cur.source}}</span>
+<a href="#" style="font-size: 13px">Open your saved link</a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- In-between slot -->
+<sc-if value="{{isInstr}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; padding: 20px 0">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">Slot {{cur.num}} of 12 · In-between · {{cur.lenText}}</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 56px; letter-spacing: -0.02em; line-height: 1.08; max-width: 760px">{{cur.mine}}</h1>
+</div>
+</sc-if>
+
+<!-- Interference slot -->
+<sc-if value="{{isInterf}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: #D9DBE0"><span style="width: 12px; height: 12px; border-radius: 3px; background: linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)"></span>Slot {{cur.num}} of 12 · Interference · {{cur.mode}} · {{cur.lenText}}</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 44px; letter-spacing: -0.02em; line-height: 1.08">Two things at once</h1>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px">
+<div style="background: #15171C; border: 1px solid #262A31; border-top: 4px solid #3DBE7A; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #3DBE7A">Picture · muted</span>
+<span style="font-size: 16px">{{cur.pic}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 20px">{{cur.picFrom}} → {{cur.picTo}}</span>
+<span style="font-size: 12px; color: #A7ABB3">{{cur.picSource}}</span>
+</div>
+<div style="background: #15171C; border: 1px solid #262A31; border-top: 4px solid #E9A23B; border-radius: 12px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #E9A23B">Sound</span>
+<span style="font-size: 16px">{{cur.snd}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 20px">{{cur.sndFrom}} → {{cur.sndTo}}</span>
+<span style="font-size: 12px; color: #A7ABB3">{{cur.sndSource}}</span>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 16px 18px; border-radius: 12px; border: 1.5px dashed #D9DBE0">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #D9DBE0">Sync cue</span>
+<span style="font-size: 18px">{{cur.cue}}</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; color: #B4B8C0">
+<span><span style="font-family: 'JetBrains Mono', monospace; color: #E8E9EC">1</span> Start the picture, muted</span>
+<span><span style="font-family: 'JetBrains Mono', monospace; color: #E8E9EC">2</span> Watch for the cue</span>
+<span><span style="font-family: 'JetBrains Mono', monospace; color: #E8E9EC">3</span> Start the sound and the timer together</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- Timer + controls (clip and in-between) -->
+<sc-if value="{{notReveal}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="height: 6px; border-radius: 3px; background: #1E2127; overflow: hidden"><div style="height: 6px; background: {{cur.color}}; width: {{elapsedPct}}%"></div></div>
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3"><span>{{timerText}} left</span><span>{{cur.lenText}}</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<button type="button" onClick="{{back}}" style="min-height: 52px; padding: 0 18px; border-radius: 12px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 15px; cursor: pointer">Back</button>
+<button type="button" onClick="{{toggleTimer}}" style="min-height: 52px; padding: 0 22px; border-radius: 12px; border: 1px solid #3A3F48; background: #15171C; color: #E8E9EC; font-weight: 600; font-size: 15px; cursor: pointer">{{timerLabel}}</button>
+<button type="button" onClick="{{next}}" style="min-height: 52px; padding: 0 24px; border-radius: 12px; border: none; background: #E8E9EC; color: #0B0C0F; font-weight: 600; font-size: 15px; cursor: pointer; margin-left: auto">{{nextLabel}}</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; padding: 14px 16px; border-radius: 12px; border: 1px dashed #2C3038">
+<span style="display: flex; align-items: center; gap: 10px; color: #B4B8C0; min-width: 0"><span style="font-size: 12px; color: #A7ABB3">Up next</span><span style="width: 10px; height: 10px; border-radius: 3px; background: {{upNext.color}}; flex: none"></span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{upNext.text}}</span></span>
+<span style="font-size: 12px; color: #A7ABB3">The creator's notes are saved for the end</span>
+</div>
+</div>
+</sc-if>
+
+<!-- Reveal -->
+<sc-if value="{{isReveal}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 8px; text-align: center; align-items: center">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: #A7ABB3">Tape complete · 8:00</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 52px; letter-spacing: -0.025em; line-height: 1.05">See what they did there</h1>
+<span style="color: #B4B8C0; max-width: 560px">Here's why every piece is on the tape, in the creator's own words.</span>
+</div>
+<div style="display: flex; flex-direction: column; background: #15171C; border: 1px solid #262A31; border-radius: 14px; overflow: hidden">
+<sc-for list="{{reveal}}" as="r" hint-placeholder-count="12">
+<div style="display: flex; gap: 14px; padding: 12px 18px; border-bottom: 1px solid #1E2127">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3; width: 18px; flex: none; padding-top: 2px">{{r.num}}</span>
+<span style="width: 8px; border-radius: 3px; background: {{r.color}}; flex: none"></span>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0"><span style="font-size: 12px; color: #A7ABB3">{{r.mine}}</span><span style="font-family: 'Patrick Hand', 'Comic Neue', cursive; font-size: 19px; line-height: 1.3">{{r.note}}</span></div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center">
+<button type="button" onClick="{{restart}}" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid #3A3F48; background: transparent; color: #E8E9EC; font-size: 14px; cursor: pointer">Play it again</button>
+<button type="button" style="min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid #3A3F48; background: #15171C; color: #E8E9EC; font-size: 14px; cursor: pointer">Remix this tape</button>
+<button type="button" style="min-height: 48px; padding: 0 22px; border-radius: 10px; border: none; background: #E8E9EC; color: #0B0C0F; font-weight: 600; font-size: 14px; cursor: pointer">Write an "I made this"</button>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.slots = [
+      { lane: "between", dur: 8, mine: "Count down from five, out loud.", note: "Sets the tone. Don't rush it." },
+      { lane: "radio", dur: 42, mine: "The overnight weather bulletin", from: "0:12", to: "0:54", source: "Radio catch-up, saved 2 Nov", note: "The calmer the voice, the better." },
+      { lane: "youtube", dur: 45, mine: "Rain on a tin roof", from: "0:45", to: "1:30", source: "Video site, saved 2 Nov", note: "Let it fade in under the end of the bulletin if you can." },
+      { lane: "film", dur: 55, mine: "Your pick: the bus stop scene", from: "1:12:04", to: "1:12:59", source: "Your film, on DVD", note: "Everyone's tape will be different here. That's the point." },
+      { lane: "between", dur: 10, mine: "Turn the lights off. Ten seconds of silence.", note: "Halfway point. Breathe." },
+      { lane: "podcast", dur: 55, mine: "Someone describing the smell of rain", from: "14:20", to: "15:15", source: "Podcast app, saved 4 Nov", note: "I wanted something that explains the feeling, not just the sound." },
+      { lane: "tv", dur: 45, mine: "Your pick: the forecaster who couldn't stop laughing", from: "0:08", to: "0:53", source: "Clip collection, saved 5 Nov", note: "The tape needs a laugh right here, just before it gets strange." },
+      { lane: "radio", dur: 60, mine: "Fallback B: a documentary interview about a sighting", from: "22:31", to: "23:31", source: "Podcast app, saved 6 Nov", note: "The hardest find on the tape. Worth it." },
+      { lane: "interference", dur: 40, mine: "Interference: a sunny pop video over a gale warning", mode: "Clash", pic: "The sunny pop video you picked", picFrom: "1:02", picTo: "1:42", picSource: "Artist's official channel, saved 3 Nov", snd: "The gale warning recording", sndFrom: "0:00", sndTo: "0:40", sndSource: "Radio archive, saved 6 Nov", cue: "Start the sound the moment the singer first smiles at the camera.", note: "Everything outside is falling apart, and nobody in the video has noticed." },
+      { lane: "tv", dur: 50, mine: "The puddle-jumping segment", from: "3:05", to: "3:55", source: "TV archive, saved 6 Nov", note: "Rain stops being sad here." },
+      { lane: "between", dur: 10, mine: "Open a window, if it's raining. If not, imagine it.", note: "The only slot that changes depending on the day you play it." },
+      { lane: "film", dur: 60, mine: "The final scene: credits over rain", from: "1:41:10", to: "1:42:10", source: "Film service, saved 7 Nov", note: "End on the sound, not the picture." }
+    ];
+    this.state = { idx: 6, remaining: 45, running: false };
+  }
+
+  componentDidMount() {
+    var self = this;
+    this.timer = setInterval(function () {
+      if (!self.state.running) { return; }
+      if (self.state.remaining <= 1) { self.setState({ remaining: 0, running: false }); }
+      else { self.setState({ remaining: self.state.remaining - 1 }); }
+    }, 1000);
+  }
+
+  componentWillUnmount() { clearInterval(this.timer); }
+
+  renderVals() {
+    var self = this;
+    var colors = { radio: "#E9A23B", tv: "#4C8DF6", film: "#F06A6E", youtube: "#3DBE7A", podcast: "#A68BF5", between: "#A7ABB3", interference: "#D9DBE0" };
+    var labels = { radio: "Radio", tv: "TV", film: "Film", youtube: "YouTube", podcast: "Podcast", between: "In-between", interference: "Interference" };
+    var swatch = { interference: "linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)" };
+    var slots = this.slots;
+    var idx = this.state.idx;
+    var total = slots.length;
+    function tc(s) { var m = Math.floor(s / 60); var r = s % 60; return m + ":" + (r < 10 ? "0" : "") + r; }
+    function go(i) { self.setState({ idx: i, remaining: i < total ? slots[i].dur : 0, running: false }); }
+
+    var isReveal = idx >= total;
+    var c = isReveal ? slots[total - 1] : slots[idx];
+    var cur = {
+      num: String(idx + 1),
+      color: colors[c.lane],
+      laneLabel: labels[c.lane],
+      lenText: tc(c.dur),
+      mine: c.mine,
+      from: c.from || "",
+      to: c.to || "",
+      source: c.source || "",
+      mode: c.mode || "", pic: c.pic || "", picFrom: c.picFrom || "", picTo: c.picTo || "", picSource: c.picSource || "",
+      snd: c.snd || "", sndFrom: c.sndFrom || "", sndTo: c.sndTo || "", sndSource: c.sndSource || "", cue: c.cue || ""
+    };
+
+    var elapsedBefore = 0;
+    for (var k = 0; k < Math.min(idx, total); k++) { elapsedBefore += slots[k].dur; }
+
+    var segs = slots.map(function (s, i) {
+      var col = colors[s.lane];
+      var bg = swatch[s.lane] || col;
+      var look;
+      if (i < idx) { look = "background: " + bg + "; opacity: 0.4; border: none;"; }
+      else if (i === idx) { look = "background: " + bg + "; border: none; box-shadow: 0 0 0 2px #0B0C0F, 0 0 0 4px #FFFFFF;"; }
+      else { look = "background: transparent; border: 1.5px solid " + col + ";"; }
+      return { flex: s.dur, look: look, aria: "Go to slot " + (i + 1) + ", " + labels[s.lane], go: function () { go(i); } };
+    });
+
+    var nextIdx = idx + 1;
+    var upNext = nextIdx < total
+      ? { color: colors[slots[nextIdx].lane], text: "Slot " + (nextIdx + 1) + " · " + slots[nextIdx].mine }
+      : { color: "#E8E9EC", text: "The reveal: see what they did there" };
+
+    var reveal = slots.map(function (s, i) { return { num: String(i + 1), color: colors[s.lane], mine: s.mine, note: s.note }; });
+
+    var remaining = this.state.remaining;
+    return {
+      cur: cur,
+      segs: segs,
+      upNext: upNext,
+      reveal: reveal,
+      isClip: !isReveal && c.lane !== "between" && c.lane !== "interference",
+      isInterf: !isReveal && c.lane === "interference",
+      isInstr: !isReveal && c.lane === "between",
+      notReveal: !isReveal,
+      isReveal: isReveal,
+      progressText: isReveal ? "Complete" : "Slot " + (idx + 1) + " of " + total + " · " + tc(elapsedBefore) + " in",
+      timerText: tc(remaining),
+      elapsedPct: isReveal ? 100 : Math.round(((c.dur - remaining) / c.dur) * 100),
+      timerLabel: this.state.running ? "Pause timer" : (remaining === c.dur ? "Start timer" : (remaining === 0 ? "Restart timer" : "Resume timer")),
+      toggleTimer: function () {
+        if (self.state.remaining === 0) { self.setState({ remaining: c.dur, running: true }); }
+        else { self.setState({ running: !self.state.running }); }
+      },
+      next: function () { go(Math.min(idx + 1, total)); },
+      back: function () { go(Math.max(idx - 1, 0)); },
+      nextLabel: idx === total - 1 ? "Finish and reveal" : "Next slot",
+      restart: function () { go(0); }
+    };
+  }
+}
+</script>
+</body>
+</html>
