@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile and shelf · Side C mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button{font-family:inherit}
+</style>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="max-width: 1400px; margin: 0 auto; padding: 20px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px">
+
+<!-- Top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #262A31">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="#E8E9EC" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle><path d="M6 21l3-5h12l3 5"></path></svg>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Side C</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 12px; color: #A7ABB3">(What You Did There)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px">
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">Browse tapes</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #E8E9EC; background: #1D2026; text-decoration: none">My shelf</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">Write a tape</a>
+</div>
+</div>
+
+<!-- Profile header -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 24px">
+<div style="width: 88px; height: 88px; border-radius: 50%; background: #1D2A40; border: 2px solid #34507E; display: flex; align-items: center; justify-content: center; font-family: 'Permanent Marker', cursive; font-size: 36px; color: #A9C8FF; flex: none" aria-hidden="true">W</div>
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em">[DISPLAY NAME]</h1>
+<span style="color: #B4B8C0">Collecting since October 2026 · Collecting from the UK</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #C9CCD2"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>Likes strange, cosy and eerie tapes</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<a href="#" style="display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">Settings</a>
+<a href="Dashboard.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 10px; background: #E8E9EC; color: #101216; font-weight: 600; text-decoration: none">Creator dashboard</a>
+</div>
+</div>
+
+<!-- Stats -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<sc-for list="{{stats}}" as="s" hint-placeholder-count="5">
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px">{{s.n}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{s.label}}</span>
+</div>
+</sc-for>
+</div>
+
+<!-- Tabs -->
+<div style="display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid #262A31" role="tablist" aria-label="Profile sections">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button type="button" role="tab" onClick="{{t.pick}}" aria-selected="{{t.selected}}" style="min-height: 48px; padding: 0 16px; border: none; background: transparent; font-size: 15px; cursor: pointer; margin-bottom: -1px; {{t.look}}">{{t.label}}</button>
+</sc-for>
+</div>
+
+<!-- SHELF TAB -->
+<sc-if value="{{isShelf}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<span style="font-size: 13px; color: #B4B8C0">Tap a cassette to take it off the shelf.</span>
+<span style="display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: #A7ABB3">
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 2px; background: #EDE9E0"></span>Complete</span>
+<span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 2px; box-sizing: border-box; border: 1.5px dashed #EDE9E0"></span>In progress</span>
+</span>
+</div>
+
+<!-- Rack -->
+<div style="display: flex; flex-direction: column">
+<div style="display: flex; align-items: flex-end; gap: 6px; padding: 0 16px; min-height: 290px; overflow-x: auto">
+<sc-for list="{{shelf}}" as="c" hint-placeholder-count="5">
+<button type="button" onClick="{{c.pick}}" aria-pressed="{{c.pressed}}" aria-label="{{c.aria}}" style="flex: none; width: 58px; height: 262px; padding: 0; border-radius: 4px 4px 0 0; display: flex; flex-direction: column; overflow: hidden; cursor: pointer; box-sizing: border-box; transform: translateY({{c.lift}}px); transition: transform 0.15s; {{c.look}}">
+<div style="height: {{c.stripeH}}px; display: flex; flex-direction: column; flex: none">
+<sc-for list="{{c.mix}}" as="m" hint-placeholder-count="4"><div style="flex: {{m.w}}; background: {{m.c}}"></div></sc-for>
+</div>
+<div style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 10px 0">
+<span style="writing-mode: vertical-rl; transform: rotate(180deg); font-family: 'Permanent Marker', cursive; font-size: {{c.size}}px; line-height: 1; white-space: nowrap; max-height: 176px; overflow: hidden; color: {{c.ink}}">{{c.title}}</span>
+</div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; padding-bottom: 8px; color: {{c.ink}}">{{c.tier}}</span>
+</button>
+</sc-for>
+<div style="flex: none; width: 58px; height: 262px; border-radius: 4px 4px 0 0; border: 1.5px dashed #3A3F48; box-sizing: border-box; display: flex; align-items: center; justify-content: center">
+<a href="#" aria-label="Find another tape" style="width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #A7ABB3; text-decoration: none; font-size: 24px">+</a>
+</div>
+</div>
+<div style="height: 14px; border-radius: 3px; background: linear-gradient(#3A2E24, #241C16); box-shadow: 0 6px 14px rgba(0,0,0,0.5)"></div>
+</div>
+
+<!-- Selected tape -->
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch; padding: 20px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="width: 210px; height: 270px; display: flex; border-radius: 6px; overflow: hidden; background: #EDE9E0; color: #1F2A44; flex: none; box-shadow: 0 12px 28px rgba(0,0,0,0.4)">
+<div style="width: 16px; display: flex; flex-direction: column">
+<sc-for list="{{sel.mix}}" as="m" hint-placeholder-count="4"><div style="flex: {{m.w}}; background: {{m.c}}"></div></sc-for>
+</div>
+<div style="flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0">
+<div style="display: flex; justify-content: space-between; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.08em; color: #1A1B1E"><span>SIDE C</span><span>{{sel.tier}}</span></div>
+<span style="font-family: 'Permanent Marker', cursive; font-size: 24px; line-height: 1.08">{{sel.title}}</span>
+<div style="height: 1px; background: #1A1B1E"></div>
+<span style="font-family: 'Patrick Hand', cursive; font-size: 16px; line-height: 1.2">{{sel.blurb}}</span>
+<span style="margin-top: auto; font-family: 'Patrick Hand', cursive; font-size: 15px; color: #3A3F48">by [CREATOR]</span>
+</div>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3; letter-spacing: 0.06em; text-transform: uppercase">{{sel.meta}}</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em">{{sel.title}}</h2>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #C9CCD2"><svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M1 5c1.5-3 3-3 4.5 0s3 3 4.5 0 3-3 3 0"></path></svg>{{sel.vibes}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #B4B8C0">{{sel.progressLabel}}</span><span style="font-family: 'JetBrains Mono', monospace">{{sel.got}} / {{sel.slots}}</span></div>
+<div style="display: flex; gap: 2px; height: 12px">
+<sc-for list="{{sel.cells}}" as="x" hint-placeholder-count="12"><div style="flex: 1; border-radius: 2px; box-sizing: border-box; {{x.look}}"></div></sc-for>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px 24px; font-size: 13px; color: #B4B8C0">
+<sc-for list="{{sel.facts}}" as="f" hint-placeholder-count="3"><span>{{f.t}}</span></sc-for>
+</div>
+<sc-if value="{{sel.hasResponse}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 12px 14px; border-radius: 10px; background: #1D2026; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #A7ABB3">Your "I made this"</span>
+<span style="font-family: 'Patrick Hand', cursive; font-size: 19px; line-height: 1.3">{{sel.response}}</span>
+</div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto">
+<a href="#" style="display: flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 10px; background: #E8E9EC; color: #101216; font-weight: 600; text-decoration: none">{{sel.primary}}</a>
+<a href="#" style="display: flex; align-items: center; min-height: 48px; padding: 0 18px; border-radius: 10px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">{{sel.secondary}}</a>
+</div>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- WRITTEN TAB -->
+<sc-if value="{{isWritten}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<span style="color: #B4B8C0">Tapes you've written. Manage them, see how collectors are getting on and fix broken slots in your creator dashboard.</span>
+<a href="Dashboard.dc.html">Open creator dashboard</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px">
+<sc-for list="{{written}}" as="w" hint-placeholder-count="2">
+<div style="display: flex; gap: 14px; padding: 14px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="width: 92px; height: 120px; display: flex; border-radius: 5px; overflow: hidden; background: #EDE9E0; color: #1F2A44; flex: none">
+<div style="width: 10px; display: flex; flex-direction: column"><sc-for list="{{w.mix}}" as="m" hint-placeholder-count="4"><div style="flex: {{m.w}}; background: {{m.c}}"></div></sc-for></div>
+<span style="flex: 1; padding: 10px 8px; font-family: 'Permanent Marker', cursive; font-size: 14px; line-height: 1.1">{{w.title}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+<span style="font-weight: 600; font-size: 15px">{{w.title}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{w.meta}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{w.stats}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+<!-- RESPONSES TAB -->
+<sc-if value="{{isResponses}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 860px">
+<span style="color: #B4B8C0">What you wrote after finishing a tape. Spoilers stay hidden for anyone who hasn't finished it.</span>
+<sc-for list="{{responses}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px"><span style="font-weight: 600">{{r.tape}}</span><span style="font-size: 12px; color: #A7ABB3">{{r.meta}}</span></div>
+<span style="font-family: 'Patrick Hand', cursive; font-size: 19px; line-height: 1.3">{{r.text}}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+
+<!-- BADGES TAB -->
+<sc-if value="{{isBadges}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="color: #B4B8C0">{{badgeSummary}}</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px">
+<sc-for list="{{badges}}" as="b" hint-placeholder-count="8">
+<div style="display: flex; gap: 14px; align-items: center; padding: 14px; border-radius: 14px; {{b.card}}">
+<div style="width: 56px; height: 56px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; {{b.disc}}">
+<sc-if value="{{b.isCassette}}" hint-placeholder-val="{{ false }}"><svg width="28" height="20" viewBox="0 0 30 22" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle></svg></sc-if>
+<sc-if value="{{b.isStar}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 17l-5.9 3.3 1.3-6.5-4.9-4.5 6.6-.8z"></path></svg></sc-if>
+<sc-if value="{{b.isGlobe}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="9" r="7.5"></circle><path d="M1.5 9h15M9 1.5c2.2 2.2 2.2 12.8 0 15M9 1.5c-2.2 2.2-2.2 12.8 0 15"></path></svg></sc-if>
+<sc-if value="{{b.isSplit}}" hint-placeholder-val="{{ false }}"><div style="width: 26px; height: 26px; border-radius: 5px; background: {{b.splitBg}}"></div></sc-if>
+<sc-if value="{{b.isLanes}}" hint-placeholder-val="{{ false }}"><div style="display: flex; gap: 2px; height: 22px"><div style="width: 4px; border-radius: 2px; background: {{b.c1}}"></div><div style="width: 4px; border-radius: 2px; background: {{b.c2}}"></div><div style="width: 4px; border-radius: 2px; background: {{b.c3}}"></div><div style="width: 4px; border-radius: 2px; background: {{b.c4}}"></div><div style="width: 4px; border-radius: 2px; background: {{b.c5}}"></div><div style="width: 4px; border-radius: 2px; background: {{b.c6}}"></div></div></sc-if>
+<sc-if value="{{b.isArrow}}" hint-placeholder-val="{{ false }}"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h12M12 6l6 6-6 6"></path><path d="M4 6v12" stroke-dasharray="2 3"></path></svg></sc-if>
+<sc-if value="{{b.isPen}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 16l1-4 8-8 3 3-8 8z"></path></svg></sc-if>
+<sc-if value="{{b.isMoon}}" hint-placeholder-val="{{ false }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"></path></svg></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+<span style="font-weight: 600; {{b.nameStyle}}">{{b.name}}</span>
+<span style="font-size: 12px; color: #A7ABB3">{{b.desc}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+
+</div>
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: "shelf", selected: "rain" };
+  }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var C = { radio: "#E9A23B", tv: "#4C8DF6", film: "#F06A6E", yt: "#3DBE7A", pod: "#A68BF5", btw: "#A7ABB3", inf: "linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)" };
+    function mix(arr) { return arr.map(function (m) { return { c: C[m[0]], w: m[1] }; }); }
+
+    var shelfData = [
+      { id: "rain", title: "Rain on a Tuesday", tier: "C15", len: "8:00", slots: 12, got: 7, vibes: "Tranquil → Strange → Hopeful", blurb: "Calm, then strange, then hopeful.", mix: [["btw",28],["radio",102],["tv",95],["film",115],["yt",45],["inf",40],["pod",55]], facts: ["Started 2 Nov", "1 fallback used", "Next: slot 4, the bus stop"], primary: "Continue collecting", secondary: "Open the tape page" },
+      { id: "snow", title: "Snow days", tier: "C5", len: "4:50", slots: 7, got: 4, vibes: "Cosy · Joyful · Nostalgic", blurb: "School-closure announcements from everywhere it snows.", mix: [["radio",40],["yt",30],["tv",20],["btw",10]], facts: ["Started 5 Nov", "Worldwide", "Next: slot 5"], primary: "Continue collecting", secondary: "Open the tape page" },
+      { id: "wait", title: "Waiting rooms", tier: "C15", len: "11:30", slots: 9, got: 9, done: true, vibes: "Tense · Melancholy · Funny", blurb: "Every slot is someone waiting for something.", mix: [["tv",60],["btw",40],["film",80]], facts: ["Finished 30 Oct", "2 rare finds", "Played twice"], primary: "Play it again", secondary: "Read the reveal", response: "Slot 6 made me laugh out loud, then slot 7 made me feel awful for laughing. Exactly the point." },
+      { id: "clips", title: "Only clips under 20 seconds", tier: "C5", len: "4:40", slots: 15, got: 15, done: true, vibes: "Frantic · Chaotic · Funny", blurb: "Fast cuts, no breathing room.", mix: [["yt",70],["radio",30],["tv",20]], facts: ["Finished 21 Oct", "All original sources"], primary: "Play it again", secondary: "Read the reveal", response: "Collected the whole thing in one evening. Playing it back felt like channel-hopping at 3am." },
+      { id: "applause", title: "Applause for no reason", tier: "C5", len: "3:10", slots: 6, got: 6, done: true, vibes: "Funny · Joyful · Strange", blurb: "Audiences cheering at things you never see.", mix: [["tv",50],["yt",40],["btw",10]], facts: ["Finished 15 Oct", "My first tape"], primary: "Play it again", secondary: "Read the reveal" }
+    ];
+
+    var shelf = shelfData.map(function (t) {
+      var sel = st.selected === t.id;
+      var frac = t.got / t.slots;
+      var look = t.done
+        ? "background: #EDE9E0; border: 1px solid #CFC9BC;"
+        : "background: repeating-linear-gradient(135deg, #EDE9E01F 0 6px, transparent 6px 12px); border: 1.5px dashed #EDE9E0;";
+      return {
+        title: t.title, tier: t.tier, mix: mix(t.mix),
+        size: t.title.length > 22 ? 12 : (t.title.length > 16 ? 14 : 17),
+        stripeH: t.done ? 70 : Math.max(14, Math.round(70 * frac)),
+        ink: t.done ? "#1F2A44" : "#E8E9EC",
+        look: look + (sel ? " box-shadow: 0 0 0 2px #101216, 0 0 0 4px #FFFFFF;" : ""),
+        lift: sel ? -18 : 0,
+        pressed: sel ? "true" : "false",
+        aria: t.title + ", " + (t.done ? "complete" : t.got + " of " + t.slots + " collected"),
+        pick: function () { self.setState({ selected: t.id }); }
+      };
+    });
+
+    var s = shelfData.filter(function (t) { return t.id === st.selected; })[0] || shelfData[0];
+    var cells = [];
+    for (var i = 0; i < s.slots; i++) {
+      cells.push({ look: i < s.got ? "background: #E8E9EC;" : "border: 1px dashed #5B606A;" });
+    }
+    var sel = {
+      title: s.title, tier: s.tier, blurb: s.blurb, mix: mix(s.mix), vibes: s.vibes,
+      meta: s.tier + " · " + s.len + " · " + s.slots + " slots · " + (s.done ? "complete" : "in progress"),
+      got: s.got, slots: s.slots, cells: cells,
+      progressLabel: s.done ? "Collected and played" : "Collected so far",
+      facts: s.facts.map(function (f) { return { t: f }; }),
+      hasResponse: !!s.response, response: s.response || "",
+      primary: s.primary, secondary: s.secondary
+    };
+
+    var tabs = [["shelf", "Shelf"], ["written", "Written by me"], ["responses", "My responses"], ["badges", "Badges"]].map(function (t) {
+      var on = st.tab === t[0];
+      return { label: t[1], selected: on ? "true" : "false", look: on ? "color: #E8E9EC; font-weight: 600; border-bottom: 2px solid #E8E9EC;" : "color: #A7ABB3; border-bottom: 2px solid transparent;", pick: function () { self.setState({ tab: t[0] }); } };
+    });
+
+    var written = [
+      { title: "Kitchen at 3am", meta: "C15 · 9:20 · 10 slots · Published", stats: "214 collecting · 61 finished · 18 responses", mix: mix([["radio",50],["pod",30],["inf",15],["btw",20]]) },
+      { title: "Seaside out of season", meta: "C15 · 12:45 · 11 slots · Published", stats: "88 collecting · 40 finished · 9 responses", mix: mix([["yt",50],["pod",30],["radio",30],["btw",15]]) }
+    ];
+
+    var responses = [
+      { tape: "Waiting rooms", meta: "30 Oct · used 1 fallback", text: "Slot 6 made me laugh out loud, then slot 7 made me feel awful for laughing. Exactly the point." },
+      { tape: "Only clips under 20 seconds", meta: "21 Oct · all original sources", text: "Collected the whole thing in one evening. Playing it back felt like channel-hopping at 3am." }
+    ];
+
+    var badgeDefs = [
+      ["First tape", "Finish your first tape", true, "cassette"],
+      ["Rare find", "Collect a rare slot", true, "star"],
+      ["Plan B", "Finish a tape using a fallback", true, "arrow"],
+      ["Full spectrum", "Finish a tape that uses every lane", false, "lanes"],
+      ["Interference", "Survive an Interference slot", false, "split"],
+      ["Worldwide", "Finish three Worldwide tapes", false, "globe"],
+      ["Creator", "Get a tape published", true, "pen"],
+      ["Night shift", "Finish a tape between midnight and 5am", false, "moon"]
+    ];
+    var earned = 0;
+    var badges = badgeDefs.map(function (b) {
+      if (b[2]) { earned++; }
+      var got = b[2];
+      return {
+        name: b[0], desc: got ? b[1] : "Locked · " + b[1],
+        card: got ? "background: #171A1F; border: 1px solid #3A3F48;" : "background: transparent; border: 1.5px dashed #2C3038;",
+        disc: got ? "background: #EDE9E0; color: #1F2A44;" : "background: #1B1E24; color: #5B606A; border: 1.5px dashed #3A3F48;",
+        nameStyle: got ? "" : "color: #A7ABB3;",
+        isCassette: b[3] === "cassette", isStar: b[3] === "star", isGlobe: b[3] === "globe", isSplit: b[3] === "split",
+        isLanes: b[3] === "lanes", isArrow: b[3] === "arrow", isPen: b[3] === "pen", isMoon: b[3] === "moon",
+        splitBg: got ? C.inf : "linear-gradient(#3A3F48 0 50%, #2C3038 50% 100%)",
+        c1: got ? C.radio : "#3A3F48", c2: got ? C.tv : "#3A3F48", c3: got ? C.film : "#3A3F48", c4: got ? C.yt : "#3A3F48", c5: got ? C.pod : "#3A3F48", c6: got ? C.btw : "#3A3F48"
+      };
+    });
+
+    return {
+      stats: [{ n: 3, label: "Tapes finished" }, { n: 2, label: "In progress" }, { n: 2, label: "Tapes written" }, { n: 4, label: "Rare finds" }, { n: 3, label: "Fallbacks used" }],
+      tabs: tabs,
+      isShelf: st.tab === "shelf", isWritten: st.tab === "written", isResponses: st.tab === "responses", isBadges: st.tab === "badges",
+      shelf: shelf, sel: sel, written: written, responses: responses, badges: badges,
+      badgeSummary: earned + " of " + badgeDefs.length + " badges earned. Locked ones show what to aim for."
+    };
+  }
+}
+mountComponent(Component);
+</script>
+</body>
+</html>

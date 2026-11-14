@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creator dashboard · Side C mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500&amp;family=Space+Grotesk:wght@500;700&amp;family=Patrick+Hand&amp;family=Permanent+Marker&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#101216}
+a{color:#9CC2FF}a:hover{color:#C6DCFF}
+button,input{font-family:inherit}
+</style>
+<script src="runtime.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<template id="tpl">
+<div style="min-height: 100vh; background: #101216; color: #E8E9EC; font-family: Inter, system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+<div style="max-width: 1400px; margin: 0 auto; padding: 20px 24px 56px; box-sizing: border-box; display: flex; flex-direction: column; gap: 24px">
+
+<!-- Top bar -->
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid #262A31">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="30" height="22" viewBox="0 0 30 22" fill="none" stroke="#E8E9EC" stroke-width="1.6" aria-hidden="true"><rect x="1" y="1" width="28" height="20" rx="3"></rect><circle cx="10" cy="10" r="3"></circle><circle cx="20" cy="10" r="3"></circle><path d="M6 21l3-5h12l3 5"></path></svg>
+<span style="display: flex; align-items: baseline; gap: 6px"><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 22px; letter-spacing: -0.01em">Side C</span><span style="font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 12px; color: #A7ABB3">(What You Did There)</span></span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 4px">
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">Browse tapes</a>
+<a href="Profile.dc.html" style="padding: 10px 14px; border-radius: 8px; color: #B4B8C0; text-decoration: none">My shelf</a>
+<a href="#" style="padding: 10px 14px; border-radius: 8px; color: #E8E9EC; background: #1D2026; text-decoration: none">Creator dashboard</a>
+</div>
+</div>
+
+<!-- Header -->
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 40px; letter-spacing: -0.02em; line-height: 1.05">Creator dashboard</h1>
+<span style="color: #B4B8C0">Your tapes, how collectors are getting on, and anything that needs fixing.</span>
+</div>
+<a href="Submit.dc.html" style="display: flex; align-items: center; min-height: 48px; padding: 0 20px; border-radius: 10px; background: #E8E9EC; color: #101216; font-weight: 600; text-decoration: none">Write a new tape</a>
+</div>
+
+<!-- Needs attention -->
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px">Needs your attention</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px">
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 14px; background: #2A1E14; border: 1px solid #6B4A22">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#F2B65A" stroke-width="1.7" stroke-linecap="round" style="flex: none; margin-top: 2px" aria-hidden="true"><path d="M8 12l4-4M7 9l-2 2a2.8 2.8 0 0 0 4 4l2-2M13 11l2-2a2.8 2.8 0 0 0-4-4l-2 2"></path></svg>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600">Kitchen at 3am · slot 6 may be broken</span>
+<span style="font-size: 13px; color: #D9CDBB">2 collectors say the station closedown link no longer works. Until you fix it, collectors are pointed to your fallbacks.</span>
+</div>
+<button type="button" onClick="{{goKitchen}}" style="flex: none; min-height: 44px; padding: 0 14px; border-radius: 10px; border: none; background: #F2B65A; color: #1A1206; font-weight: 600; cursor: pointer">Fix slot 6</button>
+</div>
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 16px; border-radius: 14px; background: #2A1E14; border: 1px solid #6B4A22">
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#F2B65A" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="flex: none; margin-top: 2px" aria-hidden="true"><path d="M8 5L3 10l5 5M3 10h9a5 5 0 0 1 5 5"></path></svg>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600">Lifts and escalators was sent back</span>
+<span style="font-size: 13px; color: #D9CDBB">The reviewer left 3 notes. Fix them and resubmit whenever you're ready.</span>
+</div>
+<button type="button" onClick="{{goLifts}}" style="flex: none; min-height: 44px; padding: 0 14px; border-radius: 10px; border: none; background: #F2B65A; color: #1A1206; font-weight: 600; cursor: pointer">See notes</button>
+</div>
+</div>
+</div>
+
+<!-- Totals -->
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px">
+<sc-for list="{{totals}}" as="t" hint-placeholder-count="5">
+<div style="background: #171A1F; border: 1px solid #262A31; border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px">{{t.n}}</span>
+<span style="font-size: 13px; color: #B4B8C0">{{t.label}}</span>
+</div>
+</sc-for>
+</div>
+
+<!-- List + detail -->
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+
+<!-- Tape list -->
+<div style="flex: 1 1 360px; min-width: 0; max-width: 100%; display: flex; flex-direction: column; gap: 10px">
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 18px">Your tapes</h2>
+<sc-for list="{{tapes}}" as="t" hint-placeholder-count="5">
+<button type="button" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}" style="display: flex; gap: 14px; align-items: center; padding: 12px; border-radius: 14px; text-align: left; color: #E8E9EC; cursor: pointer; {{t.look}}">
+<div style="width: 54px; height: 72px; display: flex; border-radius: 4px; overflow: hidden; background: #EDE9E0; flex: none">
+<div style="width: 8px; display: flex; flex-direction: column"><sc-for list="{{t.mix}}" as="m" hint-placeholder-count="4"><div style="flex: {{m.w}}; background: {{m.c}}"></div></sc-for></div>
+<span style="flex: 1; padding: 6px 5px; font-family: 'Permanent Marker', cursive; font-size: 10px; line-height: 1.1; color: #1F2A44">{{t.title}}</span>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{t.title}}</span>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A7ABB3">{{t.meta}}</span>
+<span style="align-self: flex-start; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; {{t.chip}}">{{t.status}}</span>
+</div>
+<sc-if value="{{t.hasFlag}}" hint-placeholder-val="{{ false }}">
+<span style="flex: none; min-width: 24px; height: 24px; padding: 0 6px; box-sizing: border-box; border-radius: 12px; background: #F2B65A; color: #1A1206; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center" aria-label="{{t.flagAria}}">{{t.flag}}</span>
+</sc-if>
+</button>
+</sc-for>
+</div>
+
+<!-- Detail -->
+<div style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 18px; padding: 22px; border-radius: 14px; background: #171A1F; border: 1px solid #262A31">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<span style="align-self: flex-start; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; {{d.chip}}">{{d.status}}</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 28px; letter-spacing: -0.02em">{{d.title}}</h2>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{d.meta}}</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="Submit.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">{{d.editLabel}}</a>
+<sc-if value="{{d.isPublished}}" hint-placeholder-val="{{ true }}"><a href="Landing.dc.html" style="display: flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid #3A3F48; color: #E8E9EC; text-decoration: none">View public page</a></sc-if>
+</div>
+</div>
+
+<!-- Published -->
+<sc-if value="{{d.isPublished}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<div style="display: flex; flex-direction: column; gap: 10px">
+<h3 style="margin: 0; font-size: 14px; font-weight: 600">How far collectors get</h3>
+<sc-for list="{{d.funnel}}" as="f" hint-placeholder-count="3">
+<div style="display: grid; grid-template-columns: 150px minmax(0, 1fr) 48px; gap: 12px; align-items: center">
+<span style="font-size: 13px; color: #B4B8C0">{{f.label}}</span>
+<div style="height: 22px; border-radius: 4px; background: #1D2026"><div style="height: 22px; border-radius: 4px; background: {{f.c}}; width: {{f.pct}}%"></div></div>
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 13px; text-align: right">{{f.n}}</span>
+</div>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h3 style="margin: 0; font-size: 14px; font-weight: 600">Where collectors get stuck</h3>
+<span style="font-size: 12px; color: #A7ABB3">Share of collectors who found each slot, and how many used a fallback</span>
+</div>
+<div style="display: flex; flex-direction: column; border-radius: 10px; border: 1px solid #262A31; overflow: hidden">
+<sc-for list="{{d.slots}}" as="s" hint-placeholder-count="10">
+<div style="display: grid; grid-template-columns: 28px minmax(0, 1.2fr) minmax(0, 1fr) 132px; gap: 12px; align-items: center; padding: 10px 14px; border-bottom: 1px solid #1F2329; {{s.rowBg}}">
+<span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #A7ABB3">{{s.num}}</span>
+<span style="display: flex; align-items: center; gap: 8px; min-width: 0"><span style="width: 10px; height: 10px; border-radius: 3px; background: {{s.c}}; flex: none"></span><span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{s.name}}</span></span>
+<sc-if value="{{s.isClip}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; align-items: center; gap: 8px"><div style="flex: 1; height: 8px; border-radius: 4px; background: #262A31"><div style="height: 8px; border-radius: 4px; background: {{s.barC}}; width: {{s.found}}%"></div></div><span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; width: 38px; text-align: right">{{s.found}}%</span></div>
+</sc-if>
+<sc-if value="{{s.isDiy}}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; color: #A7ABB3">Do it yourself</span></sc-if>
+<span style="font-size: 12px; {{s.noteStyle}}">{{s.note}}</span>
+</div>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #B4B8C0">{{d.stuckText}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+<h3 style="margin: 0; font-size: 14px; font-weight: 600">Latest "I made this"</h3>
+<a href="#" style="font-size: 13px">{{d.responsesLink}}</a>
+</div>
+<div style="padding: 14px 16px; border-radius: 10px; background: #1D2026; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; color: #A7ABB3">[USER] · {{d.responseMeta}}</span>
+<span style="font-family: 'Patrick Hand', cursive; font-size: 19px; line-height: 1.3">{{d.response}}</span>
+</div>
+</div>
+</div>
+</sc-if>
+
+<!-- Sent back -->
+<sc-if value="{{d.isSentBack}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="color: #D9CDBB">Sent back on 6 Nov. Nothing's wrong with you or the idea: fix these and resubmit. Tick each one off as you go.</span>
+<sc-for list="{{notes}}" as="n" hint-placeholder-count="3">
+<div style="display: flex; gap: 14px; align-items: flex-start; padding: 14px 16px; border-radius: 12px; {{n.card}}">
+<input type="checkbox" checked="{{n.done}}" onChange="{{n.toggle}}" aria-label="{{n.aria}}" style="width: 20px; height: 20px; margin: 2px 0 0; flex: none; accent-color: #8FE0B3">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 4px">
+<span style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center"><span style="font-weight: 600; {{n.titleStyle}}">{{n.where}}</span><span style="font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid #3A3F48; color: #C9CCD2">{{n.rule}}</span></span>
+<span style="font-size: 13px; color: #C9CCD2">{{n.text}}</span>
+</div>
+<a href="Submit.dc.html" style="flex: none; font-size: 13px">Fix in editor</a>
+</div>
+</sc-for>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding-top: 6px">
+<button type="button" disabled="{{notReady}}" style="min-height: 48px; padding: 0 22px; border-radius: 10px; font-weight: 600; font-size: 15px; {{resubmitLook}}">Resubmit for review</button>
+<span style="font-size: 13px; color: #A7ABB3">{{notesLeft}}</span>
+</div>
+</div>
+</sc-if>
+
+<!-- In review -->
+<sc-if value="{{d.isReview}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 18px">
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px" role="img" aria-label="Review progress: submitted 5 November, now in review, not yet published">
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 6px; border-radius: 3px; background: #8FE0B3"></div><span style="font-weight: 600">Submitted</span><span style="font-size: 12px; color: #A7ABB3">5 Nov</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 6px; border-radius: 3px; background: repeating-linear-gradient(135deg, #A9C8FF 0 4px, #34507E 4px 8px)"></div><span style="font-weight: 600">In review</span><span style="font-size: 12px; color: #A7ABB3">Usually [TIME]</span></div>
+<div style="display: flex; flex-direction: column; gap: 6px"><div style="height: 6px; border-radius: 3px; background: #262A31"></div><span style="font-weight: 600; color: #A7ABB3">Published</span><span style="font-size: 12px; color: #A7ABB3">Not yet</span></div>
+</div>
+<div style="padding: 14px 16px; border-radius: 10px; background: #1D2026; font-size: 13px; color: #C9CCD2">A reviewer is checking sources, descriptions, safety and labels against the community guidelines. You'll get a notification either way. Editing now takes it out of the queue until you resubmit.</div>
+</div>
+</sc-if>
+
+<!-- Draft -->
+<sc-if value="{{d.isDraft}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between; font-size: 13px"><span style="color: #B4B8C0">Running time for a C15</span><span style="font-family: 'JetBrains Mono', monospace">2:40 of 4:30 minimum</span></div>
+<div style="height: 10px; border-radius: 5px; background: #262A31"><div style="height: 10px; border-radius: 5px; background: #E8E9EC; width: 59%"></div></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{draftChecks}}" as="c" hint-placeholder-count="6">
+<div style="display: flex; align-items: center; gap: 10px; min-height: 32px">
+<span style="width: 20px; height: 20px; border-radius: 50%; flex: none; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; {{c.dot}}">{{c.mark}}</span>
+<span style="{{c.textStyle}}">{{c.t}}</span>
+</div>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #A7ABB3">Drafts are only visible to you. Last edited 4 Nov.</span>
+</div>
+</sc-if>
+
+</div>
+</div>
+
+</div>
+</div>
+</template>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { selected: "kitchen", fixed: { n1: false, n2: false, n3: false } };
+  }
+
+  renderVals() {
+    var self = this;
+    var st = this.state;
+    var C = { radio: "#E9A23B", tv: "#4C8DF6", film: "#F06A6E", yt: "#3DBE7A", pod: "#A68BF5", btw: "#A7ABB3", inf: "linear-gradient(#3DBE7A 0 50%, #E9A23B 50% 100%)" };
+    function mix(arr) { return arr.map(function (m) { return { c: C[m[0]], w: m[1] }; }); }
+    var CHIP = {
+      Published: "background: #1E3A2B; color: #8FE0B3; border: 1px solid #2F6B4A;",
+      "In review": "background: #1D2A40; color: #A9C8FF; border: 1px solid #34507E;",
+      "Sent back": "background: #3A2A12; color: #F2B65A; border: 1px solid #6B4A22;",
+      Draft: "background: #1D2026; color: #C9CCD2; border: 1px solid #3A3F48;"
+    };
+
+    var tapesData = [
+      { id: "kitchen", title: "Kitchen at 3am", status: "Published", meta: "C15 · 9:20 · 10 slots · since 12 Oct", flag: 1, mix: [["radio",50],["pod",30],["inf",15],["btw",20]],
+        funnel: [214, 132, 61], responses: 18, response: "The uncanny merge at slot 7 is genuinely the creepiest thing I've heard. I had to turn a light on.", responseMeta: "finished 4 Nov",
+        slots: [["btw","Switch off every light but one"],["radio","Late-night phone-in about insomnia",92,5],["yt","Fridge hum, ten hours",98,0],["pod","Someone describing a recurring dream",74,12],["radio","Shipping-forecast-style read",88,6],["radio","Station closedown announcement",41,35,true],["inf","Uncanny merge: cookery show over a lullaby",66,18],["pod","A whispered recipe",70,9],["btw","Make a cup of tea, quietly"],["radio","Dawn chorus at the end of an overnight show",57,22]] },
+      { id: "seaside", title: "Seaside out of season", status: "Published", meta: "C15 · 12:45 · 11 slots · since 28 Sep", mix: [["yt",50],["pod",30],["radio",30],["btw",15]],
+        funnel: [88, 63, 40], responses: 9, response: "Slot 7 took me a week of archive digging and I'd do it again.", responseMeta: "finished 1 Nov",
+        slots: [["btw","Close your eyes"],["yt","Gulls over an empty beach",97,0],["pod","Someone remembering summer jobs",81,4],["radio","Out-of-season ferry announcement",63,20],["yt","Arcade machines left on",90,2],["btw","Listen for the nearest car"],["radio","Seaside special, from the archive",48,30],["pod","A lighthouse keeper's interview",72,8],["yt","Rain on a promenade",95,0],["tv","Closing-down sale advert",55,15],["btw","Say goodbye to summer, out loud"]] },
+      { id: "lifts", title: "Lifts and escalators", status: "Sent back", meta: "C5 · 4:30 · 6 slots · sent back 6 Nov", mix: [["tv",40],["yt",30],["btw",20],["radio",10]] },
+      { id: "walls", title: "Things heard through walls", status: "In review", meta: "C30 · 21:00 · 16 slots · submitted 5 Nov", mix: [["film",40],["inf",25],["radio",30],["tv",25],["btw",15]] },
+      { id: "depot", title: "Bus depot lullabies", status: "Draft", meta: "C15 · 2:40 so far · 4 slots", mix: [["radio",40],["yt",30],["btw",20]] }
+    ];
+
+    var tapes = tapesData.map(function (t) {
+      var sel = st.selected === t.id;
+      var flagN = t.id === "lifts" ? 3 - ["n1", "n2", "n3"].filter(function (k) { return st.fixed[k]; }).length : (t.flag || 0);
+      return {
+        title: t.title, status: t.status, meta: t.meta, chip: CHIP[t.status], mix: mix(t.mix),
+        hasFlag: flagN > 0, flag: String(flagN), flagAria: flagN + (flagN === 1 ? " thing needs" : " things need") + " attention",
+        pressed: sel ? "true" : "false",
+        look: sel ? "background: #1D2026; border: 1.5px solid #E8E9EC;" : "background: #171A1F; border: 1px solid #262A31;",
+        pick: function () { self.setState({ selected: t.id }); }
+      };
+    });
+
+    var t = tapesData.filter(function (x) { return x.id === st.selected; })[0];
+    var pub = t.status === "Published";
+    var funnel = [], slots = [], stuckText = "";
+    if (pub) {
+      var labels = ["Started collecting", "Collected half", "Finished the tape"];
+      var cols = ["#4A5060", "#8F949D", "#E8E9EC"];
+      funnel = t.funnel.map(function (n, i) { return { label: labels[i], n: n, pct: Math.round((n / t.funnel[0]) * 100), c: cols[i] }; });
+      var clipSlots = t.slots.filter(function (s) { return s.length > 2; });
+      var lowest = clipSlots.reduce(function (a, b) { return b[2] < a[2] ? b : a; });
+      slots = t.slots.map(function (s, i) {
+        var clip = s.length > 2;
+        var isLow = clip && s === lowest;
+        var note = !clip ? "" : (s[4] ? "Reported broken · " + s[3] + "% used a fallback" : (s[3] ? s[3] + "% used a fallback" : "No fallbacks needed"));
+        return {
+          num: String(i + 1), name: s[1], c: C[s[0]], isClip: clip, isDiy: !clip,
+          found: clip ? s[2] : 0, note: note,
+          barC: isLow ? "#F2B65A" : "#8F949D",
+          noteStyle: s[4] ? "color: #F2B65A; font-weight: 600;" : "color: #A7ABB3;",
+          rowBg: s[4] ? "background: #2A1E14;" : ""
+        };
+      });
+      var idx = t.slots.indexOf(lowest) + 1;
+      stuckText = "Most people get stuck on slot " + idx + ", found by " + lowest[2] + "% of collectors." + (lowest[4] ? " It's also the slot reported broken, so fixing the link should help." : " A clearer clue or an extra fallback could help.");
+    }
+
+    var noteDefs = [
+      ["n1", "Slot 3 · video", "Official sources", "The link goes to an unofficial re-upload. Link the original channel, or remove the link and describe where to look."],
+      ["n2", "Slot 5 · in-between", "Safe instructions", "\"Stand at the top of the stairs with your eyes closed\" isn't safe for everyone. Swap it for something that can be done sitting down."],
+      ["n3", "Tape details", "Honest labels", "Slot 4 has flashing lights from a lift display. Add a flashing images warning."]
+    ];
+    var notes = noteDefs.map(function (n) {
+      var done = !!st.fixed[n[0]];
+      return {
+        where: n[1], rule: n[2], text: n[3], done: done,
+        aria: "Mark as fixed: " + n[1],
+        card: done ? "background: #14241B; border: 1px solid #2F6B4A;" : "background: #1D2026; border: 1px solid #3A3F48;",
+        titleStyle: done ? "text-decoration: line-through; color: #A7ABB3;" : "",
+        toggle: function () { var f = Object.assign({}, self.state.fixed); f[n[0]] = !f[n[0]]; self.setState({ fixed: f }); }
+      };
+    });
+    var left = notes.filter(function (n) { return !n.done; }).length;
+
+    var draftChecks = [["Title, description and liner notes", true], ["Vibes and vibe arc", true], ["Tier chosen: C15", true], ["At least 4:30 of slots", false], ["Fallbacks for hard-to-find slots", false], ["Regions marked on every slot", false]].map(function (c) {
+      return { t: c[0], mark: c[1] ? "✓" : "", dot: c[1] ? "background: #8FE0B3; color: #0F2418;" : "border: 1.5px dashed #5B606A;", textStyle: c[1] ? "" : "color: #B4B8C0;" };
+    });
+
+    return {
+      totals: [{ n: 2, label: "Published" }, { n: 302, label: "People collecting" }, { n: 101, label: "Finished your tapes" }, { n: 27, label: "\"I made this\" responses" }, { n: 3, label: "In review, sent back or draft" }],
+      tapes: tapes,
+      d: {
+        title: t.title, status: t.status, chip: CHIP[t.status], meta: t.meta,
+        isPublished: pub, isSentBack: t.status === "Sent back", isReview: t.status === "In review", isDraft: t.status === "Draft",
+        editLabel: t.status === "Draft" ? "Continue writing" : "Edit tape",
+        funnel: funnel, slots: slots, stuckText: stuckText,
+        responsesLink: pub ? "Read all " + t.responses : "", response: t.response || "", responseMeta: t.responseMeta || ""
+      },
+      notes: notes,
+      notReady: left > 0,
+      notesLeft: left > 0 ? left + (left === 1 ? " note" : " notes") + " left to fix" : "All fixed. Ready to resubmit.",
+      resubmitLook: left > 0 ? "border: 1px solid #3A3F48; background: #1A1D22; color: #8F949D; cursor: not-allowed;" : "border: none; background: #E8E9EC; color: #101216; cursor: pointer;",
+      draftChecks: draftChecks,
+      goKitchen: function () { self.setState({ selected: "kitchen" }); },
+      goLifts: function () { self.setState({ selected: "lifts" }); }
+    };
+  }
+}
+mountComponent(Component);
+</script>
+</body>
+</html>
