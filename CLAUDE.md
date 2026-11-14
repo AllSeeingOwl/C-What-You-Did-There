@@ -11,10 +11,13 @@ Briefing for Claude Code. Read this first, then `docs/design-spec.md`.
 
 ## Current stage
 
-Concept and design. There is **no app code yet**. What exists:
+Stage 1 of the real build: a working website in `app/` that runs entirely in the browser (no server, no accounts; data in localStorage; tapes shared as a link or file). What exists:
 
 | Path | What it is |
 | --- | --- |
+| `app/` | The website: React + TypeScript + Vite, tests with Vitest. `app/src/model/` holds the rules and data, independent of the screens |
+| `docs/building.md` | How the app is built and run, decisions made while building, and what stage 2 needs |
+| `.github/workflows/deploy.yml` | Tests, builds and publishes the site to GitHub Pages on every push to `main` |
 | `README.md` | Public summary of the concept and the repo |
 | `docs/design-spec.md` | **Source of truth** for every rule: slot types, lane colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting, core screens |
 | `docs/community-guidelines.md` | Draft rules for creators and collectors; has `[AGE]`, `[TIME]`, `[CONTACT]` placeholders and open questions for a solicitor |
@@ -54,12 +57,20 @@ Each mockup page holds its markup in `<template id="tpl">` and defines `class Co
 
 They are throwaway prototypes for showing the design, not the basis of the real app. Open them straight in a browser; there is no build step.
 
+## How the app works
+
+- Run `npm install`, then `npm run dev`, `npm test` or `npm run build`, from `app/`.
+- Every number from the spec lives in `app/src/model/constants.ts`; checks live in `rules.ts`. Change the spec first, then those files, then the tests in `model.test.ts`.
+- Anything read from a share link or file goes through `parse.ts`, which rebuilds it field by field. Only links that pass `checkLink` become clickable.
+- The sample tape in `sampleTapes.ts` mirrors `docs/sample-tape-rain-on-a-tuesday.md`; keep them in step.
+- Addresses use `#/...` so the site works on any static host.
+
 ## Next steps (agreed so far)
 
 1. Test the sample tape with a few friends; let their feedback reshape the design.
 2. Design the remaining screens: logo and app icon, settings, sign in, the "I made this" form, problem states (dead links, no results, 404), review queue, reporting, notifications, info pages.
 3. Write the legal pages with a solicitor: terms, privacy, takedowns, minimum age.
-4. Decide funding and the tech stack, then start the real build (likely a simple website first, an app later).
+4. ~~Start the real build~~ Stage 1 done (browser-only website). Next: put it online, then decide funding and hosting for stage 2 (accounts, shared catalogue, review queue, reporting).
 
 ## Working conventions
 
