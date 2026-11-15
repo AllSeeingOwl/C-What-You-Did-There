@@ -3,6 +3,7 @@ import { useStore } from './model/store';
 import { href, match, usePath } from './router';
 import { About } from './pages/About';
 import { Collect } from './pages/Collect';
+import { Feedback } from './pages/Feedback';
 import { Home } from './pages/Home';
 import { ImportTape, SharedTape } from './pages/Import';
 import { NotFound } from './pages/NotFound';
@@ -16,6 +17,7 @@ function route(path: string) {
   if (path === '/' || path === '') return { page: <Home />, nav: '/', title: '' };
   if ((p = match('/tape/:id', path))) return { page: <TapePage id={p.id} />, nav: '/', title: 'Tape' };
   if ((p = match('/tape/:id/collect', path))) return { page: <Collect id={p.id} />, nav: '/', title: 'Collecting' };
+  if ((p = match('/tape/:id/feedback', path))) return { page: <Feedback id={p.id} />, nav: '/', title: 'Tester questions' };
   if ((p = match('/tape/:id/play', path))) return { page: <Play id={p.id} />, nav: '/', title: 'Play-along' };
   if (path === '/write') return { page: <Write key="new" />, nav: '/write', title: 'Write a tape' };
   if ((p = match('/write/:id', path))) return { page: <Write key={p.id} id={p.id} />, nav: '/write', title: 'Write a tape' };

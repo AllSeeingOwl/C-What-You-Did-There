@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Hand, LaneSwatch, slotTypeLabel } from '../components/bits';
+import { TesterFeedback } from '../components/TesterFeedback';
 import { LANES } from '../model/constants';
 import { isComplete } from '../model/progress';
 import { EMPTY_PROGRESS, findTape, useStore } from '../model/store';
@@ -191,6 +192,7 @@ export function Play({ id }: { id: string }) {
               </div>
             ))}
           </div>
+          {item.origin === 'sample' && <TesterFeedback tape={tape} />}
           <div className="row">
             <a className="btn" href={href(`/tape/${tape.id}`)}>Back to the tape</a>
             <a className="btn" href={href('/write')}>Write a tape of your own</a>

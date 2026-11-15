@@ -1,6 +1,6 @@
 # Building Side C
 
-Last updated 14 November 2026
+Last updated 15 November 2026
 
 How the working website in `app/` is put together, how to run it, and what comes next.
 
@@ -15,6 +15,7 @@ A real website that runs entirely in the visitor's browser. It needs no server, 
 | Collecting | `#/tape/[ID]/collect` | The editing-suite timeline (vertical list and bottom sheet on phones); record your find, fallback used and times |
 | Play-along | `#/tape/[ID]/play` | Set-up, a timer per slot, the Interference split screen and sync cue, then the reveal |
 | Write a tape | `#/write` | The full form with every rule from the design spec checked live, plus the publishing checklist |
+| Tester questions | `#/tape/[ID]/feedback` | The questions from the sample tape doc, also shown after its reveal; answers save as you type and are copied or downloaded to send back |
 | Add a tape | `#/import` and `#/t/[CODE]` | Open a share link or a tape file from someone else |
 | Settings, How it works, 404 | `#/settings`, `#/about` | Region, plain text, creator name, delete all data; the short guidelines |
 
@@ -57,9 +58,10 @@ Then open the address it prints (usually `http://localhost:5173`). Other command
 
 The workflow in `.github/workflows/deploy.yml` tests, builds and publishes the site every time the `main` branch changes.
 
-1. Merge this work into `main`.
-2. On GitHub, open the repo's **Settings → Pages** and set **Source** to **GitHub Actions**. You only do this once.
-3. The site appears at `https://allseeingowl.github.io/C-What-You-Did-There/` a minute or two later.
+The site is live at https://allseeingowl.github.io/C-What-You-Did-There/. Anything merged into `main` appears there a minute or two later.
+
+- The repo's **Settings → Pages → Source** must be **GitHub Actions**. If it's set to "Deploy from a branch", the address shows the README instead of the website.
+- To publish again without changing anything, open the **Actions** tab, choose **Publish website**, then **Run workflow**.
 
 ## How the code is laid out
 

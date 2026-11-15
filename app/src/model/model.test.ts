@@ -160,3 +160,14 @@ describe('media mix', () => {
     expect(sum).toBeCloseTo(1);
   });
 });
+
+describe('tester questions', () => {
+  it('match the questions in the sample tape doc', async () => {
+    const { readFileSync } = await import('node:fs');
+    const { TESTER_QUESTIONS } = await import('./sampleTapes');
+    const doc = readFileSync(new URL('../../../docs/sample-tape-rain-on-a-tuesday.md', import.meta.url), 'utf8');
+    const section = doc.split('## Tester feedback')[1];
+    const fromDoc = [...section.matchAll(/^\d+\. (.+)$/gm)].map((m) => m[1].replace(/'/g, '’'));
+    expect(TESTER_QUESTIONS).toEqual(fromDoc);
+  });
+});

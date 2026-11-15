@@ -68,6 +68,11 @@ export function TapePage({ id }: { id: string }) {
             )}
             {complete && <a className="btn" href={href(`/tape/${tape.id}/collect`)}>View timeline</a>}
           </div>
+          {origin === 'sample' && (
+            <p className="small muted">
+              Testing this for us? The questions come after the reveal, or <a href={href(`/tape/${tape.id}/feedback`)}>answer them now</a> if you’ve stopped partway. That’s useful too.
+            </p>
+          )}
         </div>
       </div>
 

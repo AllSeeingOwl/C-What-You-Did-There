@@ -101,3 +101,15 @@ export const RAIN_ON_A_TUESDAY: Tape = {
 };
 
 export const SAMPLE_TAPES: Tape[] = [RAIN_ON_A_TUESDAY];
+
+/** Questions for friends testing the sample tape (from the "Tester feedback" section of the doc). */
+export const TESTER_QUESTIONS = [
+  'How long did collecting take, in days and roughly in hours?',
+  'Which slot was hardest to find, and did you use a fallback for it?',
+  'Were any instructions unclear: the descriptions, the lengths, the Interference sync cue?',
+  'Did the hunting feel fun, or like a chore? At what point?',
+  'Did the playback flow, or did switching between sources break the mood?',
+  'Did the reveal change how you felt about the tape?',
+  'Would you collect another tape? Would you write one?',
+  'Anything you’d add, cut or change?',
+];
