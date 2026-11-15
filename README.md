@@ -23,7 +23,7 @@ No clips are hosted or shared. The tape only points to them.
 
 ## Try it
 
-A working first version of the website is in [`app/`](app/). It runs entirely in your browser: browse, collect, play along and write tapes, then share them as a link or file. There are no accounts yet, so everything is saved on your own device. See [`docs/building.md`](docs/building.md) for how to run it and put it online.
+**Live at https://allseeingowl.github.io/C-What-You-Did-There/** · the code is in [`app/`](app/). It runs entirely in your browser: browse, collect, play along and write tapes, then share them as a link or file. There are no accounts yet, so everything is saved on your own device. See [`docs/building.md`](docs/building.md) for how to run it and put it online.
 
 ## What's in this repo
 
@@ -31,6 +31,7 @@ A working first version of the website is in [`app/`](app/). It runs entirely in
 | --- | --- |
 | [`app/`](app/) | The working website (stage 1: no accounts, saved in your browser) |
 | [`docs/building.md`](docs/building.md) | How the website is built, how to run it, and what stage 2 needs |
+| [`docs/tester-message.md`](docs/tester-message.md) | A ready-to-send message for friends testing the sample tape |
 | [`docs/design-spec.md`](docs/design-spec.md) | The rules behind every screen: slot types, colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting |
 | [`docs/community-guidelines.md`](docs/community-guidelines.md) | Draft guidelines for creators and collectors (to be checked by a solicitor) |
 | [`docs/sample-tape-rain-on-a-tuesday.md`](docs/sample-tape-rain-on-a-tuesday.md) | A real, playable sample tape, with questions for testers |
@@ -48,7 +49,7 @@ The pages load their fonts from Google Fonts, so they look their best with an in
 First working version (stage 1): a website that runs in the browser, with no accounts. Next up:
 
 - [x] Working website: browse, tape page, collecting timeline, play-along and reveal, write a tape, share by link or file
-- [ ] Put it online with GitHub Pages (see [`docs/building.md`](docs/building.md))
+- [x] Put it online: https://allseeingowl.github.io/C-What-You-Did-There/
 - [ ] Test the sample tape with a few friends
 - [ ] Profile page
 - [ ] Review queue, reporting and notifications
