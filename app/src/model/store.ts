@@ -18,13 +18,15 @@ interface State {
   tapes: ShelfTape[]; // yours and imported (samples are added on read)
   progress: Record<string, TapeProgress>;
   settings: Settings;
+  /** Tester answers, by tape id. */
+  feedback: Record<string, string[]>;
 }
 
 const KEY = 'sidec:v1';
 const DEFAULT_SETTINGS: Settings = { region: 'GB', plainText: false, welcomed: false, creatorName: '' };
 
 function load(): State {
-  const empty: State = { tapes: [], progress: {}, settings: { ...DEFAULT_SETTINGS } };
+  const empty: State = { tapes: [], progress: {}, settings: { ...DEFAULT_SETTINGS }, feedback: {} };
   try {
     const raw = localStorage.getItem(KEY);
     if (!raw) return empty;
@@ -41,6 +43,7 @@ function load(): State {
       tapes,
       progress: typeof data.progress === 'object' && data.progress ? data.progress : {},
       settings: { ...DEFAULT_SETTINGS, ...(data.settings ?? {}) },
+      feedback: typeof data.feedback === 'object' && data.feedback ? data.feedback : {},
     };
   } catch {
     return empty;
@@ -108,8 +111,11 @@ export const actions = {
   updateSettings(patch: Partial<Settings>) {
     commit({ ...state, settings: { ...state.settings, ...patch } });
   },
+  setFeedback(tapeId: string, answers: string[]) {
+    commit({ ...state, feedback: { ...state.feedback, [tapeId]: answers } });
+  },
   clearEverything() {
-    commit({ tapes: [], progress: {}, settings: { ...DEFAULT_SETTINGS } });
+    commit({ tapes: [], progress: {}, settings: { ...DEFAULT_SETTINGS }, feedback: {} });
   },
 };
 
