@@ -46,7 +46,7 @@ describe('the sample sync tape', () => {
   });
 
   it('is labelled as an open-song sync tape', () => {
-    expect(lengthLabel(LAST_TRAIN_OUT)).toBe('Sync · open song · 10 scenes');
+    expect(lengthLabel(LAST_TRAIN_OUT)).toBe('Music video · open song · 10 scenes');
     expect(lengthLabel(RAIN_ON_A_TUESDAY)).toBe('C15 · 8:00 · 12 slots');
     expect(totalSeconds(LAST_TRAIN_OUT)).toBe(270);
   });
@@ -97,7 +97,7 @@ describe('fixed songs', () => {
   it('times scenes from the song’s clock', () => {
     expect(errors(fixedTape())).toEqual([]);
     expect(cueSheet(fixedTape())!.map((c) => c.seconds)).toEqual([20, 20, 40, 40]);
-    expect(lengthLabel(fixedTape())).toBe('Sync · 2:00 · 4 scenes');
+    expect(lengthLabel(fixedTape())).toBe('Music video · 2:00 · 4 scenes');
   });
 
   it('keeps scenes between 4 seconds and a minute', () => {

@@ -37,6 +37,20 @@ export const VIBES = [
 export const MEDIA_TYPES: MediaType[] = ['radio', 'tv', 'film', 'video', 'podcast'];
 export const SLOT_TYPES: SlotType[] = [...MEDIA_TYPES, 'between', 'interference'];
 
+/** What each kind of tape is called on screen. Sync tapes show as "Music video". */
+export const KINDS = {
+  mixtape: {
+    label: 'Mixtape',
+    plural: 'Mixtapes',
+    blurb: 'Short moments from radio, TV, film, video and podcasts, played one after another.',
+  },
+  sync: {
+    label: 'Music video',
+    plural: 'Music videos',
+    blurb: 'A home-made music video: one song plays with the sound on while you cut muted clips in over it.',
+  },
+} as const;
+
 /** Sync tapes (docs/design-spec.md, "Sync tapes"). */
 export const SYNC = {
   song: { min: 90, max: 360 },

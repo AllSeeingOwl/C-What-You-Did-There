@@ -32,13 +32,13 @@ export function hasInterference(tape: Pick<Tape, 'slots'>): boolean {
   return tape.slots.some((s) => s.type === 'interference');
 }
 
-/** "C15 · 8:00 · 12 slots", "Sync · 3:34 · 10 scenes" or "Sync · open song · 10 scenes". */
+/** "C15 · 8:00 · 12 slots", "Music video · 3:34 · 10 scenes" or "Music video · open song · 10 scenes". */
 export function lengthLabel(tape: Pick<Tape, 'kind' | 'tier' | 'slots'>): string {
   if (tape.kind !== 'sync') return `${tape.tier} · ${formatTime(totalSeconds(tape))} · ${tape.slots.length} slots`;
   const song = tape.slots.find((s) => s.type === 'song');
   const count = tape.slots.filter((s) => s.type !== 'song').length;
   const length = !song ? 'no song yet' : song.song?.mode === 'open' ? 'open song' : formatTime(song.seconds);
-  return `Sync · ${length} · ${count} ${count === 1 ? 'scene' : 'scenes'}`;
+  return `Music video · ${length} · ${count} ${count === 1 ? 'scene' : 'scenes'}`;
 }
 
 /** Share of running time for each colour, for the J-card stripe. */

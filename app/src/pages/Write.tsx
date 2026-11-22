@@ -5,7 +5,7 @@ import { RegionPicker } from '../components/RegionSelect';
 import { newScene, newSong, SceneEditor, SongEditor, VarietySummary } from '../components/SyncEditor';
 import { availabilityLabel, tapeAvailability } from '../model/availability';
 import {
-  DIFFICULTIES, LANES, SYNC, MAX_FALLBACKS, MAX_INTERFERENCE, MAX_VIBES, MEDIA_TYPES, RARITIES, SLOT_TYPES, TIER_IDS, TIERS, VIBES, WORLD,
+  DIFFICULTIES, KINDS, LANES, SYNC, MAX_FALLBACKS, MAX_INTERFERENCE, MAX_VIBES, MEDIA_TYPES, RARITIES, SLOT_TYPES, TIER_IDS, TIERS, VIBES, WORLD,
 } from '../model/constants';
 import { type Issue, slotLimits, validateTape } from '../model/rules';
 import { actions, findTape, getState, useStore } from '../model/store';
@@ -306,7 +306,7 @@ export function Write({ id }: { id?: string }) {
     });
   const setKind = (kind: Tape['kind']) => {
     if (kind === tape.kind) return;
-    if (tape.slots.length > 0 && !window.confirm(`Switch to a ${kind === 'sync' ? 'sync tape' : 'mixtape'}? Your ${tape.kind === 'sync' ? 'song and scenes' : 'slots'} will be cleared.`)) return;
+    if (tape.slots.length > 0 && !window.confirm(`Switch to a ${kind === 'sync' ? 'music video' : 'mixtape'}? Your ${tape.kind === 'sync' ? 'song and scenes' : 'slots'} will be cleared.`)) return;
     set({ kind, slots: kind === 'sync' ? [newSong()] : [] });
     setChecks((cs) => cs.map(() => false));
   };
@@ -340,8 +340,8 @@ export function Write({ id }: { id?: string }) {
   return (
     <div className="page">
       <div className="stack">
-        <span className="eyebrow">{existing ? (existing.draft ? 'Draft' : 'Editing') : 'New tape'}</span>
-        <h1>Write a tape</h1>
+        <span className="eyebrow">{existing ? (existing.draft ? 'Draft' : 'Editing') : 'New tape'}{tape.slots.length > 0 || existing ? ` · ${KINDS[sync ? 'sync' : 'mixtape'].label}` : ''}</span>
+        <h1>{sync ? 'Make a music video' : 'Write a tape'}</h1>
         <p className="muted" style={{ maxWidth: 720 }}>
           A tape is instructions, never the clips: describe each moment, say where to find it and how long it runs.
           {!wasPublished && ' Your draft saves itself in this browser as you go.'}
@@ -367,14 +367,14 @@ export function Write({ id }: { id?: string }) {
               <textarea id="w-liner" value={tape.liner} onChange={(e) => set({ liner: e.target.value })} maxLength={1000} />
             </Field>
             <fieldset>
-              <legend>Kind of tape</legend>
+              <legend>What are you making?</legend>
               <label className="check">
                 <input type="radio" name="kind" checked={!sync} onChange={() => setKind('mixtape')} />
-                <span><strong>Mixtape</strong> <span className="muted small">· short moments from radio, TV, film, video and podcasts, played one after another</span></span>
+                <span><strong>{KINDS.mixtape.label}</strong> <span className="muted small">· {KINDS.mixtape.blurb}</span></span>
               </label>
               <label className="check">
                 <input type="radio" name="kind" checked={sync} onChange={() => setKind('sync')} />
-                <span><strong>Sync tape</strong> <span className="muted small">· a home-made music video: one song, with muted clips cut in over it</span></span>
+                <span><strong>{KINDS.sync.label}</strong> <span className="muted small">· {KINDS.sync.blurb}</span></span>
               </label>
             </fieldset>
             {!sync && (

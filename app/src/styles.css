@@ -91,6 +91,8 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .badge-here { color: #8db6ff; }
 .badge-away { color: var(--faint); }
 .badge-warn { color: var(--warn); }
+.badge-mixtape { color: #e8e9ec; }
+.badge-video { color: #f3a6d3; }
 .swatch { display: inline-block; width: 10px; height: 10px; border-radius: 3px; flex: none; }
 .vibes { display: inline-flex; align-items: center; gap: 8px; color: #c9ccd2; font-size: 14px; }
 

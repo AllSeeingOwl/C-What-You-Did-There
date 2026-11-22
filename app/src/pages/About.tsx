@@ -22,7 +22,7 @@ export function About() {
       </section>
 
       <section className="panel stack">
-        <h2>Tape lengths</h2>
+        <h2>Mixtape lengths</h2>
         <ul className="stack" style={{ margin: 0, paddingLeft: 20 }}>
           {TIER_IDS.map((t) => (
             <li key={t}><strong className="mono">{t}</strong>: {formatTime(TIERS[t].minSeconds)} to {formatTime(TIERS[t].maxSeconds)}, {t === 'C5' ? '3 to 6' : `up to ${TIERS[t].maxSlots}`} slots</li>
@@ -32,8 +32,9 @@ export function About() {
       </section>
 
       <section className="panel stack" id="sync">
-        <h2>Sync tapes: home-made music videos</h2>
-        <p className="muted">A sync tape is one song, played with the sound on, while you cut muted clips in over it so the pictures “explain” the song, often far too literally. The creator either names the song, with each scene timed on its clock, or gives a brief, so you pick a song yourself and note when each part of it starts.</p>
+        <h2>Two kinds of tape</h2>
+        <p className="muted"><strong>Mixtapes</strong> are short moments from radio, TV, film, video and podcasts, played one after another, with things to do in between. Their lengths are the cassette tiers above.</p>
+        <p className="muted"><strong>Music videos</strong> (sync tapes) are one song, played with the sound on, while you cut muted clips in over it so the pictures “explain” the song, often far too literally. The creator either names the song, with each scene timed on its clock, or gives a brief, so you pick a song yourself and note when each part of it starts.</p>
         <ul className="stack" style={{ margin: 0, paddingLeft: 20 }}>
           <li>Songs run 1:30 to 6:00, with 3 to 24 scenes of 4 seconds to a minute each (up to 3 of them things to do in the room).</li>
           <li>Keep it varied: never the same clip twice, at most 2 scenes from one film, programme, series or channel, and no medium (film, TV, online video) or style (drama, animation, real life) in more than half the scenes.</li>
@@ -60,7 +61,7 @@ export function About() {
 
       <div className="row">
         <a className="btn btn-primary" href={href('/tape/sample-rain-on-a-tuesday')}>Try the sample tape</a>
-        <a className="btn" href={href('/tape/sample-last-train-out')}>Try the sample sync tape</a>
+        <a className="btn" href={href('/tape/sample-last-train-out')}>Try the sample music video</a>
         <a className="btn" href={href('/write')}>Write a tape</a>
       </div>
     </div>

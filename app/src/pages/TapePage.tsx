@@ -1,7 +1,7 @@
-import { Hand, JCard, LaneSwatch, RegionBadge, regionList, slotTypeLabel, TapeWarnings, Vibes } from '../components/bits';
+import { Hand, JCard, KindBadge, LaneSwatch, RegionBadge, regionList, slotTypeLabel, TapeWarnings, Vibes } from '../components/bits';
 import { ShareTools } from '../components/ShareTools';
 import { slotWorksIn, tapeAvailability } from '../model/availability';
-import { COSTS, DIFFICULTIES, SCENE_MODES } from '../model/constants';
+import { COSTS, DIFFICULTIES, KINDS, SCENE_MODES } from '../model/constants';
 import { collectedCount, hasStarted, isCollected, isComplete, isLocked } from '../model/progress';
 import { actions, EMPTY_PROGRESS, findTape, useStore } from '../model/store';
 import { isSync, sceneKindLabel, slotName } from '../model/sync';
@@ -105,9 +105,12 @@ export function TapePage({ id }: { id: string }) {
         <JCard tape={tape} big />
         <div className="stack-lg">
           <div className="stack">
-            <span className="eyebrow">{lengthLabel(tape)}</span>
-            {isSync(tape) && <p className="muted">A sync tape: a home-made music video. One song plays with the sound on while you cut muted clips in over it.</p>}
+            <div className="row" style={{ gap: 10 }}>
+              <KindBadge tape={tape} />
+              <span className="eyebrow">{lengthLabel(tape).replace(/^Music video · /, '')}</span>
+            </div>
             <h1>{tape.title}</h1>
+            <p className="muted">{KINDS[isSync(tape) ? 'sync' : 'mixtape'].blurb}</p>
             <Vibes tape={tape} />
             {tape.theme && <p className="muted">Theme: {tape.theme}</p>}
             <div className="row" style={{ gap: 6 }}>

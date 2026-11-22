@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
-import { JCard, RegionBadge, TapeWarnings, Vibes } from '../components/bits';
+import { JCard, KindBadge, RegionBadge, TapeWarnings, Vibes } from '../components/bits';
 import { RegionSelect } from '../components/RegionSelect';
 import { tapeAvailability } from '../model/availability';
-import { TIER_IDS, VIBES } from '../model/constants';
+import { KINDS, TIER_IDS, VIBES } from '../model/constants';
 import { collectedCount, hasStarted, isComplete } from '../model/progress';
 import { actions, allTapes, type ShelfTape, useStore } from '../model/store';
 import { isSync } from '../model/sync';
@@ -70,6 +70,7 @@ function TapeCard({ item, region }: { item: ShelfTape; region: string }) {
       <div className="stack" style={{ gap: 6 }}>
         <Vibes tape={t} />
         <div className="row" style={{ gap: 6 }}>
+          <KindBadge tape={t} />
           <RegionBadge a={a} />
           <TapeWarnings tape={t} />
         </div>
@@ -85,6 +86,7 @@ export function Home() {
   const region = state.settings.region;
   const [query, setQuery] = useState('');
   const [tiers, setTiers] = useState<string[]>([]);
+  const [kind, setKind] = useState<'' | 'mixtape' | 'sync'>('');
   const [vibe, setVibe] = useState('');
   const [hereOnly, setHereOnly] = useState(false);
 
@@ -93,13 +95,15 @@ export function Home() {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return published.filter(({ tape }) => {
-      if (tiers.length && !tiers.includes(isSync(tape) ? 'Sync' : tape.tier)) return false;
+      if (kind && (isSync(tape) ? 'sync' : 'mixtape') !== kind) return false;
+      // Lengths are mixtape tiers: picking one leaves music videos out.
+      if (tiers.length && (isSync(tape) || !tiers.includes(tape.tier))) return false;
       if (vibe && !tape.vibes.includes(vibe) && !tape.arc?.includes(vibe)) return false;
       if (hereOnly && !tapeAvailability(tape, region).worksHere) return false;
       if (q && ![tape.title, tape.creator, tape.theme, tape.liner].some((f) => f.toLowerCase().includes(q))) return false;
       return true;
     });
-  }, [published, query, tiers, vibe, hereOnly, region]);
+  }, [published, query, kind, tiers, vibe, hereOnly, region]);
 
   const toggleTier = (t: string) => setTiers((cur) => (cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t]));
 
@@ -118,7 +122,7 @@ export function Home() {
 
       <section className="stack" aria-labelledby="browse-title">
         <div className="row between">
-          <h2 id="browse-title">Browse tapes</h2>
+          <h2 id="browse-title">Browse tapes and music videos</h2>
           <a className="btn" href={href('/write')}>Write a tape</a>
         </div>
         <div className="panel panel-tight stack">
@@ -127,9 +131,17 @@ export function Home() {
             <input id="search" type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Title, creator or theme" />
           </div>
           <div className="row">
-            <span className="small muted" id="tier-label">Length</span>
+            <span className="small muted" id="kind-label">Kind</span>
+            <div className="row" role="group" aria-labelledby="kind-label" style={{ gap: 6 }}>
+              {([['', 'All'], ['mixtape', KINDS.mixtape.plural], ['sync', KINDS.sync.plural]] as const).map(([k, label]) => (
+                <button key={k || 'all'} type="button" className="chip" aria-pressed={kind === k} onClick={() => setKind(k)}>{label}</button>
+              ))}
+            </div>
+          </div>
+          <div className="row">
+            <span className="small muted" id="tier-label">Mixtape length</span>
             <div className="row" role="group" aria-labelledby="tier-label" style={{ gap: 6 }}>
-              {[...TIER_IDS, 'Sync'].map((t) => (
+              {TIER_IDS.map((t) => (
                 <button key={t} type="button" className="chip mono" aria-pressed={tiers.includes(t)} onClick={() => toggleTier(t)}>{t}</button>
               ))}
             </div>
@@ -152,7 +164,7 @@ export function Home() {
           </div>
         )}
         <p className="small muted">
-          There’s no shared catalogue yet: this list holds the sample tape, your own tapes and any shared with you.
+          There’s no shared catalogue yet: this list holds the sample tapes, your own tapes and any shared with you.
           Got a link or file from a friend? <a href={href('/import')}>Add a tape</a>.
         </p>
       </section>
