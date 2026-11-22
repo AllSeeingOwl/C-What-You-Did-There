@@ -15,6 +15,7 @@ A Side C tape is a set of instructions for a mixtape, never the clips themselves
 | Main name | **Side C** (the secret third side of a cassette) |
 | Full lockup | **Side C** *(What You Did There)*, with the bracketed words smaller and lighter |
 | Backup name | **C What You Did There**, used as this repo's name. CWYDT is fan shorthand only, never the official name |
+| Kinds of tape | **Mixtape** (the original format) and **Music video** (a sync tape: see below). Every tape shows which it is, with a label and its own icon. "Sync tape" is the technical name used in this spec and in the code |
 
 ## Slot types and lane colours
 
@@ -196,7 +197,8 @@ A sync tape should pull its pictures from all over the place: the jokes come fro
 - **Timeline:** pictures in one lane, with the song in its own lane underneath, like an editing suite's audio track. Scenes sit at their cue times once they're known (a fixed song, or an open song that's been mapped); until then, they're spaced evenly.
 - **Play-along:** a large song clock. The collector taps Start at the same moment they press play on the song. The screen shows the scene playing now, what they found for it, and counts down to the next cut: "Next in 3 seconds".
 - **Before playback:** a cue sheet of every scene's start time, and the tip to play the song on one device and the pictures on another.
-- **Labels:** sync tapes show "Sync · 3:34 · 10 scenes" (or "Sync · open song · 10 scenes") instead of a tier, and the browse filter has a Sync option.
+- **Labels:** on screen, sync tapes are called **Music videos**. They show "Music video · 3:34 · 10 scenes" (or "Music video · open song · 10 scenes") instead of a tier, and carry a Music video badge (a play-button icon) where mixtapes carry a Mixtape badge (a cassette icon).
+- **Browsing:** a Kind filter (All, Mixtapes, Music videos). The length filter (C5, C15, C30) is for mixtapes only.
 
 ### Open questions
 

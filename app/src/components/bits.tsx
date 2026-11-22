@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { availabilityLabel, type TapeAvailability } from '../model/availability';
-import { LANES, regionName, SCENE_MODES } from '../model/constants';
+import { KINDS, LANES, regionName, SCENE_MODES } from '../model/constants';
 import { checkLink } from '../model/rules';
 import { sceneColour, sceneKindLabel } from '../model/sync';
 import { lengthLabel, mediaMix } from '../model/tape';
@@ -34,6 +34,21 @@ export function Vibes({ tape }: { tape: Pick<Tape, 'vibes' | 'arc'> }) {
     <span className="vibes">
       <WaveIcon />
       <span><span className="visually-hidden">Vibes: </span>{tape.vibes.join(' · ')}</span>
+    </span>
+  );
+}
+
+/** "Mixtape" or "Music video", with its own icon so it never relies on colour. */
+export function KindBadge({ tape }: { tape: Pick<Tape, 'kind'> }) {
+  const video = tape.kind === 'sync';
+  return (
+    <span className={`badge badge-kind ${video ? 'badge-video' : 'badge-mixtape'}`}>
+      {video ? (
+        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><rect x="0.7" y="0.7" width="12.6" height="10.6" rx="1.5" /><path d="M5.5 3.6v4.8L9.3 6z" fill="currentColor" /></svg>
+      ) : (
+        <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true"><rect x="0.7" y="0.7" width="14.6" height="10.6" rx="1.5" /><circle cx="5" cy="5.5" r="1.6" /><circle cx="11" cy="5.5" r="1.6" /><path d="M3.5 11.3l1.5-2.5h6l1.5 2.5" /></svg>
+      )}
+      {KINDS[video ? 'sync' : 'mixtape'].label}
     </span>
   );
 }
