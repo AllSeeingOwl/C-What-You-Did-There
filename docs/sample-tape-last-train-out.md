@@ -1,6 +1,6 @@
 # Last Train Out
 
-A Side C sample sync tape · Last updated 22 November 2026
+A Side C sample sync tape · Last updated 22 November 2026 (variety rules added)
 
 ## For testers: how this works
 
@@ -23,6 +23,7 @@ This tape never quotes any lyrics, and you shouldn't write them down either. Whe
 | Format | Sync · open song (2:30 to 4:30) |
 | Scenes | 10: 7 to find, 2 repeats, 1 in the room |
 | Difficulty | Easy to medium: two "literal" hunts depend on your song's words |
+| Mix | Film, TV and online video; drama, animation and real life |
 | Vibes | Nostalgic → Funny → Hopeful |
 | Theme | Leaving, trains, going somewhere new |
 | Availability | Worldwide: every scene says "any", so you choose a clip that works where you are |
@@ -61,20 +62,28 @@ Listen once and note the time each section starts. Rough is fine, to the nearest
 
 ## The running order
 
-Each scene plays, muted, from its section's start time until the next one. Pick clips that run a little longer than the section, so you never run out. If a clip does run out, pause on its last frame.
+Each scene plays, muted, from its section's start time until the next one. The medium and style columns say what kind of clip to look for. Pick clips that run a little longer than the section, so you never run out. If a clip does run out, pause on its last frame.
 
-| # | Plays during | Mode | What to find | Where to look | Your find and start time |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Intro | Mood | Any shot of an empty railway platform at night. | Film, TV or official railway channels on video sites | |
-| 2 | Verse 1, first half | Literal | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film or TV scene. | Any film service, TV catch-up | |
-| 3 | Verse 1, second half | Literal (mystery) | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
-| 4 | Chorus 1 | Literal (mystery) | Pick the most important word in your chorus, the one that comes back again and again. Find a clip that acts it out as literally as possible: if it's "fly", a pigeon; if it's "home", a house. | Anywhere official | |
-| 5 | Verse 2 | Mood | Any nature documentary shot of animals on a long journey: geese flying in formation, herds crossing a river. | Nature documentaries on TV catch-up or official channels | |
-| 6 | Last few seconds of verse 2 | In the room | Turn off one light. The song keeps playing. | You, in the room | Nothing to find |
-| 7 | Chorus 2 | Repeat | Play your scene 4 clip again from the same start time. | Already collected | Same as scene 4 |
-| 8 | Bridge (skip if none) | Clash | Any cheerful TV presenter waving goodbye at the end of a programme. | TV catch-up, official broadcaster channels | |
-| 9 | Final chorus | Mood | A train pulling away, seen from the platform, in any film or TV programme. Start just as it begins to move. | Any film service, TV catch-up | |
-| 10 | Outro, to the very end | Repeat | Back to your scene 1 platform, now empty. Hold it until the song finishes. | Already collected | Same as scene 1 |
+| # | Plays during | Mode | Medium · style | What to find | Where to look | Your find and start time |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Intro | Mood | Online video · Real life | Any shot of an empty railway platform at night. | Official railway, travel or webcam channels on video sites | |
+| 2 | Verse 1, first half | Literal | Film · Drama | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film. | Any film service, rental or DVD | |
+| 3 | Verse 1, second half | Literal (mystery) | Your choice | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
+| 4 | Chorus 1 | Literal (mystery) | Your choice | Pick the most important word in your chorus, the one that comes back again and again. Find a clip that acts it out as literally as possible: if it's "fly", a pigeon; if it's "home", a house. | Anywhere official | |
+| 5 | Verse 2 | Mood | TV · Real life | Any nature documentary shot of animals on a long journey: geese flying in formation, herds crossing a river. | TV catch-up, broadcasters' official channels | |
+| 6 | Last few seconds of verse 2 | In the room | In the room | Turn off one light. The song keeps playing. | You, in the room | Nothing to find |
+| 7 | Chorus 2 | Repeat | Same as scene 4 | Play your scene 4 clip again from the same start time. | Already collected | Same as scene 4 |
+| 8 | Bridge (skip if none) | Clash | TV · Animation | Any cartoon character waving goodbye at the end of an episode, as cheerfully as possible. | TV catch-up, official cartoon channels | |
+| 9 | Final chorus | Mood | Film · Drama | A train pulling away, seen from the platform, in any film. Start just as it begins to move. | Any film service, rental or DVD | |
+| 10 | Outro, to the very end | Repeat | Same as scene 1 | Back to your scene 1 platform, now empty. Hold it until the song finishes. | Already collected | Same as scene 1 |
+
+### Keeping it varied
+
+Sync tapes mix their pictures, so no one film, show or style takes over. For scenes 3 and 4, where you choose:
+
+- Don't use a film, programme, series or channel you've already used twice. (Scenes 2 and 9 can come from the same film, but then 3 and 4 can't.)
+- Out of the 7 scenes you find, no more than 4 should be the same medium (film, TV or online video), and no more than 4 the same style (drama, animation or real life). Because the other scenes are already a mix, any choice for scenes 3 and 4 keeps you inside these limits, so the main thing to watch is the first rule.
+- A fallback should keep the same medium and style where it can. If it can't, check the two rules above still hold.
 
 ### Fallbacks
 
@@ -84,7 +93,7 @@ If a scene is hard to find, any of these counts as collected.
 - **Scene 3:** (A) if your verse has nothing concrete in it, use a clip of the song's title, taken literally; (B) any road sign pointing somewhere far away.
 - **Scene 4:** (A) if the key word can't be acted out (like "maybe"), use a clip of someone shrugging; (B) hold up a hand-written card with a drawing of the word.
 - **Scene 5:** (A) any time-lapse of clouds moving across the sky; (B) any shot of an aeroplane taking off.
-- **Scene 8:** (A) any closing credits rolling at the end of a children's programme; (B) any announcer saying goodnight before a channel closes down.
+- **Scene 8:** (A) any animated closing credits at the end of a children's programme; (B) any puppet waving goodbye on children's TV.
 - **Scene 9:** (A) any boat leaving a harbour; (B) the back of any bus driving away down a street.
 
 ## Playing it back
@@ -119,7 +128,7 @@ Read this only after playing the whole tape: it explains why each scene is where
 | 5 | Animals on a journey | Everything's migrating. You're not the only one going. |
 | 6 | One light off | You'll only notice it was the turning point afterwards. |
 | 7 | Chorus repeat | Real music videos repeat the chorus shot, so this one does too. It's funnier the second time. |
-| 8 | Presenter waving | Far too cheerful. Goodbye shouldn't look this easy. |
+| 8 | Cartoon waving | Far too cheerful. Goodbye shouldn't look this easy. |
 | 9 | Train pulling away | The thing the whole song was building up to. |
 | 10 | Empty platform again | Same shot as the start, but now someone's gone. |
 
@@ -137,4 +146,5 @@ Short, honest answers are the most useful. Write them down or tell the person wh
 6. Did two devices help, or would you rather do it all on one screen?
 7. Did the reveal change how you felt about the video?
 8. Would you rather a creator picked the song for you, with exact timings?
-9. Anything you'd add, cut or change?
+9. Did the variety rules (different films, shows and styles) make hunting harder, the video better, or both?
+10. Anything you'd add, cut or change?
