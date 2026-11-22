@@ -143,7 +143,7 @@ Each scene is a muted clip (or an in-room action) shown while part of the song p
 | Scenes per tape | 3 to 24 |
 | Scene length | 4 seconds to 1 minute (8 to 20 seconds works best when switching by hand) |
 | In-room scenes | Up to 3 (for example "turn the lights off for the bridge"). The song never stops |
-| Repeats | Up to 2 per tape. A scene can replay an earlier clip, as music videos do for a returning chorus. A repeat counts as already collected |
+| Repeats | None. Every scene is a different clip, so a returning chorus gets a new clip, not the old one again |
 
 - **Cues:** *timed* cues use the song's clock ("0:42") and need a fixed song. *Section* cues use the song's structure ("Chorus 2") and work for open songs. Before playback, collectors note the time each section starts, which turns a section cue sheet into a timed one.
 - **Scene modes**, shown on each scene so collectors know what they're hunting for:
@@ -162,11 +162,12 @@ A sync tape should pull its pictures from all over the place: the jokes come fro
 
 | Rule | Limit |
 | --- | --- |
-| Same source | At most 2 scenes from the same film, programme, series or channel (repeats don't count) |
+| Same clip | Never twice in one tape |
+| Same source | At most 2 scenes from the same film, programme, series or channel |
 | Mediums | At least 2 different mediums, and no medium in more than half the found scenes (rounded up) |
 | Styles | At least 2 different styles, and no style in more than half the found scenes (rounded up) |
 
-- "Found scenes" means scenes collectors have to hunt down. In-room scenes and repeats don't count towards the limits.
+- "Found scenes" means scenes collectors have to hunt down. In-room scenes don't count towards the limits.
 - Example: a 9-scene tape can have at most 5 animated scenes and at most 5 TV scenes, and no more than 2 from any one series.
 - **Open scenes** ("any clip that acts out your chorus's key word") are checked when the collector records a find. The app asks for its medium, style and source, and warns if the find would break a limit, for example "You've already used this film twice". Before the app does this, tapes remind collectors in words.
 - The write-a-tape form checks the creator's scenes as they go and explains which rule a tape breaks, rather than just refusing it.
