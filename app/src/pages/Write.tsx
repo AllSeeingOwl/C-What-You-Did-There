@@ -16,7 +16,7 @@ import { NotFound } from './NotFound';
 function blankTape(creator: string): Tape {
   const now = new Date().toISOString();
   return {
-    format: 'side-c-tape', version: 1, id: newId('t'), title: '', creator, theme: '', liner: '', tier: 'C5',
+    format: 'side-c-tape', version: 1, kind: 'mixtape', id: newId('t'), title: '', creator, theme: '', liner: '', tier: 'C5',
     difficulty: 'medium', vibes: [], warnings: { flashing: false, loudNoises: false, upsettingThemes: false },
     slots: [], createdAt: now, updatedAt: now,
   };

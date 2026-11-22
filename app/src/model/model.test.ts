@@ -162,12 +162,16 @@ describe('media mix', () => {
 });
 
 describe('tester questions', () => {
-  it('match the questions in the sample tape doc', async () => {
+  it('match the questions in each sample tape doc', async () => {
     const { readFileSync } = await import('node:fs');
-    const { TESTER_QUESTIONS } = await import('./sampleTapes');
-    const doc = readFileSync(new URL('../../../docs/sample-tape-rain-on-a-tuesday.md', import.meta.url), 'utf8');
-    const section = doc.split('## Tester feedback')[1];
-    const fromDoc = [...section.matchAll(/^\d+\. (.+)$/gm)].map((m) => m[1].replace(/'/g, '’'));
-    expect(TESTER_QUESTIONS).toEqual(fromDoc);
+    const { TESTERS } = await import('./sampleTapes');
+    // Docs use straight quotes; the app uses curly ones.
+    const plain = (t: string) => t.replace(/[’‘]/g, "'").replace(/[“”]/g, '"');
+    for (const info of Object.values(TESTERS)) {
+      const doc = readFileSync(new URL(`../../../docs/${info.doc}`, import.meta.url), 'utf8');
+      const section = doc.split('## Tester feedback')[1];
+      const fromDoc = [...section.matchAll(/^\d+\. (.+)$/gm)].map((m) => plain(m[1]));
+      expect(info.questions.map(plain)).toEqual(fromDoc);
+    }
   });
 });

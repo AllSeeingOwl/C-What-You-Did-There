@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TESTER_QUESTIONS } from '../model/sampleTapes';
+import { TESTERS } from '../model/sampleTapes';
 import { actions, useStore } from '../model/store';
 import type { Tape } from '../model/types';
 
@@ -8,6 +8,7 @@ const NONE: string[] = [];
 /** Questions for friends testing the sample tape. Answers save as you type, then get copied or downloaded to send back. */
 export function TesterFeedback({ tape }: { tape: Tape }) {
   const saved = useStore((s) => s.feedback[tape.id] ?? NONE);
+  const TESTER_QUESTIONS = TESTERS[tape.id]?.questions ?? NONE;
   const [message, setMessage] = useState('');
   const answers = TESTER_QUESTIONS.map((_, i) => (typeof saved[i] === 'string' ? saved[i] : ''));
   const answered = answers.filter((a) => a.trim()).length;
@@ -35,6 +36,7 @@ export function TesterFeedback({ tape }: { tape: Tape }) {
     setMessage('Saved. Attach the file to a message to whoever sent you the tape.');
   }
 
+  if (TESTER_QUESTIONS.length === 0) return null;
   return (
     <section className="panel stack" aria-labelledby="feedback-title">
       <span className="eyebrow">Testing Side C</span>
