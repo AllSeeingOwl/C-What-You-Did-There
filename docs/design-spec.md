@@ -1,6 +1,6 @@
 # Side C design spec
 
-Last updated 7 November 2026
+Last updated 22 November 2026
 
 The rules and building blocks behind every Side C screen. When a mockup and this spec disagree, this spec wins.
 
@@ -110,6 +110,67 @@ Anything in the creator's own voice is handwritten, like a real cassette. Everyt
 
 - Handwritten text is set larger than regular text to stay readable.
 - Collectors can switch to **plain text** in settings (offered during sign-up).
+
+## Sync tapes (proposed)
+
+**Status: a proposal for testing, not yet in the app.** Nothing here changes the rules for normal tapes. The sample [*Last Train Out*](sample-tape-last-train-out.md) tests it.
+
+A sync tape is a set of instructions for a home-made music video. One song plays from start to finish as the soundtrack, and the collector cuts muted clips over it, picked so the pictures "explain" the song, often far too literally. It is Interference stretched across a whole tape: picture from one place, sound from another.
+
+### The song
+
+- Exactly one song per tape, played once with the sound on, from an official source: the artist's own channel, a streaming service, radio catch-up or a copy the collector owns.
+- **Fixed song:** the creator names the song and the exact version (for example "album version, 3:34"), because a radio edit or live version moves every timestamp. A fallback for the song must be the same recording from another official source.
+- **Open song:** the creator gives a brief instead ("any song about leaving, 2:30 to 4:30, with at least two choruses"), and every collector's video is different. This is the sync version of a mystery slot.
+- Song length 1:30 to 6:00. Sync tapes don't use the C5/C15/C30 tiers; they show as "Sync · 3:34" (or "Sync · open song").
+
+### Lyrics: never quoted
+
+Lyrics are never written into a tape, not even a single line. Cues point to the moment, and the creator describes what the line is doing in their own words, like this:
+
+- **Allowed:** "0:42, first chorus: the singer says they're done waiting"
+- **Allowed:** "the key word of your chorus"
+- **Not allowed:** a direct quote, even a short one
+
+Collectors hear the words in the song itself. The write-a-tape checklist asks creators to confirm there are no lyrics.
+
+### Scenes
+
+Each scene is a muted clip (or an in-room action) shown while part of the song plays.
+
+| Rule | Limit |
+| --- | --- |
+| Scenes per tape | 3 to 24 |
+| Scene length | 4 seconds to 1 minute (8 to 20 seconds works best when switching by hand) |
+| In-room scenes | Up to 3 (for example "turn the lights off for the bridge"). The song never stops |
+| Repeats | A scene can replay an earlier clip, as music videos do for a returning chorus. A repeat counts as already collected |
+
+- **Cues:** *timed* cues use the song's clock ("0:42") and need a fixed song. *Section* cues use the song's structure ("Chorus 2") and work for open songs. Before playback, collectors note the time each section starts, which turns a section cue sheet into a timed one.
+- **Scene modes**, shown on each scene so collectors know what they're hunting for:
+  - **Literal:** the picture acts out the words
+  - **Mood:** the picture matches the feeling
+  - **Clash:** the picture fights the song
+- Scenes play back to back; if a clip runs short, hold its last frame until the next cue.
+- Fallbacks (up to three per scene), slot states, rarity and the reveal work as for normal tapes. Regions follow the usual rule, with the song counting as a slot.
+
+### Safety
+
+- The "unsettling, never harmful" rule applies to every scene: no graphic, violent, hateful or flashing material.
+- No strobing: the 4-second minimum keeps cuts slow, no clip may contain flashing, and an in-room scene never asks anyone to flash lights.
+- Tapes with Clash scenes show "contains an unsettling interlude" unless the creator marks them as comic, which a reviewer checks.
+
+### On screen (later)
+
+- The song sits in its own lane underneath the picture lane, like an editing suite's audio track. Its colour is an open question: a pink such as `#E879B9` would stay distinct from the five media colours.
+- Play-along shows a large song clock. The collector taps Start at the same moment they press play on the song, and the screen counts down to each cue: "Next: scene 4 in 3, 2, 1".
+- Tip shown before playback: play the song on one device and the pictures on another.
+
+### Open questions
+
+1. Do collectors find hand-syncing fun or fiddly? (The sample tests this.)
+2. Should a fixed-song tape link to the song on one named service, or list several?
+3. Do sync tapes need their own vibes, or is the existing list enough?
+4. Should repeats have a limit, so a tape isn't one clip played four times?
 
 ## Core screens
 

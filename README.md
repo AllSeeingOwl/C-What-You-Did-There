@@ -35,6 +35,7 @@ No clips are hosted or shared. The tape only points to them.
 | [`docs/design-spec.md`](docs/design-spec.md) | The rules behind every screen: slot types, colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting |
 | [`docs/community-guidelines.md`](docs/community-guidelines.md) | Draft guidelines for creators and collectors (to be checked by a solicitor) |
 | [`docs/sample-tape-rain-on-a-tuesday.md`](docs/sample-tape-rain-on-a-tuesday.md) | A real, playable sample tape, with questions for testers |
+| [`docs/sample-tape-last-train-out.md`](docs/sample-tape-last-train-out.md) | A sample *sync tape* (a home-made music video), testing a proposed second format |
 | [`mockups/`](mockups/) | Ten clickable screen mockups that open in any browser (the original designs) |
 | [`mockups/canvas-source/`](mockups/canvas-source/) | The original design files, kept so they can be reopened in the design canvas |
 
@@ -51,6 +52,7 @@ First working version (stage 1): a website that runs in the browser, with no acc
 - [x] Working website: browse, tape page, collecting timeline, play-along and reveal, write a tape, share by link or file
 - [x] Put it online: https://allseeingowl.github.io/C-What-You-Did-There/
 - [ ] Test the sample tape with a few friends
+- [ ] Test the proposed sync-tape format (music videos) with the *Last Train Out* sample
 - [ ] Profile page
 - [ ] Review queue, reporting and notifications
 - [ ] Legal pages: terms, privacy, takedowns, minimum age

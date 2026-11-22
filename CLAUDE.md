@@ -22,6 +22,7 @@ Stage 1 of the real build: a working website in `app/` that runs entirely in the
 | `docs/design-spec.md` | **Source of truth** for every rule: slot types, lane colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting, core screens |
 | `docs/community-guidelines.md` | Draft rules for creators and collectors; has `[AGE]`, `[TIME]`, `[CONTACT]` placeholders and open questions for a solicitor |
 | `docs/sample-tape-rain-on-a-tuesday.md` | A real, playable sample tape used for testing the idea with friends |
+| `docs/sample-tape-last-train-out.md` | A playable sample *sync tape* (home-made music video) for the proposed format in the spec's "Sync tapes" section. Not in the app yet |
 | `mockups/*.html` | Ten clickable screen mockups; `mockups/index.html` links them |
 | `mockups/runtime.js` | Tiny renderer the mockups use (see below) |
 | `mockups/canvas-source/` | Original files from the Claude design canvas (`.dc.html` + `canvas.json`). Archive only: they need the canvas runtime and don't open on their own |
