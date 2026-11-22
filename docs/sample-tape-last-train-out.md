@@ -1,6 +1,6 @@
 # Last Train Out
 
-A Side C sample sync tape · Last updated 22 November 2026
+A Side C sample sync tape · Last updated 22 November 2026 (variety rules added)
 
 ## For testers: how this works
 
@@ -21,8 +21,9 @@ This tape never quotes any lyrics, and you shouldn't write them down either. Whe
 | Detail | This tape |
 | --- | --- |
 | Format | Sync · open song (2:30 to 4:30) |
-| Scenes | 10: 7 to find, 2 repeats, 1 in the room |
-| Difficulty | Easy to medium: two "literal" hunts depend on your song's words |
+| Scenes | 10: 9 to find, 1 in the room |
+| Difficulty | Easy to medium: three "literal" hunts depend on your song's words |
+| Mix | Film, TV and online video; drama, animation and real life |
 | Vibes | Nostalgic → Funny → Hopeful |
 | Theme | Leaving, trains, going somewhere new |
 | Availability | Worldwide: every scene says "any", so you choose a clip that works where you are |
@@ -61,20 +62,29 @@ Listen once and note the time each section starts. Rough is fine, to the nearest
 
 ## The running order
 
-Each scene plays, muted, from its section's start time until the next one. Pick clips that run a little longer than the section, so you never run out. If a clip does run out, pause on its last frame.
+Each scene plays, muted, from its section's start time until the next one. The medium and style columns say what kind of clip to look for. Pick clips that run a little longer than the section, so you never run out. If a clip does run out, pause on its last frame.
 
-| # | Plays during | Mode | What to find | Where to look | Your find and start time |
-| --- | --- | --- | --- | --- | --- |
-| 1 | Intro | Mood | Any shot of an empty railway platform at night. | Film, TV or official railway channels on video sites | |
-| 2 | Verse 1, first half | Literal | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film or TV scene. | Any film service, TV catch-up | |
-| 3 | Verse 1, second half | Literal (mystery) | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
-| 4 | Chorus 1 | Literal (mystery) | Pick the most important word in your chorus, the one that comes back again and again. Find a clip that acts it out as literally as possible: if it's "fly", a pigeon; if it's "home", a house. | Anywhere official | |
-| 5 | Verse 2 | Mood | Any nature documentary shot of animals on a long journey: geese flying in formation, herds crossing a river. | Nature documentaries on TV catch-up or official channels | |
-| 6 | Last few seconds of verse 2 | In the room | Turn off one light. The song keeps playing. | You, in the room | Nothing to find |
-| 7 | Chorus 2 | Repeat | Play your scene 4 clip again from the same start time. | Already collected | Same as scene 4 |
-| 8 | Bridge (skip if none) | Clash | Any cheerful TV presenter waving goodbye at the end of a programme. | TV catch-up, official broadcaster channels | |
-| 9 | Final chorus | Mood | A train pulling away, seen from the platform, in any film or TV programme. Start just as it begins to move. | Any film service, TV catch-up | |
-| 10 | Outro, to the very end | Repeat | Back to your scene 1 platform, now empty. Hold it until the song finishes. | Already collected | Same as scene 1 |
+| # | Plays during | Mode | Medium · style | What to find | Where to look | Your find and start time |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Intro | Mood | Online video · Real life | Any shot of an empty railway platform at night. | Official railway, travel or webcam channels on video sites | |
+| 2 | Verse 1, first half | Literal | Film · Drama | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film. | Any film service, rental or DVD | |
+| 3 | Verse 1, second half | Literal (mystery) | Your choice | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
+| 4 | Chorus 1 | Literal (mystery) | Your choice | Pick the most important word in your chorus, the one that comes back again and again. Find a clip that acts it out as literally as possible: if it's "fly", a pigeon; if it's "home", a house. | Anywhere official | |
+| 5 | Verse 2 | Mood | TV · Real life | Any nature documentary shot of animals on a long journey: geese flying in formation, herds crossing a river. | TV catch-up, broadcasters' official channels | |
+| 6 | Last few seconds of verse 2 | In the room | In the room | Turn off one light. The song keeps playing. | You, in the room | Nothing to find |
+| 7 | Chorus 2 | Literal (mystery) | Your choice, but a different medium and style from scene 4 | The same key word as scene 4, acted out by a completely different clip. If scene 4 was a real pigeon, try a cartoon bird. | Anywhere official | |
+| 8 | Bridge (skip if none) | Clash | TV · Animation | Any cartoon character waving goodbye at the end of an episode, as cheerfully as possible. | TV catch-up, official cartoon channels | |
+| 9 | Final chorus | Mood | Film · Drama | A train pulling away, seen from the platform, in any film. Start just as it begins to move. | Any film service, rental or DVD | |
+| 10 | Outro, to the very end | Mood | Online video · Real life | A different empty platform from scene 1, ideally in daylight, from a different station and channel. Hold it until the song finishes. | Official railway, travel or webcam channels on video sites | |
+
+### Keeping it varied
+
+Sync tapes mix their pictures, so no one film, show or style takes over. For scenes 3, 4 and 7, where you choose:
+
+- Never use the same clip twice.
+- Don't use a film, programme, series or channel you've already used twice. (Scenes 2 and 9 can come from the same film, but then 3, 4 and 7 can't.)
+- Out of the 9 scenes you find, no more than 5 should be the same medium (film, TV or online video), and no more than 5 the same style (drama, animation or real life). As long as scene 7 differs from scene 4, as it asks, any choice keeps you inside these limits, so the main things to watch are the first two rules.
+- A fallback should keep the same medium and style where it can. If it can't, check the two rules above still hold.
 
 ### Fallbacks
 
@@ -83,9 +93,11 @@ If a scene is hard to find, any of these counts as collected.
 - **Scene 2:** (A) any advert where someone sits on a suitcase to close it; (B) pack a bag yourself, badly, and do it live during the scene.
 - **Scene 3:** (A) if your verse has nothing concrete in it, use a clip of the song's title, taken literally; (B) any road sign pointing somewhere far away.
 - **Scene 4:** (A) if the key word can't be acted out (like "maybe"), use a clip of someone shrugging; (B) hold up a hand-written card with a drawing of the word.
+- **Scene 7:** (A) a clip of the opposite of your key word; (B) the key word written on a sign, a shop front or a cake, in any clip.
 - **Scene 5:** (A) any time-lapse of clouds moving across the sky; (B) any shot of an aeroplane taking off.
-- **Scene 8:** (A) any closing credits rolling at the end of a children's programme; (B) any announcer saying goodnight before a channel closes down.
+- **Scene 8:** (A) any animated closing credits at the end of a children's programme; (B) any puppet waving goodbye on children's TV.
 - **Scene 9:** (A) any boat leaving a harbour; (B) the back of any bus driving away down a street.
+- **Scene 10:** (A) any empty bus stop or ferry terminal; (B) any station clock, with nobody underneath it.
 
 ## Playing it back
 
@@ -97,7 +109,7 @@ Play everything in one go, without stopping the song. It's easiest with two devi
     3. Keep **Map your song** where you can see it, along with a clock or timer that shows seconds.
 2. Dim the lights.
 3. Start the song and the timer at the same moment.
-4. At each section's start time, switch to the next scene's tab and press play. Scenes 7 and 10 replay earlier tabs, so restart them from your start time.
+4. At each section's start time, switch to the next scene's tab and press play.
 5. At scene 6, turn off the light and stay on the scene 5 clip until chorus 2.
 6. Hold the last picture until the song ends, then sit for a moment before reading on.
 
@@ -118,10 +130,10 @@ Read this only after playing the whole tape: it explains why each scene is where
 | 4 | Literal chorus word | Your tape is now different from everyone else's. That's the point. |
 | 5 | Animals on a journey | Everything's migrating. You're not the only one going. |
 | 6 | One light off | You'll only notice it was the turning point afterwards. |
-| 7 | Chorus repeat | Real music videos repeat the chorus shot, so this one does too. It's funnier the second time. |
-| 8 | Presenter waving | Far too cheerful. Goodbye shouldn't look this easy. |
+| 7 | Key word, again | Same joke, new picture. It's funnier the second time because you can see it coming. |
+| 8 | Cartoon waving | Far too cheerful. Goodbye shouldn't look this easy. |
 | 9 | Train pulling away | The thing the whole song was building up to. |
-| 10 | Empty platform again | Same shot as the start, but now someone's gone. |
+| 10 | Another empty platform | It looks like the start, but it's a different station. Someone's arrived somewhere new. |
 
 </details>
 
@@ -132,9 +144,10 @@ Short, honest answers are the most useful. Write them down or tell the person wh
 1. Which song did you pick, and was it easy to find one that fitted the brief?
 2. Was mapping your song (the section start times) easy or a chore?
 3. Which scene was hardest to find, and did you use a fallback?
-4. Were the two "literal" hunts (scenes 3 and 4) fun? Did they make you laugh during playback?
+4. Were the three "literal" hunts (scenes 3, 4 and 7) fun? Did they make you laugh during playback?
 5. Could you keep up with the cuts while playing back, or was switching too fiddly?
 6. Did two devices help, or would you rather do it all on one screen?
 7. Did the reveal change how you felt about the video?
 8. Would you rather a creator picked the song for you, with exact timings?
-9. Anything you'd add, cut or change?
+9. Did the variety rules (different films, shows and styles) make hunting harder, the video better, or both?
+10. Anything you'd add, cut or change?

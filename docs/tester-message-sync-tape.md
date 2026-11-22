@@ -16,16 +16,17 @@ It isn't on the Side C website yet, so it's just a page to read. Keep your notes
 
 1. **Pick your song.** Any song about leaving or going away, 2:30 to 4:30 long, with at least two choruses. The tape explains the rest.
 2. **Map your song.** Listen once and jot down when each part starts (verse, chorus and so on). It takes about five minutes.
-3. **Collect the 7 clips at your own pace,** over a few days or a week. Two of them depend on the words of your song, which is the fun part. If something's hard to find, use a fallback; it still counts.
+3. **Collect the 9 clips at your own pace,** over a few days or a week. Three of them depend on the words of your song, which is the fun part. If something's hard to find, use a fallback; it still counts.
 4. **Play it back in one go.** The song goes on one device (phone or speaker), the clips on another (laptop or TV), with the clips muted. Lights low is best.
 5. **Don't peek at the creator's notes** until the end. That's the reveal.
-6. **Answer the 9 short questions** at the bottom of the page and send them to me. If you give up partway, send them anyway; that's just as useful.
+6. **Answer the 10 short questions** at the bottom of the page and send them to me. If you give up partway, send them anyway; that's just as useful.
 
 Good to know:
 
 - Nothing to download or install, and no account.
 - Only use official sources (streaming services, catch-up apps, official channels, things you already own). No dodgy copies, please.
 - Please don't write out any of the song's lyrics in your answers. Describe them in your own words instead.
+- Keep your clips varied: never the same clip twice, and no more than two from the same film or show. The tape explains why.
 - Being a second or two late with a cut is fine. Wonky is part of the charm.
 
 Thanks! [YOUR NAME]
