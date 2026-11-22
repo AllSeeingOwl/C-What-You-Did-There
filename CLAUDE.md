@@ -18,6 +18,7 @@ Stage 1 of the real build: a working website in `app/` that runs entirely in the
 | `app/` | The website: React + TypeScript + Vite, tests with Vitest. `app/src/model/` holds the rules and data, independent of the screens |
 | `docs/building.md` | How the app is built and run, decisions made while building, and what stage 2 needs |
 | `.github/workflows/deploy.yml` | Tests, builds and publishes the site to GitHub Pages on every push to `main` |
+| `.github/workflows/checks.yml` | Runs the tests and build on every pull request, so problems show up before merging |
 | `README.md` | Public summary of the concept and the repo |
 | `docs/design-spec.md` | **Source of truth** for every rule: slot types, lane colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting, core screens |
 | `docs/community-guidelines.md` | Draft rules for creators and collectors; has `[AGE]`, `[TIME]`, `[CONTACT]` placeholders and open questions for a solicitor |

@@ -65,6 +65,8 @@ Then open the address it prints (usually `http://localhost:5173`). Other command
 
 The workflow in `.github/workflows/deploy.yml` tests, builds and publishes the site every time the `main` branch changes.
 
+Before that, `.github/workflows/checks.yml` runs the same tests and build on every pull request, without publishing anything. A green tick on a pull request means it's safe to merge; a red cross means something needs fixing first.
+
 The site is live at https://allseeingowl.github.io/C-What-You-Did-There/. Anything merged into `main` appears there a minute or two later.
 
 - The repo's **Settings → Pages → Source** must be **GitHub Actions**. If it's set to "Deploy from a branch", the address shows the README instead of the website.
