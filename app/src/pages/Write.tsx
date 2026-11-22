@@ -1,15 +1,18 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Field, JCard, LaneSwatch, slotTypeLabel } from '../components/bits';
+import { CostSelect, FallbackEditor, TimeInput } from '../components/FormBits';
 import { RegionPicker } from '../components/RegionSelect';
+import { newScene, newSong, SceneEditor, SongEditor, VarietySummary } from '../components/SyncEditor';
 import { availabilityLabel, tapeAvailability } from '../model/availability';
 import {
-  COSTS, DIFFICULTIES, LANES, MAX_FALLBACKS, MAX_INTERFERENCE, MAX_VIBES, MEDIA_TYPES, RARITIES, SLOT_TYPES, TIER_IDS, TIERS, VIBES, WORLD,
+  DIFFICULTIES, LANES, SYNC, MAX_FALLBACKS, MAX_INTERFERENCE, MAX_VIBES, MEDIA_TYPES, RARITIES, SLOT_TYPES, TIER_IDS, TIERS, VIBES, WORLD,
 } from '../model/constants';
 import { type Issue, slotLimits, validateTape } from '../model/rules';
 import { actions, findTape, getState, useStore } from '../model/store';
-import { newId, tierRange, totalSeconds } from '../model/tape';
-import { formatTime, parseTime } from '../model/time';
-import type { Cost, Difficulty, Fallback, MediaType, Rarity, Slot, SlotType, Tape, TierId } from '../model/types';
+import { isSync, songSlot } from '../model/sync';
+import { lengthLabel, newId, tierRange, totalSeconds } from '../model/tape';
+import { formatTime } from '../model/time';
+import type { Difficulty, MediaType, Rarity, Slot, SlotType, Tape, TierId } from '../model/types';
 import { href, navigate } from '../router';
 import { NotFound } from './NotFound';
 
@@ -54,72 +57,11 @@ function retype(slot: Slot, type: SlotType): Slot {
   return s;
 }
 
-function TimeInput({ id, seconds, onChange }: { id: string; seconds: number; onChange: (s: number) => void }) {
-  const [text, setText] = useState(formatTime(seconds));
-  const [bad, setBad] = useState(false);
-  useEffect(() => setText(formatTime(seconds)), [seconds]);
-  return (
-    <>
-      <input
-        id={id}
-        className="time"
-        type="text"
-        inputMode="numeric"
-        value={text}
-        aria-invalid={bad}
-        onChange={(e) => {
-          setText(e.target.value);
-          const v = parseTime(e.target.value);
-          setBad(v === null);
-          if (v !== null) onChange(v);
-        }}
-        onBlur={() => { if (!bad) setText(formatTime(seconds)); }}
-      />
-      {bad && <span className="small error-text">Write it as minutes:seconds, e.g. 0:45</span>}
-    </>
-  );
-}
-
-function CostSelect({ id, value, onChange }: { id: string; value: Cost; onChange: (c: Cost) => void }) {
-  return (
-    <select id={id} value={value} onChange={(e) => onChange(e.target.value as Cost)}>
-      {Object.entries(COSTS).map(([k, v]) => <option key={k} value={k}>{v}</option>)}
-    </select>
-  );
-}
-
 function MediaSelect({ id, value, onChange }: { id: string; value: MediaType; onChange: (m: MediaType) => void }) {
   return (
     <select id={id} value={value} onChange={(e) => onChange(e.target.value as MediaType)}>
       {MEDIA_TYPES.map((m) => <option key={m} value={m}>{LANES[m].label}</option>)}
     </select>
-  );
-}
-
-function FallbackEditor({ id, f, onChange, onRemove, label }: { id: string; f: Fallback; onChange: (f: Fallback) => void; onRemove: () => void; label: string }) {
-  return (
-    <fieldset className="stack">
-      <legend>{label}</legend>
-      <Field label="What to find instead" htmlFor={`${id}-find`}>
-        <textarea id={`${id}-find`} rows={2} value={f.find} onChange={(e) => onChange({ ...f, find: e.target.value })} maxLength={500} />
-      </Field>
-      <div className="grid-2">
-        <Field label="Where to look" htmlFor={`${id}-where`}>
-          <input id={`${id}-where`} type="text" value={f.where} onChange={(e) => onChange({ ...f, where: e.target.value })} maxLength={200} />
-        </Field>
-        <Field label="Link" hint="optional, official sources only" htmlFor={`${id}-link`}>
-          <input id={`${id}-link`} type="url" value={f.link ?? ''} placeholder="https://" onChange={(e) => onChange({ ...f, link: e.target.value || undefined })} />
-        </Field>
-        <Field label="Cost" htmlFor={`${id}-cost`}>
-          <CostSelect id={`${id}-cost`} value={f.cost} onChange={(cost) => onChange({ ...f, cost })} />
-        </Field>
-        <div className="field">
-          <span style={{ fontWeight: 500, fontSize: 14 }}>Available in</span>
-          <RegionPicker id={`${id}-region`} value={f.regions} onChange={(regions) => onChange({ ...f, regions })} />
-        </div>
-      </div>
-      <button type="button" className="btn btn-small btn-danger" style={{ alignSelf: 'flex-start' }} onClick={onRemove}>Remove {label.toLowerCase()}</button>
-    </fieldset>
   );
 }
 
@@ -315,10 +257,18 @@ const CHECKLIST = [
   'Nothing graphic, violent, hateful or flashing; anything unsettling comes from the pairing, and the warnings are set.',
 ];
 
+const SYNC_CHECKLIST = [
+  'The song and every scene come from official sources: no pirated copies, unofficial re-uploads or instructions for ripping or recording.',
+  'No lyrics anywhere in the tape, not even one line: I describe what the song is doing in my own words.',
+  'No private individuals, and no room scene involves recording or approaching anyone.',
+  'Nothing graphic, violent, hateful, flashing or strobing in any scene, and the warnings are set.',
+];
+
 export function Write({ id }: { id?: string }) {
   const existing = useStore((s) => (id ? findTape(s, id) : undefined));
   const [tape, setTape] = useState<Tape>(() => existing?.tape ?? blankTape(getState().settings.creatorName));
   const [checks, setChecks] = useState<boolean[]>(CHECKLIST.map(() => false));
+  const checklist = isSync(tape) ? SYNC_CHECKLIST : CHECKLIST;
   const [message, setMessage] = useState('');
   const wasPublished = existing ? !existing.draft : false;
 
@@ -354,6 +304,14 @@ export function Write({ id }: { id?: string }) {
       const gone = t.slots[i].id;
       return { ...t, slots: t.slots.filter((_, k) => k !== i).map((s) => (s.lockedUntil === gone ? { ...s, lockedUntil: undefined } : s)) };
     });
+  const setKind = (kind: Tape['kind']) => {
+    if (kind === tape.kind) return;
+    if (tape.slots.length > 0 && !window.confirm(`Switch to a ${kind === 'sync' ? 'sync tape' : 'mixtape'}? Your ${tape.kind === 'sync' ? 'song and scenes' : 'slots'} will be cleared.`)) return;
+    set({ kind, slots: kind === 'sync' ? [newSong()] : [] });
+    setChecks((cs) => cs.map(() => false));
+  };
+  const renameSection = (from: string, to: string) =>
+    setTape((t) => ({ ...t, slots: t.slots.map((s) => (s.scene && s.scene.cue === from ? { ...s, scene: { ...s.scene, cue: to } } : s)) }));
   const toggleVibe = (v: string) =>
     set({ vibes: tape.vibes.includes(v) ? tape.vibes.filter((x) => x !== v) : tape.vibes.length < MAX_VIBES ? [...tape.vibes, v] : tape.vibes });
 
@@ -363,6 +321,9 @@ export function Write({ id }: { id?: string }) {
   const inRange = total >= range.min && total <= range.max;
   const interferenceCount = tape.slots.filter((s) => s.type === 'interference').length;
   const canPublish = errors.length === 0 && checks.every(Boolean);
+  const sync = isSync(tape);
+  const song = songSlot(tape);
+  const pictures = tape.slots.filter((s) => s.type !== 'song');
 
   function publish() {
     if (!canPublish) return;
@@ -406,6 +367,18 @@ export function Write({ id }: { id?: string }) {
               <textarea id="w-liner" value={tape.liner} onChange={(e) => set({ liner: e.target.value })} maxLength={1000} />
             </Field>
             <fieldset>
+              <legend>Kind of tape</legend>
+              <label className="check">
+                <input type="radio" name="kind" checked={!sync} onChange={() => setKind('mixtape')} />
+                <span><strong>Mixtape</strong> <span className="muted small">· short moments from radio, TV, film, video and podcasts, played one after another</span></span>
+              </label>
+              <label className="check">
+                <input type="radio" name="kind" checked={sync} onChange={() => setKind('sync')} />
+                <span><strong>Sync tape</strong> <span className="muted small">· a home-made music video: one song, with muted clips cut in over it</span></span>
+              </label>
+            </fieldset>
+            {!sync && (
+            <fieldset>
               <legend>Tier</legend>
               <div className="row">
                 {TIER_IDS.map((t: TierId) => (
@@ -416,6 +389,7 @@ export function Write({ id }: { id?: string }) {
                 ))}
               </div>
             </fieldset>
+            )}
             <div className="grid-2">
               <Field label="Difficulty" htmlFor="w-diff">
                 <select id="w-diff" value={tape.difficulty} onChange={(e) => set({ difficulty: e.target.value as Difficulty })}>
@@ -463,6 +437,52 @@ export function Write({ id }: { id?: string }) {
             )}
           </section>
 
+          {sync && song && (
+            <SongEditor slot={song} issues={issues} onChange={(ns) => setSlot(0, ns)} onRenameSection={renameSection} />
+          )}
+          {sync && (
+            <section className="stack" aria-labelledby="scenes-title">
+              <div className="row between">
+                <h2 id="scenes-title">Scenes</h2>
+                <span className="small muted">{pictures.length} of {SYNC.maxScenes} · at least {SYNC.minScenes} · up to {SYNC.maxRoomScenes} in the room</span>
+              </div>
+              <p className="small muted">Muted clips, in the order they play. Keep it varied: no medium or style in more than half the scenes, and never the same clip twice.</p>
+              {!song && <div className="notice">This tape has no song. Switch to a mixtape and back to start again.</div>}
+              {pictures.length === 0 && <div className="empty">No scenes yet. Add the first one below.</div>}
+              {pictures.map((s, k) => {
+                const i = tape.slots.indexOf(s);
+                return (
+                  <SceneEditor
+                    key={s.id}
+                    slot={s}
+                    number={k + 1}
+                    tape={tape}
+                    issues={issues}
+                    first={k === 0}
+                    last={k === pictures.length - 1}
+                    onChange={(ns) => setSlot(i, ns)}
+                    onMove={(d) => move(i, d)}
+                    onRemove={() => removeSlot(i)}
+                  />
+                );
+              })}
+              <div className="panel panel-tight row" style={{ gap: 6 }}>
+                <span className="small muted">Add</span>
+                <button type="button" className="btn btn-small" disabled={!song || pictures.length >= SYNC.maxScenes} onClick={() => set({ slots: [...tape.slots, newScene(tape, false)] })}>
+                  + A scene to find
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-small"
+                  disabled={!song || pictures.length >= SYNC.maxScenes || pictures.filter((s) => s.type === 'between').length >= SYNC.maxRoomScenes}
+                  onClick={() => set({ slots: [...tape.slots, newScene(tape, true)] })}
+                >
+                  + Something to do in the room
+                </button>
+              </div>
+            </section>
+          )}
+          {!sync && (
           <section className="stack" aria-labelledby="slots-title">
             <div className="row between">
               <h2 id="slots-title">Slots</h2>
@@ -489,16 +509,28 @@ export function Write({ id }: { id?: string }) {
               </div>
             </div>
           </section>
+          )}
         </div>
 
         <aside className="stack-lg inspector" aria-label="Checks and publishing">
           <JCard tape={tape} />
+          {sync ? (
+          <div className="panel stack">
+            <h2 style={{ fontSize: 17 }}>Running time</h2>
+            <p className="mono" style={{ fontSize: 18 }}>{lengthLabel(tape)}</p>
+            <p className="small muted">{song?.song?.mode === 'open' ? 'As long as each collector’s song.' : 'As long as the song.'}</p>
+            <h3 style={{ fontSize: 15 }}>Mix</h3>
+            <VarietySummary tape={tape} />
+            <p className="small muted">{tape.slots.length > 0 ? availabilityLabel(tapeAvailability(tape, region)) : ''}</p>
+          </div>
+          ) : (
           <div className="panel stack">
             <h2 style={{ fontSize: 17 }}>Running time</h2>
             <div className="row between"><span className="mono" style={{ fontSize: 22 }}>{formatTime(total)}</span><span className={inRange ? 'ok-text small' : 'small muted'}>{inRange ? `Fits a ${tape.tier}` : `${tape.tier}: ${formatTime(range.min)} to ${formatTime(range.max)}`}</span></div>
             <div className="meter"><div style={{ width: `${Math.min(100, (total / range.max) * 100)}%`, background: inRange ? 'var(--ok)' : 'var(--text)' }} /></div>
             <p className="small muted">{tape.slots.length > 0 ? availabilityLabel(tapeAvailability(tape, region)) : 'Add slots to see where it works.'}</p>
           </div>
+          )}
           <div className="panel stack">
             <h2 style={{ fontSize: 17 }}>Checks</h2>
             {issues.length === 0 ? <p className="ok-text small">Everything checks out.</p> : (
@@ -509,7 +541,7 @@ export function Write({ id }: { id?: string }) {
           </div>
           <div className="panel stack">
             <h2 style={{ fontSize: 17 }}>Before you publish</h2>
-            {CHECKLIST.map((c, k) => (
+            {checklist.map((c, k) => (
               <label key={k} className="check">
                 <input type="checkbox" checked={checks[k]} onChange={(e) => setChecks((cs) => cs.map((x, j) => (j === k ? e.target.checked : x)))} />
                 <span className="small">{c}</span>

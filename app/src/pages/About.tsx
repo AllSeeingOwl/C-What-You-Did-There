@@ -31,6 +31,16 @@ export function About() {
         <p className="small muted">Close enough counts: a tape can land 10% either side of its tier. Clips run 5 seconds to 2 minutes, in-between slots 3 seconds to a minute, and Interference 10 to 45 seconds, at most two per tape.</p>
       </section>
 
+      <section className="panel stack" id="sync">
+        <h2>Sync tapes: home-made music videos</h2>
+        <p className="muted">A sync tape is one song, played with the sound on, while you cut muted clips in over it so the pictures “explain” the song, often far too literally. The creator either names the song, with each scene timed on its clock, or gives a brief, so you pick a song yourself and note when each part of it starts.</p>
+        <ul className="stack" style={{ margin: 0, paddingLeft: 20 }}>
+          <li>Songs run 1:30 to 6:00, with 3 to 24 scenes of 4 seconds to a minute each (up to 3 of them things to do in the room).</li>
+          <li>Keep it varied: never the same clip twice, at most 2 scenes from one film, programme, series or channel, and no medium (film, TV, online video) or style (drama, animation, real life) in more than half the scenes.</li>
+          <li>Lyrics are never written into a tape, not even one line. Cues describe what the song is doing instead.</li>
+        </ul>
+      </section>
+
       <section className="panel stack" id="guidelines">
         <h2>Community guidelines: the short version</h2>
         <ol className="stack" style={{ margin: 0, paddingLeft: 20 }}>
@@ -50,6 +60,7 @@ export function About() {
 
       <div className="row">
         <a className="btn btn-primary" href={href('/tape/sample-rain-on-a-tuesday')}>Try the sample tape</a>
+        <a className="btn" href={href('/tape/sample-last-train-out')}>Try the sample sync tape</a>
         <a className="btn" href={href('/write')}>Write a tape</a>
       </div>
     </div>
