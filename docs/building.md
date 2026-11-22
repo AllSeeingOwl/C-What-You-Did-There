@@ -1,6 +1,6 @@
 # Building Side C
 
-Last updated 15 November 2026
+Last updated 22 November 2026
 
 How the working website in `app/` is put together, how to run it, and what comes next.
 
@@ -15,9 +15,11 @@ A real website that runs entirely in the visitor's browser. It needs no server, 
 | Collecting | `#/tape/[ID]/collect` | The editing-suite timeline (vertical list and bottom sheet on phones); record your find, fallback used and times |
 | Play-along | `#/tape/[ID]/play` | Set-up, a timer per slot, the Interference split screen and sync cue, then the reveal |
 | Write a tape | `#/write` | The full form with every rule from the design spec checked live, plus the publishing checklist |
-| Tester questions | `#/tape/[ID]/feedback` | The questions from the sample tape doc, also shown after its reveal; answers save as you type and are copied or downloaded to send back |
+| Tester questions | `#/tape/[ID]/feedback` | The questions from each sample tape's doc, also shown after its reveal; answers save as you type and are copied or downloaded to send back |
 | Add a tape | `#/import` and `#/t/[CODE]` | Open a share link or a tape file from someone else |
 | Settings, How it works, 404 | `#/settings`, `#/about` | Region, plain text, creator name, delete all data; the short guidelines |
+
+**Sync tapes** (home-made music videos, see the design spec) use the same screens. The tape page shows a sync running order; collecting has a pictures-and-song timeline, a form for mapping an open song, and variety warnings; play-along is one song clock that counts down to each cut; and Write a tape has a "Kind of tape" choice that swaps the tier and slots for a song and scenes. The sample is *Last Train Out*.
 
 **How sharing works without a server:** a share link carries the whole tape (instructions only) inside the address after `#`. The part after `#` is never sent to any web server. Tapes can also be downloaded and sent as a `.sidec.json` file.
 
@@ -34,6 +36,11 @@ These fill gaps the spec didn't cover. They should be added to `docs/design-spec
 - **A long passage in quotation marks gets a warning,** as a nudge against pasting transcripts or lyrics.
 - **"Best in [COUNTRY]"** is the country where the most slots, or one of their fallbacks, work.
 - **Collector region "Somewhere else"** only counts slots that work worldwide.
+- **A sync tape is stored like any other tape,** with `kind: 'sync'`. Its song is always the first slot (type `song`) and every slot after it is a scene (type `scene`) or a room scene (type `between`), so collecting, fallbacks, regions and sharing all work unchanged. Older tapes with no `kind` are read as mixtapes.
+- **Sync scenes have no length of their own.** A scene runs from its cue to the next scene's cue, or to the end of the song.
+- **Open songs:** parts can be optional, and a scene cued to a missing part is skipped. The song counts as collected only once the collector's map is complete.
+- **Variety rules** stop a creator publishing when the scenes they've fixed already break them. For collectors, they only warn.
+- **Clash scenes don't add the "unsettling interlude" label automatically** until there's a review queue to check which ones are comic.
 
 ## Running it on your own computer
 
@@ -51,7 +58,7 @@ Then open the address it prints (usually `http://localhost:5173`). Other command
 
 | Command | What it does |
 | --- | --- |
-| `npm test` | Checks the rules (tiers, lengths, regions, sharing) with automatic tests |
+| `npm test` | Checks the rules (tiers, lengths, regions, sharing, sync tapes) with automatic tests |
 | `npm run build` | Makes the finished website in `app/dist` |
 
 ## Putting it online (free, with GitHub Pages)
@@ -67,9 +74,9 @@ The site is live at https://allseeingowl.github.io/C-What-You-Did-There/. Anythi
 
 | Path | What it is |
 | --- | --- |
-| `app/src/model/` | The rules and data, with no screens: tape format (`types.ts`), numbers from the spec (`constants.ts`), checks (`rules.ts`), regions (`availability.ts`), sharing (`share.ts`, `parse.ts`), saving (`store.ts`) and the sample tape |
+| `app/src/model/` | The rules and data, with no screens: tape format (`types.ts`), numbers from the spec (`constants.ts`), checks (`rules.ts`), sync tapes (`sync.ts`: cue times, song maps, variety), regions (`availability.ts`), sharing (`share.ts`, `parse.ts`), saving (`store.ts`) and the sample tapes |
 | `app/src/pages/` | One file per screen |
-| `app/src/components/` | Shared pieces: J-card, badges, slot details, region pickers, share buttons |
+| `app/src/components/` | Shared pieces: J-card, badges, slot details, region pickers, share buttons, form inputs, and the sync tape editor and details |
 | `app/src/styles.css` | All styling; colours match the design spec |
 
 The `model` folder is the part worth keeping whatever happens next: the same rules will apply when there's a server or a phone app.

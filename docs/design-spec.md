@@ -111,9 +111,9 @@ Anything in the creator's own voice is handwritten, like a real cassette. Everyt
 - Handwritten text is set larger than regular text to stay readable.
 - Collectors can switch to **plain text** in settings (offered during sign-up).
 
-## Sync tapes (proposed)
+## Sync tapes
 
-**Status: a proposal for testing, not yet in the app.** Nothing here changes the rules for normal tapes. The sample [*Last Train Out*](sample-tape-last-train-out.md) tests it.
+**Status: in the website, being tested.** Nothing here changes the rules for normal tapes ("mixtapes"). The sample [*Last Train Out*](sample-tape-last-train-out.md) tests it.
 
 A sync tape is a set of instructions for a home-made music video. One song plays from start to finish as the soundtrack, and the collector cuts muted clips over it, picked so the pictures "explain" the song, often far too literally. It is Interference stretched across a whole tape: picture from one place, sound from another.
 
@@ -176,13 +176,27 @@ A sync tape should pull its pictures from all over the place: the jokes come fro
 
 - The "unsettling, never harmful" rule applies to every scene: no graphic, violent, hateful or flashing material.
 - No strobing: the 4-second minimum keeps cuts slow, no clip may contain flashing, and an in-room scene never asks anyone to flash lights.
-- Tapes with Clash scenes show "contains an unsettling interlude" unless the creator marks them as comic, which a reviewer checks.
+- Tapes with Clash scenes should show "contains an unsettling interlude" unless the creator marks them as comic, which a reviewer checks. Until there's a review queue (stage 2), the website doesn't add this label automatically: most Clash scenes are comic, and creators can tick the existing warnings.
 
-### On screen (later)
+### Open songs: mapping and skipping
 
-- The song sits in its own lane underneath the picture lane, like an editing suite's audio track. Its colour is an open question: a pink such as `#E879B9` would stay distinct from the five media colours.
-- Play-along shows a large song clock. The collector taps Start at the same moment they press play on the song, and the screen counts down to each cue: "Next: scene 4 in 3, 2, 1".
-- Tip shown before playback: play the song on one device and the pictures on another.
+- The creator lists the **parts of the song** in order (Intro, Verse 1, Chorus 1 and so on). Each scene plays during one part, one scene per part, in song order.
+- A part can be marked **optional** (a bridge, say). If a collector's song doesn't have it, the scene cued to it is **skipped**: it counts as collected, and the scene before it keeps playing.
+- Collectors **map their song** on the collecting screen: when each part starts, and when the song ends. The song counts as collected once the map is complete, in order, and the song's length fits the brief.
+
+### Collecting
+
+- For each scene, the collector notes **which film, programme, series or channel** it came from, and its start time. Scenes play until the next cue, so there's no end time.
+- Where a scene says "your choice", the collector also picks its **medium and style**.
+- The variety rules are checked as they go. Breaking one shows a warning, for example "Scene 2, Scene 3 and Scene 9 all come from …"; it never stops them saving. Two scenes from the same source with the same start time count as the same clip.
+
+### On screen
+
+- **Colours:** the song is pink (`#E879B9`). Scenes use their medium's lane colour, room scenes grey, and "your choice" scenes grey until the collector picks.
+- **Timeline:** pictures in one lane, with the song in its own lane underneath, like an editing suite's audio track. Scenes sit at their cue times once they're known (a fixed song, or an open song that's been mapped); until then, they're spaced evenly.
+- **Play-along:** a large song clock. The collector taps Start at the same moment they press play on the song. The screen shows the scene playing now, what they found for it, and counts down to the next cut: "Next in 3 seconds".
+- **Before playback:** a cue sheet of every scene's start time, and the tip to play the song on one device and the pictures on another.
+- **Labels:** sync tapes show "Sync · 3:34 · 10 scenes" (or "Sync · open song · 10 scenes") instead of a tier, and the browse filter has a Sync option.
 
 ### Open questions
 
@@ -201,8 +215,8 @@ A sync tape should pull its pictures from all over the place: the jokes come fro
 | Tape landing page | J-card, liner notes, vibes and arc, what you'll need, running order, availability, "I made this" responses |
 | Tape timeline | The editing-suite view: collect slots, read clues and fallbacks, track progress |
 | Timeline on a phone | The same, as a vertical stack with a bottom sheet for each slot |
-| Play-along | Step-by-step playback with timers, the Interference split screen, then the reveal |
-| Write a tape | The submission form: details, vibes, tier, slots, fallbacks, regions, checklist |
+| Play-along | Step-by-step playback with timers, the Interference split screen, then the reveal. Sync tapes use one song clock instead |
+| Write a tape | The submission form: details, vibes, tier, slots, fallbacks, regions, checklist. Sync tapes swap tier and slots for the song and scenes |
 
 ## Visual basics
 
