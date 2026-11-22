@@ -1,4 +1,4 @@
-import type { Cost, Difficulty, MediaType, Rarity, SlotType, TierId } from './types';
+import type { Cost, Difficulty, MediaType, Rarity, SceneMedium, SceneMode, SceneStyle, SlotType, TierId } from './types';
 
 // Every number here comes from docs/design-spec.md. Change the spec first.
 
@@ -37,6 +37,50 @@ export const VIBES = [
 export const MEDIA_TYPES: MediaType[] = ['radio', 'tv', 'film', 'video', 'podcast'];
 export const SLOT_TYPES: SlotType[] = [...MEDIA_TYPES, 'between', 'interference'];
 
+/** Sync tapes (docs/design-spec.md, "Sync tapes"). */
+export const SYNC = {
+  song: { min: 90, max: 360 },
+  minScenes: 3,
+  maxScenes: 24,
+  scene: { min: 4, max: 60 },
+  /** Scenes switched by hand work best in this range. */
+  sceneComfort: { min: 8, max: 20 },
+  maxRoomScenes: 3,
+  /** Same film, programme, series or channel. */
+  maxPerSource: 2,
+  minMediums: 2,
+  minStyles: 2,
+  /** No medium or style in more than this share of the found scenes (rounded up). */
+  maxShare: 0.5,
+} as const;
+
+export const SONG_COLOUR = '#E879B9';
+/** Scenes where the collector picks the medium, before they've picked. */
+export const CHOICE_COLOUR = '#A7ABB3';
+
+export const SCENE_MEDIUMS: Record<SceneMedium, string> = {
+  film: 'Film',
+  tv: 'TV',
+  video: 'Online video',
+  any: 'Your choice',
+};
+export const SCENE_STYLES: Record<SceneStyle, string> = {
+  drama: 'Drama',
+  animation: 'Animation',
+  real: 'Real life',
+  any: 'Your choice',
+};
+export const SCENE_STYLE_HINTS: Record<Exclude<SceneStyle, 'any'>, string> = {
+  drama: 'acted, live-action fiction',
+  animation: 'cartoons and animated films',
+  real: 'documentary, news, nature, real footage',
+};
+export const SCENE_MODES: Record<SceneMode, { label: string; hint: string }> = {
+  literal: { label: 'Literal', hint: 'the picture acts out the words' },
+  mood: { label: 'Mood', hint: 'the picture matches the feeling' },
+  clash: { label: 'Clash', hint: 'the picture fights the song' },
+};
+
 export const LANES: Record<SlotType, { label: string; colour: string }> = {
   radio: { label: 'Radio', colour: '#E9A23B' },
   tv: { label: 'TV', colour: '#4C8DF6' },
@@ -45,6 +89,8 @@ export const LANES: Record<SlotType, { label: string; colour: string }> = {
   podcast: { label: 'Podcast', colour: '#A68BF5' },
   between: { label: 'In-between', colour: '#A7ABB3' },
   interference: { label: 'Interference', colour: '#A7ABB3' },
+  song: { label: 'Song', colour: SONG_COLOUR },
+  scene: { label: 'Your choice', colour: CHOICE_COLOUR },
 };
 
 export const COSTS: Record<Cost, string> = {

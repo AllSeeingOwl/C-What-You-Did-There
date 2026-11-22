@@ -1,10 +1,10 @@
 # Last Train Out
 
-A Side C sample sync tape · Last updated 22 November 2026 (variety rules added)
+A Side C sample sync tape · Last updated 22 November 2026 (now on the website)
 
 ## For testers: how this works
 
-This is a sync tape: instructions for a home-made music video. You choose a song that fits the brief, hunt down a set of short clips, then play the song with sound while you cut the clips in over it, muted. Nothing is attached and nothing gets downloaded. You find everything yourself from official sources.
+This is a sync tape: instructions for a home-made music video. You can play it on the website (https://allseeingowl.github.io/C-What-You-Did-There/#/tape/sample-last-train-out), which maps your song, times your cuts and keeps your answers, or from this page with pen and paper. You choose a song that fits the brief, hunt down a set of short clips, then play the song with sound while you cut the clips in over it, muted. Nothing is attached and nothing gets downloaded. You find everything yourself from official sources.
 
 1. Read **The tape at a glance** and **Choosing your song**, then pick your song.
 2. Listen to it once and fill in **Map your song**: the time each section starts.
@@ -67,15 +67,15 @@ Each scene plays, muted, from its section's start time until the next one. The m
 | # | Plays during | Mode | Medium · style | What to find | Where to look | Your find and start time |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Intro | Mood | Online video · Real life | Any shot of an empty railway platform at night. | Official railway, travel or webcam channels on video sites | |
-| 2 | Verse 1, first half | Literal | Film · Drama | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film. | Any film service, rental or DVD | |
-| 3 | Verse 1, second half | Literal (mystery) | Your choice | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
+| 2 | Verse 1 | Literal | Film · Drama | Someone packing a suitcase badly: too full, won't shut, something falls out. Any film. | Any film service, rental or DVD | |
+| 3 | Halfway through verse 1 | Literal (mystery) | Your choice | Listen to this part of your verse and pick the most concrete thing in it (an object, a place, an animal). Find a clip of exactly that thing, taken completely literally. | Anywhere official | |
 | 4 | Chorus 1 | Literal (mystery) | Your choice | Pick the most important word in your chorus, the one that comes back again and again. Find a clip that acts it out as literally as possible: if it's "fly", a pigeon; if it's "home", a house. | Anywhere official | |
 | 5 | Verse 2 | Mood | TV · Real life | Any nature documentary shot of animals on a long journey: geese flying in formation, herds crossing a river. | TV catch-up, broadcasters' official channels | |
 | 6 | Last few seconds of verse 2 | In the room | In the room | Turn off one light. The song keeps playing. | You, in the room | Nothing to find |
 | 7 | Chorus 2 | Literal (mystery) | Your choice, but a different medium and style from scene 4 | The same key word as scene 4, acted out by a completely different clip. If scene 4 was a real pigeon, try a cartoon bird. | Anywhere official | |
-| 8 | Bridge (skip if none) | Clash | TV · Animation | Any cartoon character waving goodbye at the end of an episode, as cheerfully as possible. | TV catch-up, official cartoon channels | |
+| 8 | Bridge (skip if your song has none) | Clash | TV · Animation | Any cartoon character waving goodbye at the end of an episode, as cheerfully as possible. | TV catch-up, official cartoon channels | |
 | 9 | Final chorus | Mood | Film · Drama | A train pulling away, seen from the platform, in any film. Start just as it begins to move. | Any film service, rental or DVD | |
-| 10 | Outro, to the very end | Mood | Online video · Real life | A different empty platform from scene 1, ideally in daylight, from a different station and channel. Hold it until the song finishes. | Official railway, travel or webcam channels on video sites | |
+| 10 | Outro (to the very end) | Mood | Online video · Real life | A different empty platform from scene 1, ideally in daylight, from a different station and channel. Hold it until the song finishes. | Official railway, travel or webcam channels on video sites | |
 
 ### Keeping it varied
 
@@ -93,8 +93,8 @@ If a scene is hard to find, any of these counts as collected.
 - **Scene 2:** (A) any advert where someone sits on a suitcase to close it; (B) pack a bag yourself, badly, and do it live during the scene.
 - **Scene 3:** (A) if your verse has nothing concrete in it, use a clip of the song's title, taken literally; (B) any road sign pointing somewhere far away.
 - **Scene 4:** (A) if the key word can't be acted out (like "maybe"), use a clip of someone shrugging; (B) hold up a hand-written card with a drawing of the word.
-- **Scene 7:** (A) a clip of the opposite of your key word; (B) the key word written on a sign, a shop front or a cake, in any clip.
 - **Scene 5:** (A) any time-lapse of clouds moving across the sky; (B) any shot of an aeroplane taking off.
+- **Scene 7:** (A) a clip of the opposite of your key word; (B) the key word written on a sign, a shop front or a cake, in any clip.
 - **Scene 8:** (A) any animated closing credits at the end of a children's programme; (B) any puppet waving goodbye on children's TV.
 - **Scene 9:** (A) any boat leaving a harbour; (B) the back of any bus driving away down a street.
 - **Scene 10:** (A) any empty bus stop or ferry terminal; (B) any station clock, with nobody underneath it.

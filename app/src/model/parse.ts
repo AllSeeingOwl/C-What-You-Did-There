@@ -1,5 +1,7 @@
 import { MAX_FALLBACKS, MEDIA_TYPES, SLOT_TYPES, TIER_IDS } from './constants';
-import type { Cost, Difficulty, Fallback, InterferencePart, MediaType, Rarity, Slot, SlotType, Tape, TierId } from './types';
+import type {
+  Cost, Difficulty, Fallback, InterferencePart, MediaType, Rarity, SceneInfo, SceneMedium, SceneMode, SceneStyle, Slot, SlotType, SongInfo, Tape, TierId,
+} from './types';
 
 // Reads a tape from untrusted JSON (a shared link or an imported file) and
 // rebuilds it field by field, so nothing unexpected gets through.
@@ -7,6 +9,9 @@ import type { Cost, Difficulty, Fallback, InterferencePart, MediaType, Rarity, S
 const COST_IDS: Cost[] = ['free', 'subscription', 'rent-buy', 'archive', 'diy'];
 const RARITY_IDS: Rarity[] = ['common', 'uncommon', 'rare', 'you'];
 const DIFFICULTY_IDS: Difficulty[] = ['quick', 'medium', 'deep'];
+const SCENE_MEDIUM_IDS: SceneMedium[] = ['film', 'tv', 'video', 'any'];
+const SCENE_STYLE_IDS: SceneStyle[] = ['drama', 'animation', 'real', 'any'];
+const SCENE_MODE_IDS: SceneMode[] = ['literal', 'mood', 'clash'];
 
 type Obj = Record<string, unknown>;
 const isObj = (v: unknown): v is Obj => typeof v === 'object' && v !== null && !Array.isArray(v);
@@ -28,9 +33,36 @@ function parseFallback(v: unknown): Fallback {
   return { find: str(o.find), where: str(o.where, 400), link: optStr(o.link, 500), regions: strList(o.regions, 30), cost: oneOf(o.cost, COST_IDS, 'free') };
 }
 
+function parseSong(v: unknown): SongInfo {
+  const o = isObj(v) ? v : {};
+  const sections = Array.isArray(o.sections) ? o.sections.slice(0, 30) : [];
+  return {
+    mode: o.mode === 'open' ? 'open' : 'fixed',
+    version: str(o.version, 200),
+    minSeconds: num(o.minSeconds),
+    maxSeconds: num(o.maxSeconds),
+    sections: sections.map((x) => {
+      const sec = isObj(x) ? x : {};
+      return { name: str(sec.name, 60), optional: sec.optional === true };
+    }),
+  };
+}
+
+function parseScene(v: unknown): SceneInfo {
+  const o = isObj(v) ? v : {};
+  return {
+    cue: str(o.cue, 60),
+    at: typeof o.at === 'number' && Number.isFinite(o.at) ? Math.round(o.at) : undefined,
+    medium: oneOf(o.medium, SCENE_MEDIUM_IDS, 'any'),
+    style: oneOf(o.style, SCENE_STYLE_IDS, 'any'),
+    mode: oneOf(o.mode, SCENE_MODE_IDS, 'mood'),
+    differentFrom: optStr(o.differentFrom, 40),
+  };
+}
+
 function parseSlot(v: unknown, index: number): Slot {
   const o = isObj(v) ? v : {};
-  const type = oneOf<SlotType>(o.type, SLOT_TYPES, 'video');
+  const type = oneOf<SlotType>(o.type, [...SLOT_TYPES, 'song', 'scene'], 'video');
   const slot: Slot = {
     id: str(o.id, 40) || `s${index + 1}`,
     type,
@@ -56,6 +88,8 @@ function parseSlot(v: unknown, index: number): Slot {
       syncCue: str(i.syncCue, 400),
     };
   }
+  if (type === 'song') slot.song = parseSong(o.song);
+  if ((type === 'scene' || type === 'between') && isObj(o.scene)) slot.scene = parseScene(o.scene);
   return slot;
 }
 
@@ -71,6 +105,8 @@ export function parseTape(input: unknown): Tape {
   return {
     format: 'side-c-tape',
     version: 1,
+    // Tapes from before sync tapes existed have no kind: they're mixtapes.
+    kind: input.kind === 'sync' ? 'sync' : 'mixtape',
     id: str(input.id, 40) || 'imported',
     title: str(input.title, 120),
     creator: str(input.creator, 60),

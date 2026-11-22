@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import { availabilityLabel, type TapeAvailability } from '../model/availability';
-import { LANES, regionName } from '../model/constants';
+import { LANES, regionName, SCENE_MODES } from '../model/constants';
 import { checkLink } from '../model/rules';
-import { mediaMix, totalSeconds } from '../model/tape';
-import { formatTime } from '../model/time';
-import type { Slot, Tape } from '../model/types';
+import { sceneColour, sceneKindLabel } from '../model/sync';
+import { lengthLabel, mediaMix } from '../model/tape';
+import type { Slot, SlotProgress, Tape } from '../model/types';
 
 /** Creator's own words. Plain-text mode is handled by the .plain class on the app. */
 export function Hand({ kind, children, as = 'span', className = '' }: { kind: 'marker' | 'neat'; children: ReactNode; as?: 'span' | 'p' | 'div'; className?: string }) {
@@ -65,7 +65,7 @@ export function JCard({ tape, big = false }: { tape: Tape; big?: boolean }) {
         {mix.map((m) => <span key={m.type} style={{ flex: m.share, background: m.colour }} />)}
       </div>
       <div className="jcard-body">
-        <span className="jcard-meta">{tape.tier} · {formatTime(totalSeconds(tape))} · {tape.slots.length} slots</span>
+        <span className="jcard-meta">{lengthLabel(tape)}</span>
         <Hand kind="marker" className="jcard-title">{tape.title || 'Untitled tape'}</Hand>
         <Hand kind="neat">by {tape.creator || '[CREATOR]'}</Hand>
         {big && tape.theme && <span className="small" style={{ color: '#44506b' }}>{tape.theme}</span>}
@@ -74,14 +74,22 @@ export function JCard({ tape, big = false }: { tape: Tape; big?: boolean }) {
   );
 }
 
-export function LaneSwatch({ slot }: { slot: Slot }) {
+export function LaneSwatch({ slot, progress }: { slot: Slot; progress?: SlotProgress }) {
+  if (slot.type === 'song' || slot.type === 'scene' || slot.scene) {
+    return <span className="swatch" style={{ background: sceneColour(slot, progress) }} />;
+  }
   if (slot.type === 'interference' && slot.interference) {
     return <span className="swatch" style={{ background: `linear-gradient(${LANES[slot.interference.picture.media].colour} 0 50%, ${LANES[slot.interference.sound.media].colour} 50% 100%)` }} />;
   }
   return <span className="swatch" style={{ background: LANES[slot.type].colour }} />;
 }
 
-export function slotTypeLabel(slot: Slot): string {
+export function slotTypeLabel(slot: Slot, progress?: SlotProgress): string {
+  if (slot.type === 'song') return slot.song?.mode === 'open' ? 'Song (your choice)' : 'Song';
+  if (slot.scene) {
+    const mode = slot.type === 'between' ? '' : ` · ${SCENE_MODES[slot.scene.mode].label}${slot.mystery ? ' (mystery)' : ''}`;
+    return sceneKindLabel(slot, progress) + mode;
+  }
   if (slot.type === 'interference') return `Interference (${slot.interference?.mode === 'merge' ? 'uncanny merge' : 'clash'})`;
   return LANES[slot.type].label + (slot.mystery ? ' (mystery)' : '');
 }

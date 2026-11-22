@@ -18,11 +18,12 @@ Stage 1 of the real build: a working website in `app/` that runs entirely in the
 | `app/` | The website: React + TypeScript + Vite, tests with Vitest. `app/src/model/` holds the rules and data, independent of the screens |
 | `docs/building.md` | How the app is built and run, decisions made while building, and what stage 2 needs |
 | `.github/workflows/deploy.yml` | Tests, builds and publishes the site to GitHub Pages on every push to `main` |
+| `.github/workflows/checks.yml` | Runs the tests and build on every pull request, so problems show up before merging |
 | `README.md` | Public summary of the concept and the repo |
 | `docs/design-spec.md` | **Source of truth** for every rule: slot types, lane colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting, core screens |
 | `docs/community-guidelines.md` | Draft rules for creators and collectors; has `[AGE]`, `[TIME]`, `[CONTACT]` placeholders and open questions for a solicitor |
 | `docs/sample-tape-rain-on-a-tuesday.md` | A real, playable sample tape used for testing the idea with friends |
-| `docs/sample-tape-last-train-out.md` | A playable sample *sync tape* (home-made music video) for the proposed format in the spec's "Sync tapes" section. Not in the app yet |
+| `docs/sample-tape-last-train-out.md` | A playable sample *sync tape* (home-made music video), the format in the spec's "Sync tapes" section. Also in the app |
 | `docs/tester-message.md`, `docs/tester-message-sync-tape.md` | Ready-to-send messages for friends testing each sample tape |
 | `mockups/*.html` | Ten clickable screen mockups; `mockups/index.html` links them |
 | `mockups/runtime.js` | Tiny renderer the mockups use (see below) |
@@ -62,9 +63,10 @@ They are throwaway prototypes for showing the design, not the basis of the real 
 ## How the app works
 
 - Run `npm install`, then `npm run dev`, `npm test` or `npm run build`, from `app/`.
-- Every number from the spec lives in `app/src/model/constants.ts`; checks live in `rules.ts`. Change the spec first, then those files, then the tests in `model.test.ts`.
+- Every number from the spec lives in `app/src/model/constants.ts`; checks live in `rules.ts`, and sync-tape logic (cues, song maps, variety) in `sync.ts`. Change the spec first, then those files, then the tests in `model.test.ts` and `sync.test.ts`.
+- A sync tape has `kind: 'sync'`; its first slot is the song (type `song`), and the rest are scenes (type `scene`) or room scenes (type `between`).
 - Anything read from a share link or file goes through `parse.ts`, which rebuilds it field by field. Only links that pass `checkLink` become clickable.
-- The sample tape in `sampleTapes.ts` mirrors `docs/sample-tape-rain-on-a-tuesday.md`; keep them in step.
+- The sample tapes in `sampleTapes.ts` mirror `docs/sample-tape-rain-on-a-tuesday.md` and `docs/sample-tape-last-train-out.md`, tester questions included (a test checks the questions); keep them in step.
 - Addresses use `#/...` so the site works on any static host.
 
 ## Next steps (agreed so far)

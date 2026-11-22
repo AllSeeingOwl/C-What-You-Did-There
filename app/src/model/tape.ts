@@ -1,7 +1,11 @@
 import { LANES, TIER_MARGIN, TIERS } from './constants';
+import { formatTime } from './time';
 import type { SlotType, Tape, TierId } from './types';
 
+/** A sync tape runs as long as its song (for an open song, the longest the brief allows). */
 export function totalSeconds(tape: Pick<Tape, 'slots'>): number {
+  const song = tape.slots.find((s) => s.type === 'song');
+  if (song) return song.song?.mode === 'open' ? song.song.maxSeconds : song.seconds;
   return tape.slots.reduce((sum, s) => sum + (Number.isFinite(s.seconds) ? s.seconds : 0), 0);
 }
 
@@ -28,8 +32,18 @@ export function hasInterference(tape: Pick<Tape, 'slots'>): boolean {
   return tape.slots.some((s) => s.type === 'interference');
 }
 
+/** "C15 · 8:00 · 12 slots", "Sync · 3:34 · 10 scenes" or "Sync · open song · 10 scenes". */
+export function lengthLabel(tape: Pick<Tape, 'kind' | 'tier' | 'slots'>): string {
+  if (tape.kind !== 'sync') return `${tape.tier} · ${formatTime(totalSeconds(tape))} · ${tape.slots.length} slots`;
+  const song = tape.slots.find((s) => s.type === 'song');
+  const count = tape.slots.filter((s) => s.type !== 'song').length;
+  const length = !song ? 'no song yet' : song.song?.mode === 'open' ? 'open song' : formatTime(song.seconds);
+  return `Sync · ${length} · ${count} ${count === 1 ? 'scene' : 'scenes'}`;
+}
+
 /** Share of running time for each colour, for the J-card stripe. */
 export function mediaMix(tape: Pick<Tape, 'slots'>): { type: SlotType; colour: string; share: number }[] {
+  if (tape.slots.some((s) => s.type === 'song')) return syncMix(tape);
   const total = totalSeconds(tape) || 1;
   const byType = new Map<string, { type: SlotType; colour: string; seconds: number }>();
   for (const s of tape.slots) {
@@ -57,4 +71,22 @@ export function newId(prefix = ''): string {
       ? crypto.randomUUID().replace(/-/g, '').slice(0, 12)
       : Math.random().toString(36).slice(2, 14);
   return prefix + rand;
+}
+
+/**
+ * Sync tapes: a quarter for the song, the rest shared between scenes by
+ * medium. Scenes where the collector chooses show as "your choice".
+ */
+function syncMix(tape: Pick<Tape, 'slots'>): { type: SlotType; colour: string; share: number }[] {
+  const pictures = tape.slots.filter((s) => s.type !== 'song');
+  const songShare = pictures.length ? 0.25 : 1;
+  const counts = new Map<SlotType, number>();
+  for (const s of pictures) {
+    const type: SlotType = s.type === 'between' ? 'between' : s.scene && s.scene.medium !== 'any' ? s.scene.medium : 'scene';
+    counts.set(type, (counts.get(type) ?? 0) + 1);
+  }
+  return [
+    { type: 'song' as SlotType, colour: LANES.song.colour, share: songShare },
+    ...[...counts].map(([type, n]) => ({ type, colour: LANES[type].colour, share: ((1 - songShare) * n) / pictures.length })),
+  ];
 }

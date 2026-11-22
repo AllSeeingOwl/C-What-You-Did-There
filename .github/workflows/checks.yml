@@ -1,0 +1,36 @@
+# Checks every pull request before it's merged: the same steps the
+# publishing workflow runs, without publishing anything. A red cross on
+# the pull request means something needs fixing before it goes live.
+name: Checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    name: Tests and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci
+      # The rules from the design spec, sharing, sync tapes, and that the
+      # sample tapes' tester questions match their docs.
+      - run: npm test
+      # Type checks the code, then builds the website.
+      - run: npm run build

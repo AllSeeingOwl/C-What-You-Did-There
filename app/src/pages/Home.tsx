@@ -5,7 +5,7 @@ import { tapeAvailability } from '../model/availability';
 import { TIER_IDS, VIBES } from '../model/constants';
 import { collectedCount, hasStarted, isComplete } from '../model/progress';
 import { actions, allTapes, type ShelfTape, useStore } from '../model/store';
-import type { TierId } from '../model/types';
+import { isSync } from '../model/sync';
 import { href } from '../router';
 
 function Welcome() {
@@ -44,6 +44,9 @@ function Welcome() {
         <a className="btn btn-primary" href={href('/tape/sample-rain-on-a-tuesday')} onClick={() => actions.updateSettings({ welcomed: true })}>
           Try a first tape: Rain on a Tuesday
         </a>
+        <a className="btn" href={href('/tape/sample-last-train-out')} onClick={() => actions.updateSettings({ welcomed: true })}>
+          Or make a music video: Last Train Out
+        </a>
         <button type="button" className="btn" onClick={() => actions.updateSettings({ welcomed: true })}>Just browse</button>
       </div>
     </section>
@@ -81,7 +84,7 @@ export function Home() {
   const tapes = allTapes(state);
   const region = state.settings.region;
   const [query, setQuery] = useState('');
-  const [tiers, setTiers] = useState<TierId[]>([]);
+  const [tiers, setTiers] = useState<string[]>([]);
   const [vibe, setVibe] = useState('');
   const [hereOnly, setHereOnly] = useState(false);
 
@@ -90,7 +93,7 @@ export function Home() {
   const results = useMemo(() => {
     const q = query.trim().toLowerCase();
     return published.filter(({ tape }) => {
-      if (tiers.length && !tiers.includes(tape.tier)) return false;
+      if (tiers.length && !tiers.includes(isSync(tape) ? 'Sync' : tape.tier)) return false;
       if (vibe && !tape.vibes.includes(vibe) && !tape.arc?.includes(vibe)) return false;
       if (hereOnly && !tapeAvailability(tape, region).worksHere) return false;
       if (q && ![tape.title, tape.creator, tape.theme, tape.liner].some((f) => f.toLowerCase().includes(q))) return false;
@@ -98,7 +101,7 @@ export function Home() {
     });
   }, [published, query, tiers, vibe, hereOnly, region]);
 
-  const toggleTier = (t: TierId) => setTiers((cur) => (cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t]));
+  const toggleTier = (t: string) => setTiers((cur) => (cur.includes(t) ? cur.filter((x) => x !== t) : [...cur, t]));
 
   return (
     <div className="page">
@@ -126,7 +129,7 @@ export function Home() {
           <div className="row">
             <span className="small muted" id="tier-label">Length</span>
             <div className="row" role="group" aria-labelledby="tier-label" style={{ gap: 6 }}>
-              {TIER_IDS.map((t) => (
+              {[...TIER_IDS, 'Sync'].map((t) => (
                 <button key={t} type="button" className="chip mono" aria-pressed={tiers.includes(t)} onClick={() => toggleTier(t)}>{t}</button>
               ))}
             </div>

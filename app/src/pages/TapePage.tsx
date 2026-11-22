@@ -1,21 +1,81 @@
 import { Hand, JCard, LaneSwatch, RegionBadge, regionList, slotTypeLabel, TapeWarnings, Vibes } from '../components/bits';
 import { ShareTools } from '../components/ShareTools';
 import { slotWorksIn, tapeAvailability } from '../model/availability';
-import { COSTS, DIFFICULTIES } from '../model/constants';
+import { COSTS, DIFFICULTIES, SCENE_MODES } from '../model/constants';
 import { collectedCount, hasStarted, isCollected, isComplete, isLocked } from '../model/progress';
 import { actions, EMPTY_PROGRESS, findTape, useStore } from '../model/store';
-import { slotNumber, totalSeconds } from '../model/tape';
+import { isSync, sceneKindLabel, slotName } from '../model/sync';
+import { lengthLabel, slotNumber } from '../model/tape';
 import { formatTime } from '../model/time';
-import type { Cost, Tape } from '../model/types';
+import type { Cost, Slot, Tape, TapeProgress } from '../model/types';
 import { href, navigate } from '../router';
 import { NotFound } from './NotFound';
 
-function needs(tape: Tape): { cost: Cost; slots: number[] }[] {
-  const by = new Map<Cost, number[]>();
-  tape.slots.forEach((s, i) => {
-    by.set(s.cost, [...(by.get(s.cost) ?? []), i + 1]);
+/** "3" for slot 3 of a mixtape; "song" or "3" (scene 3) for a sync tape. */
+function shortName(tape: Tape, slot: Slot): string {
+  return slotName(tape, slot).replace(/^(Slot|Scene) /, '').toLowerCase();
+}
+
+function needs(tape: Tape): { cost: Cost; slots: string[] }[] {
+  const by = new Map<Cost, string[]>();
+  tape.slots.forEach((s) => {
+    by.set(s.cost, [...(by.get(s.cost) ?? []), shortName(tape, s)]);
   });
   return [...by.entries()].map(([cost, slots]) => ({ cost, slots }));
+}
+
+function SyncOrder({ tape, progress, region }: { tape: Tape; progress: TapeProgress; region: string }) {
+  return (
+    <table className="order">
+      <thead>
+        <tr><th scope="col">#</th><th scope="col">Plays during</th><th scope="col">Mode</th><th scope="col">Medium · style</th><th scope="col">What to find</th><th scope="col">Available</th></tr>
+      </thead>
+      <tbody>
+        {tape.slots.map((s) => {
+          const locked = isLocked(s, tape, progress);
+          const song = s.song;
+          const fixed = song?.mode === 'fixed';
+          return (
+            <tr key={s.id}>
+              <td className="num">{s.type === 'song' ? '♪' : shortName(tape, s)}</td>
+              <td>
+                {s.type === 'song' ? 'The whole tape, with the sound on' : (
+                  <>
+                    {s.scene?.at !== undefined && <span className="mono">{formatTime(s.scene.at)} </span>}
+                    {s.scene?.cue}
+                  </>
+                )}
+              </td>
+              <td className="small">{s.type === 'song' ? '' : s.type === 'between' ? 'In the room' : `${SCENE_MODES[s.scene?.mode ?? 'mood'].label}${s.mystery ? ' (mystery)' : ''}`}</td>
+              <td><span className="row" style={{ gap: 8, flexWrap: 'nowrap' }}><LaneSwatch slot={s} />{s.type === 'song' ? 'Song' : sceneKindLabel(s)}</span></td>
+              <td>
+                {locked ? (
+                  <span className="muted">Locked until you’ve found {slotName(tape, tape.slots.find((x) => x.id === s.lockedUntil)!).toLowerCase()}.</span>
+                ) : (
+                  <>
+                    {s.type === 'song' && (fixed ? <strong>Song: </strong> : <strong>Choose a song: </strong>)}
+                    {s.find}
+                    {fixed && song.version && <span className="muted"> ({song.version})</span>}
+                    {song?.mode === 'open' && <span className="muted"> It must run {formatTime(song.minSeconds)} to {formatTime(song.maxSeconds)}.</span>}
+                    {s.scene?.differentFrom && (
+                      <span className="muted"> Use a different medium and style from {slotName(tape, tape.slots.find((x) => x.id === s.scene!.differentFrom) ?? s).toLowerCase()}.</span>
+                    )}
+                    {s.spoiler && <span className="badge badge-warn" style={{ marginLeft: 6 }}>Spoiler</span>}
+                  </>
+                )}
+                {isCollected(s, progress) && s.type !== 'between' && <span className="ok-text small"> · {progress[s.id]?.skipped ? 'skipped' : 'collected'}</span>}
+              </td>
+              <td className="small">
+                {s.type === 'between' ? 'Anywhere' : regionList(s.regions)}
+                {s.fallbacks.length > 0 && <span className="muted"> · {s.fallbacks.length} fallback{s.fallbacks.length > 1 ? 's' : ''}</span>}
+                {!slotWorksIn(s, region) && <span className="error-text"> · not where you are</span>}
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  );
 }
 
 export function TapePage({ id }: { id: string }) {
@@ -45,7 +105,8 @@ export function TapePage({ id }: { id: string }) {
         <JCard tape={tape} big />
         <div className="stack-lg">
           <div className="stack">
-            <span className="eyebrow">{tape.tier} · {formatTime(totalSeconds(tape))} · {tape.slots.length} slots</span>
+            <span className="eyebrow">{lengthLabel(tape)}</span>
+            {isSync(tape) && <p className="muted">A sync tape: a home-made music video. One song plays with the sound on while you cut muted clips in over it.</p>}
             <h1>{tape.title}</h1>
             <Vibes tape={tape} />
             {tape.theme && <p className="muted">Theme: {tape.theme}</p>}
@@ -83,7 +144,7 @@ export function TapePage({ id }: { id: string }) {
           <ul className="stack" style={{ margin: 0, paddingLeft: 18 }}>
             {needs(tape).map((n) => (
               <li key={n.cost}>
-                <strong>{COSTS[n.cost]}</strong>: {n.slots.length} {n.slots.length === 1 ? 'slot' : 'slots'} <span className="muted small">({n.slots.join(', ')})</span>
+                <strong>{COSTS[n.cost]}</strong>: {n.slots.length} {n.slots.length === 1 ? 'piece' : 'pieces'} <span className="muted small">({n.slots.join(', ')})</span>
               </li>
             ))}
           </ul>
@@ -106,7 +167,11 @@ export function TapePage({ id }: { id: string }) {
       <section className="panel stack" aria-labelledby="order-title">
         <h2 id="order-title">Running order</h2>
         <p className="small muted">The creator’s notes stay hidden until you’ve played the whole tape.</p>
+        {isSync(tape) && (
+          <p className="small muted">Keep it varied: never the same clip twice, no more than two scenes from one film, programme or channel, and no medium or style in more than half the scenes.</p>
+        )}
         <div style={{ overflowX: 'auto' }}>
+          {isSync(tape) ? <SyncOrder tape={tape} progress={progress} region={region} /> : (
           <table className="order">
             <thead>
               <tr><th scope="col">#</th><th scope="col">Type</th><th scope="col">Length</th><th scope="col">What to find</th><th scope="col">Available</th></tr>
@@ -141,6 +206,7 @@ export function TapePage({ id }: { id: string }) {
               })}
             </tbody>
           </table>
+          )}
         </div>
       </section>
     </div>
