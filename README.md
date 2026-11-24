@@ -31,7 +31,7 @@ No clips are hosted or shared. The tape only points to them.
 | --- | --- |
 | [`app/`](app/) | The working website (stage 1: no accounts, saved in your browser) |
 | [`docs/building.md`](docs/building.md) | How the website is built, how to run it, and what stage 2 needs |
-| [`docs/tester-message.md`](docs/tester-message.md) | A ready-to-send message for friends testing the sample tape |
+| [`docs/tester-message.md`](docs/tester-message.md) | A ready-to-send message for friends testing the sample mixtape, *Rain on a Tuesday* |
 | [`docs/tester-message-sync-tape.md`](docs/tester-message-sync-tape.md) | The same for the sample music video, *Last Train Out* |
 | [`docs/design-spec.md`](docs/design-spec.md) | The rules behind every screen: slot types, colours, tiers, lengths, fallbacks, Interference, regions, vibes, handwriting |
 | [`docs/community-guidelines.md`](docs/community-guidelines.md) | Draft guidelines for creators and collectors (to be checked by a solicitor) |
